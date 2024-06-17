@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const MyDialog = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   const openDialog = () => {
