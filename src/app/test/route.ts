@@ -1,7 +1,8 @@
 import axios from "axios";
+import { NextResponse } from "next/server";
 
 export async function GET() {
-  return Response.json(run());
+  return NextResponse.json({ a: 1 });
 }
 
 async function run() {
@@ -45,7 +46,7 @@ async function run() {
     return response.data;
   } catch (e) {
     console.log(e);
-    
+
     return e;
   }
 }
