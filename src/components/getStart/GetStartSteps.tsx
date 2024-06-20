@@ -45,7 +45,7 @@ export default function GetStartSteps() {
       setCurrentStep(currentStep + 1);
     }
   };
-  git 
+   
   return (
     <Container maxWidth="sm">
       <Box
