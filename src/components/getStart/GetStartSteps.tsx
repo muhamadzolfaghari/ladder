@@ -45,7 +45,11 @@ export default function GetStartSteps() {
       setCurrentStep(currentStep + 1);
     }
   };
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> master
   return (
     <Container maxWidth="sm">
       <Box
