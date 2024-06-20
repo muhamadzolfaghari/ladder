@@ -2,13 +2,12 @@ import axios from "axios";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  console.log("test");
-  
+  run();
   return NextResponse.json({ a: 1 });
 }
 
 async function run() {
-  const apiKey = "AIzaSyBguY4FmP090KrqaSuLt95Emrs3y8_j260";
+  const apiKey = process.env.NEXT_PUBLIC_API_KEY;
   const prompt = "Write a story about a magic backpack.";
 
   const request = {
