@@ -45,7 +45,7 @@ export default function GetStartSteps() {
       setCurrentStep(currentStep + 1);
     }
   };
-   
+
   return (
     <Container maxWidth="sm">
       <Box
