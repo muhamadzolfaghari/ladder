@@ -2,15 +2,10 @@ import axios from "axios";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  run();
-  return NextResponse.json({ a: 1 });
-}
+  const url =
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCWxoLsLt5_xn7d4QtCcIZmSshzdTiNVNc";
 
-async function run() {
-  const apiKey = process.env.NEXT_PUBLIC_API_KEY;
-  const prompt = "Write a story about a magic backpack.";
-
-  const request = {
+  const data = {
     contents: [
       {
         parts: [
@@ -28,7 +23,6 @@ async function run() {
         "Content-Type": "application/json",
       },
     });
-
     return NextResponse.json(response.data, { status: 200 });
   } catch (error) {
     return NextResponse.json(
