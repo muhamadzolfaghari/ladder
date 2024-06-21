@@ -15,39 +15,27 @@ async function run() {
       {
         parts: [
           {
-            text: prompt,
+            text: "Explain how AI works",
           },
         ],
       },
     ],
-    safetySettings: [
-      {
-        category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-        threshold: "BLOCK_ONLY_HIGH",
-      },
-    ],
-    generationConfig: {
-      stopSequences: ["Title"],
-      temperature: 1.0,
-      maxOutputTokens: 800,
-      topP: 0.8,
-      topK: 10,
-    },
   };
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-
   try {
-    const response = await axios.post(url, request, {
+    const response = await axios.post(url, data, {
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    return response.data;
-  } catch (e) {
-    console.log(e);
-
-    return e;
+    return NextResponse.json(response.data, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error: (error as { response: { data: string } }).response.data,
+      },
+      { status: 500 }
+    );
   }
 }
