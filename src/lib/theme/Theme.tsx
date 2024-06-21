@@ -73,6 +73,34 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiStepConnector: {
+      styleOverrides: {
+        line: {
+          borderColor: "#C2C9BD",
+          borderWidth: "3px",
+          borderRadius: "10px",
+        },
+      },
+    },
+    MuiStepLabel: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        },
+        labelContainer: {
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        },
+        label: {
+          fontFamily: rubik.style.fontFamily,
+          fontWeight: 500,
+        },
+      },
+    },
+
     MuiButton: {
       styleOverrides: {
         root: {
@@ -81,6 +109,9 @@ const theme = createTheme({
           textTransform: "capitalize",
           fontFamily: rubik.style.fontFamily,
           borderRadius: "8px",
+          "&:hover": {
+            background: "#22983C",
+          },
         },
       },
     },
