@@ -1,52 +1,48 @@
 import axios from "axios";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
-  return NextResponse.json({ a: 1 });
-}
-
-async function run() {
-  const apiKey = "AIzaSyBguY4FmP090KrqaSuLt95Emrs3y8_j260";
-  const prompt = "Write a story about a magic backpack.";
-
-  const request = {
-    contents: [
-      {
-        parts: [
-          {
-            text: prompt,
-          },
-        ],
-      },
-    ],
-    safetySettings: [
-      {
-        category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-        threshold: "BLOCK_ONLY_HIGH",
-      },
-    ],
-    generationConfig: {
-      stopSequences: ["Title"],
-      temperature: 1.0,
-      maxOutputTokens: 800,
-      topP: 0.8,
-      topK: 10,
-    },
-  };
-
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+export async function POST(request: NextRequest) {
+  const url =
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCWxoLsLt5_xn7d4QtCcIZmSshzdTiNVNc";
 
   try {
-    const response = await axios.post(url, request, {
+    const { prompt } = await request.json();
+
+    if (!prompt) {
+      return NextResponse.json(
+        { error: "Prompt is required" },
+        { status: 400 }
+      );
+    }
+
+    const data = {
+      contents: [
+        {
+          parts: [
+            {
+              text: prompt,
+            },
+          ],
+        },
+      ],
+    };
+
+    const response = await axios.post(url, data, {
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    return response.data;
-  } catch (e) {
-    console.log(e);
-
-    return e;
+    return NextResponse.json(response.data, { status: 200 });
+  } catch (error) {
+    console.error("Error:", error);
+    return NextResponse.json(
+      {
+        error:
+          (error as { response: { data: string } })?.response?.data ||
+          "An error occurred",
+      },
+      { status: 500 }
+    );
   }
 }
