@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
     const response = await axios.post(url, data, {
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     });
 
