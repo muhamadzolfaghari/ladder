@@ -9,7 +9,7 @@ console.log(process.env.NEXT_PUBLIC_API_URL, "base api url");
 const GeminiExample = () => {
   useEffect(() => {
     axios
-      .post(process.env.NEXT_PUBLIC_API_URL + "/gemini-api", {
+      .post(process.env.NEXT_PUBLIC_API_URL + "/gemini-ai", {
         data: { prompt: "tell me hi" },
       })
       .then((res) => {
