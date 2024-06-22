@@ -1,6 +1,16 @@
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
+export function OPTIONS() {
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  };
+
+  return NextResponse.json({}, { headers });
+}
+
 export async function POST(request: NextRequest) {
   const url =
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCWxoLsLt5_xn7d4QtCcIZmSshzdTiNVNc";
@@ -28,9 +38,7 @@ export async function POST(request: NextRequest) {
     };
 
     const response = await axios.post(url, data, {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
     });
 
     return NextResponse.json(response.data, { status: 200 });

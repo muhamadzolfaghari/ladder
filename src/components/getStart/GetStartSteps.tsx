@@ -37,7 +37,7 @@ export default function GetStartSteps({ onComplete }: { onComplete: () => void }
       title: "Let’s Kick Off",
       description:
         "Create your first Ladder and start your journey. Whether it's small daily tasks or major milestones, Ladder supports you every step of the way.",
-      nextLink: "/Prompt1",
+      nextLink: "/prompt-1",
     },
   ];
 
