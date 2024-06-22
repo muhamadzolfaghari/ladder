@@ -1,19 +1,21 @@
-import applyCors from "@/lib/utilities/applyCors";
+import { applyCors } from "@/lib/utilities/applyCors";
 import axios from "axios";
+import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 
-async function POST(request: NextRequest) {
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
   const url =
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCWxoLsLt5_xn7d4QtCcIZmSshzdTiNVNc";
 
+  if (applyCors(req, res)) {
+    return;
+  }
+
   try {
-    const { prompt } = await request.json();
+    const { prompt } = req.body;
 
     if (!prompt) {
-      return NextResponse.json(
-        { error: "Prompt is required" },
-        { status: 400 }
-      );
+      return res.status(400).json({ error: "Prompt is required" });
     }
 
     const data = {
@@ -29,23 +31,16 @@ async function POST(request: NextRequest) {
     };
 
     const response = await axios.post(url, data, {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
     });
 
     return NextResponse.json(response.data, { status: 200 });
   } catch (error) {
     console.error("Error:", error);
-    return NextResponse.json(
-      {
-        error:
-          (error as { response: { data: string } })?.response?.data ||
-          "An error occurred",
-      },
-      { status: 500 }
-    );
+    return res.status(500).json({
+      error:
+        (error as { response: { data: string } })?.response?.data ||
+        "An error occurred",
+    });
   }
 }
-
-export default applyCors(POST);
