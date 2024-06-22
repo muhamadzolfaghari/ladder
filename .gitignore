@@ -36,3 +36,6 @@ yarn-error.log*
 next-env.d.ts
 
 *.js.map
+
+public/sw.js
+public/workbox-e43f5367.js
