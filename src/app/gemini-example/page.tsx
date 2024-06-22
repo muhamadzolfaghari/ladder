@@ -5,12 +5,11 @@ import React, { useEffect } from "react";
 
 console.log(process.env.NEXT_PUBLIC_API_URL, "base api url");
 
-
 const GeminiExample = () => {
   useEffect(() => {
     axios
-      .post('http://localhost:3000/api' + "/gemini-ai", {
-        data: { prompt: "tell me hi" },
+      .post("http://localhost:3000/api" + "/gemini-ai", {
+        prompt: "tell me hi",
       })
       .then((res) => {
         console.log(res);
