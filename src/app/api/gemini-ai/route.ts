@@ -7,6 +7,8 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
   const url =
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCWxoLsLt5_xn7d4QtCcIZmSshzdTiNVNc";
 
+  console.log(res);
+
   if (applyCors(req, res)) {
     return;
   }
