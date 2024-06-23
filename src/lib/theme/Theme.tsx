@@ -97,6 +97,12 @@ const theme = createTheme({
         label: {
           fontFamily: rubik.style.fontFamily,
           fontWeight: 500,
+          "&.Mui-completed": {
+            color: "rgb(34, 152, 60)",
+          },
+          "&.Mui-active": {
+            color: "#424940", 
+          },
         },
       },
     },
