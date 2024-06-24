@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 export default function Page() {
   return (
     <Container maxWidth="sm">
@@ -57,12 +58,14 @@ export default function Page() {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <Link href="/forgot-password" style={{
-                    textDecoration: 'none', 
-                    color: 'inherit', 
-                
-                  }} >
-                    forget?
+                    <Link
+                      href="/forgot-password"
+                      style={{
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      forget?
                     </Link>
                   </InputAdornment>
                 ),
@@ -79,39 +82,43 @@ export default function Page() {
             Login
           </Button>
 
-          <Typography variant="h4" mb={1} >
+          <Typography variant="h4" mb={1}>
             Or Login With Google
           </Typography>
-          <Button fullWidth variant="outlined"  sx={{ mb: 3 }}>
-          <Image
-
-          width={18}
-          height={18}
-          src="/ICONS/google-icon.svg"
-          alt="G-MAIL"
-          style={{ marginRight: "0.5rem" }}
-
-        />            Google
+          <Button fullWidth variant="outlined" sx={{ mb: 3 }}>
+            <Image
+              width={18}
+              height={18}
+              src="/ICONS/google-icon.svg"
+              alt="G-MAIL"
+              style={{ marginRight: "0.5rem" }}
+            />{" "}
+            Google
           </Button>
- 
-    <Box   display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center">
-        <Typography variant="body1">
-          Don't have an account? 
-        </Typography>
-        <Link href="/sign-up" style={{
-                    textDecoration: 'none', 
-                    color: 'inherit', 
-                    display: 'flex',
-                    alignItems: 'center',
-                
-                  }} >
-       <Typography variant="body1" color="primary"> Sign Up</Typography>
-        <ArrowForwardIcon color="primary"/>
-        </Link>
-    </Box>
+
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Typography variant="body1">Don&#39;t have an account?</Typography>
+            <Link
+              href="/sign-up"
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Typography variant="body1" color="primary">
+                {" "}
+                Sign Up
+              </Typography>
+              <ArrowForwardIcon color="primary" />
+            </Link>
+          </Box>
         </Box>
       </Box>
     </Container>
