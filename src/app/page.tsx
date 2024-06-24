@@ -16,14 +16,14 @@ export default function Home() {
       setShowGetStart(true);
     } else {
      
-      router.push("/Prompt1");
+      router.push("/prompt-1");
     }
   }, [router]);
 
   //save step ,push to prompt
   const handleGetStartComplete = () => {
     localStorage.setItem("hasVisited", "true");
-    router.push("/Prompt1");
+    router.push("/prompt-1");
   };
 
   return (
