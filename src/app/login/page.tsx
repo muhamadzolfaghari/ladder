@@ -94,13 +94,13 @@ export default function Page() {
         />            Google
           </Button>
  
-          <Grid container direction="column" alignItems="center">
-      <Grid item>
+    <Box   display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center">
         <Typography variant="body1">
           Don't have an account? 
         </Typography>
-      </Grid>
-      <Grid item>
         <Link href="/sign-up" style={{
                     textDecoration: 'none', 
                     color: 'inherit', 
@@ -111,8 +111,7 @@ export default function Page() {
        <Typography variant="body1" color="primary"> Sign Up</Typography>
         <ArrowForwardIcon color="primary"/>
         </Link>
-      </Grid>
-    </Grid>
+    </Box>
         </Box>
       </Box>
     </Container>
