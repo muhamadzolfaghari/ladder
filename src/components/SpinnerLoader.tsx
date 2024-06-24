@@ -6,7 +6,7 @@ const styles = {
   loader: {
     width: "50.4px",
     height: "44.8px",
-    "--c": "linear-gradient(#22983c 0 0)",
+    "--c": "linear-gradient(#22983C 0 0)",
     background: "var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%",
     backgroundSize: "10.1px 100%",
     backgroundRepeat: "no-repeat",

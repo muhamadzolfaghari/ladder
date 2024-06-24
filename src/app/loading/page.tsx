@@ -32,7 +32,7 @@ export default function Page() {
           alignItems="center"
           flexGrow={1}
         >
-        <CircularProgress />
+        <CircularProgress color="primary"/>
           <SpinnerLoader />
         </Box>
       </Box>
