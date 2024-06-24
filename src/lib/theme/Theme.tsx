@@ -41,6 +41,12 @@ const theme = createTheme({
       fontSize: "2.2rem",
       color: "#2D322C",
     },
+    h5: {
+      fontFamily: alumniSans.style.fontFamily,
+      fontWeight: 600,
+      fontSize: "1.7rem",
+      color: "#2D322C",
+    },
     body1: {
       fontFamily: rubik.style.fontFamily,
       fontWeight: 400,
@@ -73,6 +79,38 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "transparent",
+          boxShadow: "none",
+        },
+      },
+    },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#22983C",
+          borderRadius: "9px",
+          flexDirection: "row-reverse",
+          boxShadow: "none",
+
+          "& .MuiTypography-root": {
+            color: "white",
+            fontFamily: alumniSans.style.fontFamily,
+            fontSize: "1.8rem",
+          },
+        },
+      },
+    },
+    MuiAccordionDetails: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "white",
+          textAlign: "left",
+        },
+      },
+    },
     MuiStepConnector: {
       styleOverrides: {
         line: {
@@ -101,7 +139,7 @@ const theme = createTheme({
             color: "rgb(34, 152, 60)",
           },
           "&.Mui-active": {
-            color: "#424940", 
+            color: "#424940",
           },
         },
       },
@@ -110,13 +148,15 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          background: "#22983C",
-          color: "#F7FBF2",
           textTransform: "capitalize",
           fontFamily: rubik.style.fontFamily,
           borderRadius: "8px",
           "&:hover": {
-            background: "#22983C",
+            background: "transparnet",
+          },
+          text: {
+            background: "#F7FBF2",
+            color: "#22983C",
           },
         },
       },
