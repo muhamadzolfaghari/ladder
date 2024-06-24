@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Box, Typography } from "@mui/material";
+import { Container, Box, Typography, CircularProgress } from "@mui/material";
 import Image from "next/image";
 import SpinnerLoader from "@/components/SpinnerLoader";
 
@@ -32,6 +32,7 @@ export default function Page() {
           alignItems="center"
           flexGrow={1}
         >
+        <CircularProgress />
           <SpinnerLoader />
         </Box>
       </Box>
