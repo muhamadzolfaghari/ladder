@@ -1,18 +1,12 @@
 import React from "react";
-import { Container, Box, Typography, CircularProgress } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import SpinnerLoader from "@/components/SpinnerLoader";
 
 export default function Page() {
   return (
     <Container maxWidth="sm">
-      <Box
-        flexDirection="column"
-        alignItems="center"
-        p={1}
-        height="100vh"
-        sx={{ mt: 2, display: { xs: "flex", md: "none" } }}
-      >
+      <Box flexDirection="column" alignItems="center" p={1} height="100vh">
         <Image
           width={320}
           height={306}
@@ -32,7 +26,6 @@ export default function Page() {
           alignItems="center"
           flexGrow={1}
         >
-        <CircularProgress color="primary"/>
           <SpinnerLoader />
         </Box>
       </Box>

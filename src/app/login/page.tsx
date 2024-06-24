@@ -20,7 +20,7 @@ export default function Page() {
         flexDirection="column"
         alignItems="center"
         height="100vh"
-        sx={{ mt: 4, display: { xs: "flex", md: "none" } }}
+        // sx={{ mt: 4, display: { xs: "flex", md: "none" } }}
       >
         <Image
           width={177}
