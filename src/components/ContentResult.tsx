@@ -73,7 +73,7 @@ export default function ContentResult() {
                   <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
                     <ListItem sx={{ display: "list-item", p: 0 }}>
                       2 hours: Reading and taking notes from recommended books
-                      (e.g., "HTML & CSS: Design and Build Websites" by Jon
+                      (e.g., &quot; HTML & CSS: Design and Build Websites &quot; by Jon
                       Duckett).
                     </ListItem>
                     <ListItem sx={{ display: "list-item", p: 0 }}>
