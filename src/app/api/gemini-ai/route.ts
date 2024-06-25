@@ -1,5 +1,4 @@
-import {NextApiRequest, NextApiResponse} from "next";
-import {NextResponse} from "next/server"; // export async function POST(request: NextRequest) {
+import {NextRequest, NextResponse} from "next/server"; // export async function POST(request: NextRequest) {
 
 // export async function POST(request: NextRequest) {
 //   NextResponse.json({ res: await run() });
@@ -82,6 +81,6 @@ import {NextResponse} from "next/server"; // export async function POST(request:
 //   return result.response.text();
 // }
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(request: NextRequest) {
   return NextResponse.json({ da: process.env.GEMINI_API_KEY });
 }
