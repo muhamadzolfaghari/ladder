@@ -31,7 +31,8 @@ const DELETE_PROMPT = {
 };
 
 const ERROR_MESSAGE = "Error fetching branches:";
-const BRANCH_DELETED_MESSAGE = "All branches are deleted";
+const BRANCH_DELETED_MESSAGE = "{count} branches are deleted";
+const BRANCH_DELETE_CANCEL_MESSAGE = "Deleting process is canceled";
 
 /**
  * @typedef {object} Branch
@@ -85,7 +86,7 @@ const isDateInRange = (branchDate, filterBy) => {
   }
 };
 
-async function displayBranches() {
+async function getBranches() {
   const { filterBy } = await inquirer.prompt([FILTER_PROMPT]);
 
   const branches = await fetchBranches();
@@ -93,59 +94,29 @@ async function displayBranches() {
     isDateInRange(branch.date, filterBy)
   );
 
-  newBranches.sort((a, b) => b.date - a.date);
-
-  console.log("Branches:");
-  newBranches.forEach((branch) => {
-    console.log(
-      `${branch.name} - Last commit date: ${branch.date.toLocaleDateString()}`
-    );
-  });
+  return newBranches.sort((a, b) => b.date - a.date);
 }
 
-async function deleteBranches() {
+/**
+ *
+ * @param branches {Branch[]}
+ * @return {Promise<void>}
+ */
+async function deleteBranches(branches) {
   const { deleteConfirm } = await inquirer.prompt([DELETE_PROMPT]);
 
   if (deleteConfirm) {
-    console.log(BRANCH_DELETED_MESSAGE);
+    console.log(
+      BRANCH_DELETED_MESSAGE.replace("{count}", String(branches.length))
+    );
+  } else {
+    console.log();
   }
 }
 
 async function main() {
-  await displayBranches();
-  deleteBranches();
+  const branches = await getBranches();
+  await deleteBranches(branches);
 }
 
 main();
-
-/**
- * @typedef Branch
- * @property {string} name
- * @property {Date} date
- */
-
-/**
- * @type {Branch}
- */
-const branch = {
-  date: new Date(),
-  name: "fix/api-call",
-};
-
-// in ts file
-// export default interface Response {
-//   stats: number;
-//   message: string;
-// }
-
-/**
- * @typedef {import('response').Response} Response
- */
-
-/**
- * @type {Response}
- */
-const response = {
-  stats: 200,
-  message: "everything is all right!",
-};

@@ -11,6 +11,14 @@ interface GeminiContent {
 
 interface GeminiRequest {
   contents: GeminiContent[];
+  safetySettings: { threshold: string; category: string }[];
+  generationConfig: {
+    topK: number;
+    stopSequences: string[];
+    temperature: number;
+    maxOutputTokens: number;
+    topP: number;
+  };
 }
 
 interface GeminiResponse {
@@ -40,6 +48,19 @@ const createGeminiRequest = (prompt: string): GeminiRequest => ({
       ],
     },
   ],
+  safetySettings: [
+    {
+      category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+      threshold: "BLOCK_ONLY_HIGH",
+    },
+  ],
+  generationConfig: {
+    stopSequences: ["Title"],
+    temperature: 0.2,
+    maxOutputTokens: 8192,
+    topP: 0.95,
+    topK: 64,
+  },
 });
 
 async function requestGemini(prompt: string): Promise<string | undefined> {
