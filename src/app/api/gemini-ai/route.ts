@@ -83,14 +83,10 @@ import axios from "axios"; // export async function POST(request: NextRequest) {
 // }
 
 export async function GET(req: NextRequest) {
-  // const a = await run();
-  // console.log(a)
-
-
-  console.log(req.url)
-
-  const url =
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCWxoLsLt5_xn7d4QtCcIZmSshzdTiNVNc";
+  const url = new URL(
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent"
+  );
+  url.searchParams.append("key", process.env.GEMINI_API_KEY!);
 
   try {
     // const { prompt } = await request.json();
@@ -110,7 +106,7 @@ export async function GET(req: NextRequest) {
       ],
     };
 
-    const response = await axios.post(url, data, {
+    const response = await axios.post(url.toString(), data, {
       headers: { "Content-Type": "application/json" },
     });
 
