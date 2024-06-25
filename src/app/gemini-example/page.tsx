@@ -3,15 +3,23 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 
-console.log(process.env.NEXT_PUBLIC_API_URL, "base api url");
-
 const GeminiExample = () => {
   useEffect(() => {
     const url = "https://ladder-nu.vercel.app/api/gemini-ai";
+    const data = { prompt: "what is web?" };
 
-    axios.get(url).then((res) => {
-      console.log(res);
-    });
+    axios
+      .post(url, data, {
+        headers: { "Content-Type": "application/json" },
+        responseType: "json",
+      })
+      .then((res) => {
+        console.log(res);
+      });
+
+    // fetch(url, { method: "POST", body: JSON.stringify(data) }).then((res) => {
+    //   console.log(res);
+    // });
   }, []);
 
   return (
