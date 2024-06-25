@@ -112,6 +112,6 @@ export async function GET(request: NextRequest) {
     });
     return NextResponse.json(response.data, { status: 200 });
   } catch (e) {
-    NextResponse.json(e);
+    return NextResponse.json(e);
   }
 }
