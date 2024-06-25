@@ -80,7 +80,7 @@ const isDateInRange = (branchDate, filterBy) => {
       date.setDate(date.getDate() - 3);
       return branchDate.getTime() < date.getTime();
     case FILTER_RANGES.MORE_THAN_SIX_MONTHS:
-      return;
+      return
     case FILTER_RANGES.ALL:
       return;
   }
