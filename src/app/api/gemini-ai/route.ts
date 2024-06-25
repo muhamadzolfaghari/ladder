@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Response is empty" });
     }
 
-    return NextResponse.json(response, { status: 200 });
+    return NextResponse.json({ data: response }, { status: 200 });
   } catch (e) {
     return NextResponse.json(e);
   }
