@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import axios from "axios"; // export async function POST(request: NextRequest) {
+import axios from "axios";
 
 interface GeminiContentPart {
   text: string;
@@ -9,11 +9,25 @@ interface GeminiContent {
   parts: GeminiContentPart[];
 }
 
-interface Request {
+interface GeminiRequest {
   contents: GeminiContent[];
 }
 
-const createRequestData = (prompt: string): Request => ({
+interface GeminiResponse {
+  candidates: {
+    finishReason: string;
+    index: number;
+    safetyRatings: { probability: string; category: string }[];
+    content: { role: string; parts: { text: string }[] };
+  }[];
+  usageMetadata: {
+    candidatesTokenCount: number;
+    totalTokenCount: number;
+    promptTokenCount: number;
+  };
+}
+
+const createGeminiRequest = (prompt: string): GeminiRequest => ({
   contents: [
     {
       parts: [
@@ -28,12 +42,28 @@ const createRequestData = (prompt: string): Request => ({
   ],
 });
 
-export async function POST(request: NextRequest) {
+async function requestGemini(prompt: string): Promise<string | undefined> {
   const url = new URL(
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent"
   );
   url.searchParams.append("key", process.env.GEMINI_API_KEY!);
 
+  const data = createGeminiRequest(prompt);
+  const response = await axios.post<GeminiResponse>(url.toString(), data, {
+    headers: { "Content-Type": "application/json" },
+  });
+
+  const [firstCandidate] = response.data.candidates;
+
+  if (firstCandidate) {
+    const [firstPart] = firstCandidate.content.parts;
+    firstPart.text;
+  }
+
+  return undefined;
+}
+
+export async function POST(request: NextRequest) {
   try {
     const { prompt } = await request.json();
 
@@ -44,12 +74,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const data = createRequestData(prompt);
-    const response = await axios.post(url.toString(), data, {
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await requestGemini(prompt);
 
-    return NextResponse.json(response.data, { status: 200 });
+    if (!response) {
+      return NextResponse.json({ message: "Response is empty" });
+    }
+
+    return NextResponse.json(response, { status: 200 });
   } catch (e) {
     return NextResponse.json(e);
   }
