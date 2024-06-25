@@ -3,5 +3,6 @@
   <component name="PrettierConfiguration">
     <option name="myConfigurationMode" value="MANUAL" />
     <option name="myRunOnReformat" value="true" />
+    <option name="myFilesPattern" value="{**/*,*}.{js,ts,jsx,tsx,vue,astro,mjs}" />
   </component>
 </project>
