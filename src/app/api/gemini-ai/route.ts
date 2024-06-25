@@ -82,7 +82,7 @@ import axios from "axios"; // export async function POST(request: NextRequest) {
 //   return result.response.text();
 // }
 
-export async function GET(request: NextRequest) {
+export async function GET(req: NextRequest) {
   // const a = await run();
   // console.log(a)
 
@@ -90,19 +90,19 @@ export async function GET(request: NextRequest) {
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCWxoLsLt5_xn7d4QtCcIZmSshzdTiNVNc";
 
   try {
-    const { prompt } = await request.json();
-
-    if (!prompt) {
-      return NextResponse.json(
-        { error: "Prompt is required" },
-        { status: 400 }
-      );
-    }
+    // const { prompt } = await request.json();
+    //
+    // if (!prompt) {
+    //   return NextResponse.json(
+    //     { error: "Prompt is required" },
+    //     { status: 400 }
+    //   );
+    // }
 
     const data = {
       contents: [
         {
-          parts: [{ text: "" }, { text: prompt }],
+          parts: [{ text: "" }, { text: "tets" }],
         },
       ],
     };
@@ -110,8 +110,33 @@ export async function GET(request: NextRequest) {
     const response = await axios.post(url, data, {
       headers: { "Content-Type": "application/json" },
     });
+
+    console.log(response.data);
+
     return NextResponse.json(response.data, { status: 200 });
   } catch (e) {
+    console.log(e);
     return NextResponse.json(e);
   }
 }
+
+// interface ProductProps {
+//   id: number;
+//   title: string;
+//   price: number;
+// }
+//
+// const Product = ({ id, title, price }: ProductProps) => {};
+//
+// interface Props {
+//   id: number;
+//   title: string;
+//   price: number;
+// }
+//
+// const Product = ({ id, title, price }: Props) => {};
+//
+//
+// interface IProduct {
+//   id: number;
+// }
