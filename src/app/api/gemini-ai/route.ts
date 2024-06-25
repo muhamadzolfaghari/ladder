@@ -57,7 +57,7 @@ async function requestGemini(prompt: string): Promise<string | undefined> {
 
   if (firstCandidate) {
     const [firstPart] = firstCandidate.content.parts;
-    firstPart.text;
+    return firstPart.text;
   }
 
   return undefined;
