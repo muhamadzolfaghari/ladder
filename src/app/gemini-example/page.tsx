@@ -1,31 +1,68 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import axios from "axios";
+import {
+  Button,
+  Container,
+  Divider,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 const GeminiExample = () => {
-  useEffect(() => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [prompt, setPrompt] = useState<string>();
+  const [data, setData] = useState<string>();
+
+  function handlePromptChange(
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void {
+    setData(undefined);
+    setPrompt(event.target.value);
+  }
+
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault();
     const url = "https://ladder-nu.vercel.app/api/gemini-ai";
-    const data = { prompt: "what is web?" };
+    const data = { prompt };
+    setIsLoading(true);
 
     axios
-      .post(url, data, {
-        headers: { "Content-Type": "application/json" },
-        responseType: "json",
-      })
+      .post(url, data)
       .then((res) => {
-        console.log(res);
+        setData(res.data.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
-
-    // fetch(url, { method: "POST", body: JSON.stringify(data) }).then((res) => {
-    //   console.log(res);
-    // });
-  }, []);
+  }
 
   return (
-    <div>
-      <h1>Gemini Example</h1>
-    </div>
+    <Container>
+      <form onSubmit={handleSubmit}>
+        <Typography variant={"h1"}>Gemini Example</Typography>
+        <Stack direction={"row"} m={"auto"}>
+          <TextField
+            fullWidth
+            sx={{ mr: 2 }}
+            label={"prompt"}
+            value={prompt}
+            onChange={handlePromptChange}
+          />
+          <Button
+            variant={"contained"}
+            disabled={!prompt || isLoading}
+            type={"submit"}
+          >
+            submit
+          </Button>
+        </Stack>
+        <Divider sx={{ mt: 2, mb: 2 }} />
+        <Typography component={"pre"}>{data}</Typography>
+      </form>
+    </Container>
   );
 };
 
