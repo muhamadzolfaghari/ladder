@@ -86,6 +86,9 @@ export async function GET(req: NextRequest) {
   // const a = await run();
   // console.log(a)
 
+
+  console.log(req.url)
+
   const url =
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCWxoLsLt5_xn7d4QtCcIZmSshzdTiNVNc";
 
@@ -102,7 +105,7 @@ export async function GET(req: NextRequest) {
     const data = {
       contents: [
         {
-          parts: [{ text: "" }, { text: "tets" }],
+          parts: [{ text: "what is the sun?" }],
         },
       ],
     };
