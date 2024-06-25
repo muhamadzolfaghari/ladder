@@ -1,4 +1,5 @@
-import {NextRequest, NextResponse} from "next/server"; // export async function POST(request: NextRequest) {
+import {NextRequest, NextResponse} from "next/server";
+import axios from "axios"; // export async function POST(request: NextRequest) {
 
 // export async function POST(request: NextRequest) {
 //   NextResponse.json({ res: await run() });
@@ -82,5 +83,35 @@ import {NextRequest, NextResponse} from "next/server"; // export async function 
 // }
 
 export async function GET(request: NextRequest) {
-  return NextResponse.json({ da: process.env.GEMINI_API_KEY });
+  // const a = await run();
+  // console.log(a)
+
+  const url =
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCWxoLsLt5_xn7d4QtCcIZmSshzdTiNVNc";
+
+  try {
+    const { prompt } = await request.json();
+
+    if (!prompt) {
+      return NextResponse.json(
+        { error: "Prompt is required" },
+        { status: 400 }
+      );
+    }
+
+    const data = {
+      contents: [
+        {
+          parts: [{ text: "" }, { text: prompt }],
+        },
+      ],
+    };
+
+    const response = await axios.post(url, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return NextResponse.json(response.data, { status: 200 });
+  } catch (e) {
+    NextResponse.json(e);
+  }
 }
