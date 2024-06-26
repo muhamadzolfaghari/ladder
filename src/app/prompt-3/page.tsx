@@ -3,6 +3,7 @@ import StepBar from "@/components/StepBar";
 import {
   Box,
   Button,
+  Container,
   List,
   ListItem,
   TextField,
@@ -14,7 +15,7 @@ import React from "react";
 export default function page() {
   return (
     <>
-      <Box sx={{ mt: 4, px: "1rem" }}>
+      <Container sx={{ mt: 4, px: "1rem" }}>
         <StepBar />
         <Box sx={{ mt: 4, pl: 2 }}>
           <Box sx={{ display: "flex", gap: "1rem" }}>
@@ -114,7 +115,7 @@ export default function page() {
             </Button>
           </Link>
         </Box>
-      </Box>
+      </Container>
     </>
   );
 }

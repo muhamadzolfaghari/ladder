@@ -1,15 +1,15 @@
 import PromptSteps from "@/components/PromptSteps";
 import StepBar from "@/components/StepBar";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import React from "react";
 
 export default function page() {
   return (
     <>
-      <Box sx={{ mt: 4, px: "1rem" }}>
+      <Container sx={{ mt: 4, px: "1rem" }}>
         <StepBar />
         <PromptSteps />
-      </Box>
+      </Container>
     </>
   );
 }

@@ -44,7 +44,7 @@ const theme = createTheme({
     h5: {
       fontFamily: alumniSans.style.fontFamily,
       fontWeight: 600,
-      fontSize: "1.7rem",
+      fontSize: "1.8rem",
       color: "#2D322C",
     },
     body1: {
@@ -151,10 +151,9 @@ const theme = createTheme({
           textTransform: "capitalize",
           fontFamily: rubik.style.fontFamily,
           borderRadius: "10px",
-          paddingTop: "0.7rem",
-          paddingBottom: "0.7rem",
+          padding: " 0.7rem 1rem",
           fontSize: "1.1rem",
-          fontWeight : '500',
+          fontWeight: "500",
           "&:hover": {
             background: "transparnet",
           },
