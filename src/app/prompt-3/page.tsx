@@ -14,7 +14,7 @@ import React from "react";
 export default function page() {
   return (
     <>
-      <Box sx={{ mt: 4, display: { md: "none" }, px: "1rem" }}>
+      <Box sx={{ mt: 4, px: "1rem" }}>
         <StepBar />
         <Box sx={{ mt: 4, pl: 2 }}>
           <Box sx={{ display: "flex", gap: "1rem" }}>
@@ -109,7 +109,9 @@ export default function page() {
         </Box>
         <Box sx={{ mt: 4, pl: 2, mb: 12 }}>
           <Link href={"/review"}>
-            <Button sx={{ width: "100%" }}>Review Your Prompt</Button>
+            <Button variant="contained" sx={{ width: "100%" }}>
+              Review Your Prompt
+            </Button>
           </Link>
         </Box>
       </Box>

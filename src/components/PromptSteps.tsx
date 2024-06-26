@@ -110,8 +110,12 @@ export default function PromptSteps() {
       </Box>
       <Box sx={{ mt: 4, pl: 2, mb: 12 }}>
         <Link href={"/prompt-2"}>
-          <Button sx={{ width: "100%" }} variant={"contained"}>Next</Button>
+          <Button sx={{ width: "100%" }} variant={"contained"}>
+            Next
+          </Button>
         </Link>
+
+   
       </Box>
     </Box>
   );

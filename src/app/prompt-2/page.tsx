@@ -1,13 +1,20 @@
 import PromptSteps from "@/components/PromptSteps";
 import StepBar from "@/components/StepBar";
-import { Box, Button, List, ListItem, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  List,
+  ListItem,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
 import React from "react";
 
 export default function page() {
   return (
     <>
-      <Box sx={{ mt: 4, display: { md: "none" }, px: "1rem" }}>
+      <Box sx={{ mt: 4, px: "1rem" }}>
         <StepBar />
         <Box sx={{ mt: 4, pl: 2 }}>
           <Box sx={{ display: "flex", gap: "1rem" }}>
@@ -102,7 +109,9 @@ export default function page() {
         </Box>
         <Box sx={{ mt: 4, pl: 2, mb: 12 }}>
           <Link href={"/prompt-3"}>
-            <Button sx={{ width: "100%" }}>Next</Button>
+            <Button variant="contained" sx={{ width: "100%" }}>
+              Next
+            </Button>
           </Link>
         </Box>
       </Box>
