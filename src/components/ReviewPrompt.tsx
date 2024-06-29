@@ -186,7 +186,7 @@ export default function ReviewPrompt() {
           Edit
         </Button>
 
-        <Button sx={{ width: "100%" }} href="/result">
+        <Button variant="contained" sx={{ width: "100%" }} href="/result">
           Create Ladder
         </Button>
       </Box>

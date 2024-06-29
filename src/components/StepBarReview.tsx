@@ -7,9 +7,9 @@ import LogoIconReview from "/public/icons/Vector-review-read.svg";
 import LogoIconLadder from "/public/icons/Vector-ladder.svg";
 
 const steps = [
-  { label: "Prompt", icon: LogoIconPrompt, color: "#22983C" },
-  { label: "Review", icon: LogoIconReview, color: "#424940" },
-  { label: "Ladder", icon: LogoIconLadder, color: "#C2C9BD" },
+  { label: "Prompt", icon: LogoIconPrompt },
+  { label: "Review", icon: LogoIconReview },
+  { label: "Ladder", icon: LogoIconLadder },
 ];
 
 export default function StepBarReview() {
@@ -31,7 +31,6 @@ export default function StepBarReview() {
                   />
                 </div>
               )}
-            
             >
               {step.label}
             </StepLabel>
