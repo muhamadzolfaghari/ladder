@@ -25,7 +25,7 @@ const GeminiExample = () => {
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    const url = "http://localhost:3000/" + "/api/gemini-ai";
+    const url = "https://ladder-nu.vercel.app/api/gemini-ai";
     const data = { prompt };
     setIsLoading(true);
 
