@@ -64,15 +64,7 @@ const createGeminiRequest = (commands: string[]): GeminiRequest => ({
     },
 });
 
-/**
- * @swagger
- * /api/hello:
- *   get:
- *     description: Returns the hello world
- *     responses:
- *       200:
- *         description: Hello World!
- */
+
 async function requestGemini(prompt: string): Promise<string | undefined> {
     const url = new URL(
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent"
@@ -96,6 +88,15 @@ async function requestGemini(prompt: string): Promise<string | undefined> {
     return undefined;
 }
 
+/**
+ * @swagger
+ * /api/hello:
+ *   get:
+ *     description: Returns the hello world
+ *     responses:
+ *       200:
+ *         description: Hello World!
+ */
 export async function POST(request: NextRequest) {
     try {
         const {prompt} = await request.json();
