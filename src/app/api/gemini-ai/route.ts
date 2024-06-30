@@ -57,13 +57,22 @@ const createGeminiRequest = (commands: string[]): GeminiRequest => ({
     ],
     generationConfig: {
         stopSequences: ["Title"],
-        temperature: 0.2,
+        temperature: 0,
         maxOutputTokens: 8192,
         topP: 0.95,
         topK: 64,
     },
 });
 
+/**
+ * @swagger
+ * /api/hello:
+ *   get:
+ *     description: Returns the hello world
+ *     responses:
+ *       200:
+ *         description: Hello World!
+ */
 async function requestGemini(prompt: string): Promise<string | undefined> {
     const url = new URL(
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent"
