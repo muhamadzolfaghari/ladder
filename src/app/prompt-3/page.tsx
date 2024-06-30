@@ -1,4 +1,3 @@
-import PromptSteps from "@/components/PromptSteps";
 import StepBar from "@/components/StepBar";
 import {
   Box,
@@ -65,13 +64,11 @@ export default function page() {
           {/* Field-Specific */}
           <Box component={"form"} sx={{ mt: 3 }}>
             <TextField
-              label="Learning style"
+              label="English"
               InputLabelProps={{ shrink: true }}
               multiline
               rows={4}
-              placeholder="Combination of reading, watching videos, and hands-on practice.
-
-                  Prefer structured online courses with projects and quizzes."
+              placeholder="English"
               fullWidth
             />
           </Box>
@@ -98,7 +95,7 @@ export default function page() {
           {/* Field-Specific */}
           <Box component={"form"} sx={{ mt: 3 }}>
             <TextField
-              label="Learning Pace"
+              label="Tools and Platforms"
               InputLabelProps={{ shrink: true }}
               multiline
               rows={4}
