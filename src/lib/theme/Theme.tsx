@@ -144,6 +144,24 @@ const theme = createTheme({
         },
       },
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: "9px",
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#72796F",
+            borderWidth: "2px",
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: "1.1rem",
+        },
+      },
+    },
 
     MuiButton: {
       styleOverrides: {

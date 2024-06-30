@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import Typography from "@mui/material";
 import LogoIconPrompt from "/public/icons/Vector.svg";
 import LogoIconReview from "/public/icons/Review-vector.svg";
 import LogoIconLadder from "/public/icons/Vector-ladder.svg";
@@ -24,7 +23,7 @@ export default function StepBar() {
       <Stepper activeStep={activeStep}>
         {steps.map((step, index) => (
           <Step key={index}>
-            <StepLabel 
+            <StepLabel
               StepIconComponent={() => (
                 <div>
                   <Image

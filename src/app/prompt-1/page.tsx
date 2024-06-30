@@ -1,6 +1,6 @@
 import PromptSteps from "@/components/PromptSteps";
 import StepBar from "@/components/StepBar";
-import { Box, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import React from "react";
 
 export default function page() {

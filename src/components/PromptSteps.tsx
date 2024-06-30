@@ -98,7 +98,7 @@ export default function PromptSteps() {
         {/* Field-Specific */}
         <Box component={"form"} sx={{ mt: 3 }}>
           <TextField
-            label="Goal"
+            label="Current Level"
             InputLabelProps={{ shrink: true }}
             multiline
             rows={4}
@@ -114,8 +114,6 @@ export default function PromptSteps() {
             Next
           </Button>
         </Link>
-
-   
       </Box>
     </Box>
   );

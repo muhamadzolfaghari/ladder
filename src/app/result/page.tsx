@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import StepBarResult from "@/components/StepBarResult";
 import ContentResult from "@/components/ContentResult";
 

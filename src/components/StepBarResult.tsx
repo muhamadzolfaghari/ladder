@@ -1,5 +1,5 @@
 "use client";
-import { Box, Stepper, Step, StepLabel, Typography } from "@mui/material";
+import { Box, Stepper, Step, StepLabel } from "@mui/material";
 import React, { useState } from "react";
 import Image from "next/image";
 import LogoIconPrompt from "/public/icons/Vector-promt-complete.svg";
