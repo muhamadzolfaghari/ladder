@@ -17,10 +17,11 @@ export default function Page() {
   return (
     <Container maxWidth="sm">
       <Box
+        display="flex"
         flexDirection="column"
         alignItems="center"
+        justifyContent="center"
         height="100vh"
-        // sx={{ mt: 4, display: { xs: "flex", md: "none" } }}
       >
         <Image
           width={177}
@@ -86,7 +87,7 @@ export default function Page() {
           <Typography variant="h4" mb={1}>
             Or Login With Google
           </Typography>
-          <Button fullWidth variant="outlined" sx={{ mb: 3 }}>
+          <Button fullWidth variant="outlined" sx={{ mb: 8 }}>
             <Image
               width={18}
               height={18}
@@ -103,7 +104,7 @@ export default function Page() {
             justifyContent="center"
             alignItems="center"
           >
-            <Typography variant="body1">Don&#39;t have an account?</Typography>
+            <Typography variant="body1" mb={1}>Don&#39;t have an account?</Typography>
             <Link
               href="/sign-up"
               style={{
@@ -117,7 +118,7 @@ export default function Page() {
                 {" "}
                 Sign Up
               </Typography>
-              <ArrowForwardIcon color="primary" />
+              <ArrowForwardIcon  color="primary" sx={{ width: 18, height: 18 , marginLeft:0.5}} />
             </Link>
           </Box>
         </Box>
