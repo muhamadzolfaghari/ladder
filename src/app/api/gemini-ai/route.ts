@@ -1,92 +1,109 @@
-import {NextRequest, NextResponse} from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
 interface GeminiContentPart {
-    text: string;
+  text: string;
 }
 
 interface GeminiContent {
-    parts: GeminiContentPart[];
+  parts: GeminiContentPart[];
 }
 
 interface GeminiRequest {
-    contents: GeminiContent[];
-    safetySettings: { threshold: string; category: string }[];
-    generationConfig: {
-        topK: number;
-        stopSequences: string[];
-        temperature: number;
-        maxOutputTokens: number;
-        topP: number;
-    };
+  contents: GeminiContent[];
+  safetySettings: { threshold: string; category: string }[];
+  generationConfig: {
+    topK: number;
+    stopSequences: string[];
+    temperature: number;
+    maxOutputTokens: number;
+    topP: number;
+  };
 }
 
 interface GeminiResponse {
-    candidates: {
-        finishReason: string;
-        index: number;
-        safetyRatings: { probability: string; category: string }[];
-        content: { role: string; parts: { text: string }[] };
-    }[];
-    usageMetadata: {
-        candidatesTokenCount: number;
-        totalTokenCount: number;
-        promptTokenCount: number;
-    };
+  candidates: {
+    finishReason: string;
+    index: number;
+    safetyRatings: { probability: string; category: string }[];
+    content: { role: string; parts: { text: string }[] };
+  }[];
+  usageMetadata: {
+    candidatesTokenCount: number;
+    totalTokenCount: number;
+    promptTokenCount: number;
+  };
 }
 
-const createGeminiRequest = (commands: string[]): GeminiRequest => ({
-    contents: [
+interface RequestJson {
+  goal: string;
+  current_level: string;
+  preferred_learning_style: string;
+  resources_available: string;
+  time_commitment: string;
+  language: string;
+  field_of_study: string;
+  learning_pace: string;
+  preferred_tools_and_platforms: string;
+}
+
+const createGeminiRequest = (commands: { text: string }[]): GeminiRequest => ({
+  contents: [
+    {
+      parts: [
         {
-            parts: [
-                // {
-                //     text: "you are a mentor who is supposed to give a learning paths. your paths should be concise and realistic, well structured with phase parts, each phase containing a daily/weekly routine of small tasks.",
-                // },
-                // {
-                //     text: prompt,
-                // },
-                ...commands.map(command => ({text: command}))
-            ],
+          text: "Role and Purpose: You are a mentor responsible for creating personalized learning paths. Your primary goal is to design concise, realistic, and well-structured learning paths that guide learners from their current skill level to their desired proficiency. Each learning path should be divided into phases, with each phase containing a daily/weekly routine of small, manageable tasks.",
         },
-    ],
-    safetySettings: [
         {
-            category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-            threshold: "BLOCK_ONLY_HIGH",
+          text: "Output Format: JSON format use all information in camel case keys.",
         },
-    ],
-    generationConfig: {
-        stopSequences: ["Title"],
-        temperature: 0,
-        maxOutputTokens: 8192,
-        topP: 0.95,
-        topK: 64,
+        ...commands,
+      ],
     },
+  ],
+  safetySettings: [
+    {
+      category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+      threshold: "BLOCK_ONLY_HIGH",
+    },
+  ],
+  generationConfig: {
+    stopSequences: ["Title"],
+    temperature: 0,
+    maxOutputTokens: 8192,
+    topP: 0.95,
+    topK: 64,
+  },
 });
 
+async function requestGemini(
+  prompts: { text: string }[],
+): Promise<string | undefined> {
+  const url = new URL(
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent",
+  );
+  url.searchParams.append("key", process.env.GEMINI_API_KEY!);
 
-async function requestGemini(prompt: string): Promise<string | undefined> {
-    const url = new URL(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent"
-    );
-    url.searchParams.append("key", process.env.GEMINI_API_KEY!);
+  const data = createGeminiRequest(prompts);
 
+  const response = await axios.post<GeminiResponse>(url.toString(), data, {
+    headers: { "Content-Type": "application/json" },
+  });
 
-    const commands = prompt.split("\n");
-    const data = createGeminiRequest(commands);
-    const response = await axios.post<GeminiResponse>(url.toString(), data, {
-        headers: {"Content-Type": "application/json"},
-    });
+  const [firstCandidate] = response.data.candidates;
 
-    const [firstCandidate] = response.data.candidates;
+  if (firstCandidate) {
+    const [firstPart] = firstCandidate.content.parts;
+    return firstPart.text;
+  }
 
-    if (firstCandidate) {
-        const [firstPart] = firstCandidate.content.parts;
-        return firstPart.text;
-    }
-
-    return undefined;
+  return undefined;
 }
+
+const getPrompts = (requestJson: RequestJson) =>
+  Object.entries(requestJson).map(([key, value]) => ({
+    text: `${key}=${value}`,
+  }));
 
 /**
  * @swagger
@@ -98,27 +115,27 @@ async function requestGemini(prompt: string): Promise<string | undefined> {
  *         description: Hello World!
  */
 export async function POST(request: NextRequest) {
-    try {
-        const {prompt} = await request.json();
+  try {
+    const requestJson = (await request.json()) as RequestJson;
+    const prompts = getPrompts(requestJson);
 
-
-        if (!prompt) {
-            return NextResponse.json(
-                {error: "Prompt is required"},
-                {status: 400}
-            );
-        }
-
-        const response = await requestGemini(prompt);
-
-        if (!response) {
-            return NextResponse.json({message: "Response is empty"});
-        }
-
-        return NextResponse.json({data: response}, {status: 200});
-    } catch (e) {
-        return NextResponse.json(e);
+    if (prompts.length < 9) {
+      return NextResponse.json(
+        { error: "Prompt is required" },
+        { status: 400 },
+      );
     }
+
+    const response = await requestGemini(prompts);
+
+    if (!response) {
+      return NextResponse.json({ message: "Response is empty" });
+    }
+
+    return NextResponse.json({ data: response }, { status: 200 });
+  } catch (e) {
+    return NextResponse.json(e);
+  }
 }
 
 // interface ProductProps {
