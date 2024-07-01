@@ -12,6 +12,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@google/generative-ai": "^0.13.0",
+    "@hookform/resolvers": "^3.6.0",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
     "@types/axios": "^0.14.0",
@@ -19,7 +20,9 @@
     "next-swagger-doc": "^0.4.0",
     "react": "^18",
     "react-dom": "^18",
-    "swagger-ui-react": "^5.17.14"
+    "react-hook-form": "^7.52.0",
+    "swagger-ui-react": "^5.17.14",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^20",
