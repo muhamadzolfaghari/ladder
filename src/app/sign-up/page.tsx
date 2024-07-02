@@ -1,205 +1,280 @@
-"use client"
+"use client";
 import {
-    Box,
-    Button,
-    Container,
-    TextField,
-    Typography,
-    InputAdornment,
-    colors,
-    Grid,
-    IconButton,
-  } from "@mui/material";
-  import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-  import Image from "next/image";
-  import Link from "next/link";
-  import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-  import logoImage from "../../../public/Images/Logo.svg"
-  
-  interface IFormInputs {
-    name: string;
-    email: string;
-    password: string;
-  }
-  const schema = yup.object().shape({
-    name: yup.string().required('Name is required'),
-    email: yup.string().email('Invalid email').required('Email is required'),
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+  InputAdornment,
+  IconButton,
+} from "@mui/material";
+import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import Image from "next/image";
+import Link from "next/link";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import logoImage from "../../../public/Images/Logo.svg";
+
+type Inputs = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
+const schema = yup.object({
+    name: yup.string().required("Name is required"),
+    email: yup.string().email("Invalid email").required("Email is required"),
     password: yup
       .string()
-      .required('Password is required')
-      .min(8, 'At least 8 character, Symbols, Uppercase & letter case.')
-      .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
-      .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
-      .matches(/\d/, 'Password must contain at least one number')
-      .matches(/[@$!%*?&#]/, 'Password must contain at least one special character'),
+      .min(8, "Password must be at least 8 characters")
+      .required("Password is required")
+      .matches(/(?=.*[!@#$%^&*])/, "Must contain a special character")
+      .matches(/(?=.*[A-Z])/, "Must contain an uppercase letter")
+      .matches(/(?=.*[a-z])/, "Must contain a lowercase letter"),
+    confirmPassword: yup
+      .string()
+      .required("Confirm Password is required")
+      .oneOf([yup.ref("password")], "Passwords must match"),
+  })
+  .required();
+
+
+export default function Page() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordFocused, setPasswordFocused] = useState(false);
+  const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({
+    resolver: yupResolver(schema),
   });
-  export default function Page() {
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormInputs>({
-      resolver: yupResolver(schema),
-    });
-    const [showPassword, setShowPassword] = useState(false);
-  
-    const onSubmit: SubmitHandler<IFormInputs> = data => {
-      console.log(data);
-    };
-  
-    const togglePasswordVisibility = () => {
-      setShowPassword(prev => !prev);
-    };
-    return (
-      <Container maxWidth="sm">
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          height="100vh"
-        >
-          <Image
-            width={177}
-            height={47}
-            style={{ margin: "1rem" }}
-            src={logoImage.src}
-            alt="Wait screen illustration"
-          />
-          <Typography variant="h6" gutterBottom>
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    // Handle form submission here
+  };
+
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleClickShowConfirmPassword = () =>
+    setShowConfirmPassword(!showConfirmPassword);
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => event.preventDefault();
+
+  return (
+    <Container maxWidth="sm">
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        height="100vh"
+      >
+        <Image
+          width={177}
+          height={47}
+          style={{ margin: "1rem" }}
+          src={logoImage.src}
+          alt="Wait screen illustration"
+        />
+        <Typography variant="h6" gutterBottom>
           Your AI Learning Assistance :)
-          </Typography>
-          <Box width="100%" mt={3} component="form" onSubmit={handleSubmit(onSubmit)}>
-            <Typography variant="h4" mb={2}>
+        </Typography>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          style={{ marginBottom: "1rem" }}
+        >
+          <Typography variant="h4" mb={2}>
             Create your account
-            </Typography>
-            <TextField
-              label="Name"
-              InputLabelProps={{ shrink: true }}
-              placeholder="Nova"
-              fullWidth
-              {...register('name')}
-              error={!!errors.name}
-              helperText={errors.name?.message}
-              sx={{ marginBottom: 2 }}
-            />
-            <TextField
-              label="Email"
-              InputLabelProps={{ shrink: true }}
-              placeholder="youremail@gmail.com"
-              fullWidth
-              sx={{ marginBottom: 2 }}
-              {...register('email')}
-              error={!!errors.email}
-              helperText={errors.email?.message}
-            />
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              mb={2}
-            >
-             <TextField
+          </Typography>
+          <TextField
+            label="Name"
+            {...register("name")}
+            InputLabelProps={{ shrink: true }}
+            placeholder="Nova"
+            error={!!errors.name}
+            helperText={errors.name?.message}
             fullWidth
+            sx={{ marginBottom: 2 }}
+          />
+          <TextField
+            label="Email"
+            type="email"
+            InputLabelProps={{ shrink: true }}
+            placeholder="youremail@gmail.com"
+            {...register("email")}
+            error={!!errors.email}
+            helperText={errors.email?.message}
+            fullWidth
+            margin="normal"
+            sx={{ marginBottom: 2 }}
+          />
+          <TextField
             label="Password"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
+            {...register("password")}
             placeholder="********"
             InputLabelProps={{ shrink: true }}
-            margin="normal"
-            {...register('password')}
             error={!!errors.password}
             helperText={errors.password?.message}
+            FormHelperTextProps={{ style: { color: "red" } }}
+            fullWidth
+            margin="normal"
             InputProps={{
-              endAdornment: (
-                <InputAdornment position="end" onClick={togglePasswordVisibility}>
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
+              endAdornment: (passwordFocused || password) && (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
                 </InputAdornment>
               ),
             }}
+            onChange={(e) => setPassword(e.target.value)}
+            onFocus={() => setPasswordFocused(true)}
+            onBlur={() => setPasswordFocused(false)}
           />
-            </Box>
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              mb={2}
-            >
-              <TextField
-                fullWidth
-                label="Password"
-                type="password"
-                placeholder="********"
-                InputLabelProps={{ shrink: true }}
-                margin="normal"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <Link
-                        href="/forgot-password"
-                        style={{
-                          textDecoration: "none",
-                          color: "inherit",
-                        }}
-                      >
-                        forget?
-                      </Link>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Box>
+          <PasswordValidation password={password} />
+          <TextField
+            label="Confirm Password"
+            type={showConfirmPassword ? "text" : "password"}
+            {...register("confirmPassword")}
+            placeholder="********"
+            InputLabelProps={{ shrink: true }}
+            error={!!errors.confirmPassword}
+            helperText={errors.confirmPassword?.message}
+            fullWidth
+            style={{ marginBottom: "1rem" }}
+            InputProps={{
+              endAdornment: (confirmPasswordFocused || confirmPassword) && (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle confirm password visibility"
+                    onClick={handleClickShowConfirmPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            onFocus={() => setConfirmPasswordFocused(true)}
+            onBlur={() => setConfirmPasswordFocused(false)}
+          />
 
-            
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              type="submit"
-              sx={{ mb: 6 }}
-            >
-              Login
-            </Button>
-  
-            <Typography variant="h4" mb={1}>
-            Or Sign Up With Google
+          <Button fullWidth variant="contained" color="primary" type="submit">
+            Sign Up
+          </Button>
+        </form>
+        <Typography variant="body1" align="center">
+          By signing up, you agree to{" "}
+          <Link href="/terms" passHref>
+            <Typography component="a" color="primary">
+              our Terms
             </Typography>
-            <Button fullWidth variant="outlined" sx={{ mb: 8 }}>
-              <Image
-                width={18}
-                height={18}
-                src="/ICONS/google-icon.svg"
-                alt="G-MAIL"
-                style={{ marginRight: "0.5rem" }}
-              />{" "}
-              Google
-            </Button>
-  
-            <Box
-              display="flex"
-              flexDirection="column"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Typography variant="body1" mb={1}>Already have account? </Typography>
-              <Link
-                href="/login"
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <Typography variant="body1" color="primary">
-                  {" "}
-                  Login
-                </Typography>
-                <ArrowForwardIcon  color="primary" sx={{ width: 18, height: 18 , marginLeft:0.5}} />
-              </Link>
-            </Box>
-          </Box>
-        </Box>
-      </Container>
-    );
-  }
-  
+          </Link>{" "}
+          &{" "}
+          <Link href="/terms">
+            <Typography component="a" color="primary">
+              Privacy Policy
+            </Typography>
+          </Link>
+        </Typography>
+        <Typography variant="h4" mb={1} mt={6}>
+          Or Sign Up With Google
+        </Typography>
+        <Button fullWidth variant="outlined" sx={{ marginBottom: "2rem" }}>
+          <Image
+            width={18}
+            height={18}
+            src="/ICONS/google-icon.svg"
+            alt="G-MAIL"
+            style={{ marginRight: "0.5rem" }}
+          />{" "}
+          Google
+        </Button>
+        <Typography variant="body1" mb={1}>
+          Already have account?
+        </Typography>
+        <Link
+          href="/sign-up"
+          style={{
+            textDecoration: "none",
+            color: "inherit",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="body1" color="primary">
+            Login
+          </Typography>
+          <ArrowForwardIcon
+            color="primary"
+            sx={{ width: 18, height: 18, marginLeft: 0.5 }}
+          />
+        </Link>
+      </Box>
+    </Container>
+  );
+}
+
+
+const PasswordValidation: React.FC<{ password: string }> = ({ password }) => {
+  const validations = [
+    {
+      test: (pw: string) => pw.length >= 8,
+      message: "At least 8 characters, ",
+    },
+    {
+      test: (pw: string) => /[!@#$%^&*]/.test(pw),
+      message: "Symbols, ",
+    },
+    {
+      test: (pw: string) => /[A-Z]/.test(pw),
+      message: "Uppercase &",
+    },
+    {
+      test: (pw: string) => /[a-z]/.test(pw),
+      message: "letter case",
+    },
+  ];
+
+  return (
+    <Box
+      display={password.length > 0 ? "flex" : "none"}
+      flexDirection="row"
+      flexWrap="wrap"
+      gap={0.5}
+      mt={1}
+      mb={1}
+    >
+      {validations.map((validation, index) => (
+        <Typography
+          key={index}
+          variant="body1"
+          fontSize="12px"
+          style={{ color: validation.test(password) ? "green" : "red" }}
+        >
+          {validation.message}
+        </Typography>
+      ))}
+    </Box>
+  );
+};
