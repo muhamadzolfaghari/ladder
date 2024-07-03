@@ -193,8 +193,8 @@ export default function Page() {
           <Button fullWidth variant="contained" color="primary" type="submit">
             Sign Up
           </Button>
-        <Box gap={0.5} mt={1} width="100vh" fontSize={13} display="flex" justifyContent="left">
-          By signing up, you agree to{" "}
+        <Box gap={0.5} mt={1} width="100vh" fontSize={14}  display="flex" justifyContent="left">
+        <Typography variant="body1" fontSize={14} > By signing up, you agree to{" "}</Typography>
           <Link
             href="/terms"
             passHref
@@ -202,7 +202,7 @@ export default function Page() {
           >
             our terms
           </Link>
-          <Typography variant="body1" fontSize={13} >
+          <Typography variant="body1"fontSize={14}  >
             &
           </Typography>
           <Link
