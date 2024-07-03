@@ -7,7 +7,6 @@ import {
   Typography,
   InputAdornment,
   IconButton,
-  styled,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -18,7 +17,6 @@ import Image from "next/image";
 import Link from "next/link";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import logoImage from "../../../public/Images/Logo.svg";
-import { log } from "console";
 
 type Inputs = {
   name: string;
@@ -94,11 +92,16 @@ export default function Page() {
         <Typography variant="h6" gutterBottom>
           Your AI Learning Assistance :)
         </Typography>
-
-      <Box component="form" width="100%" mt={3} mb={1}
+<Box>
+        <Box
+          component="form"
+          width="100%"
+          mt={3}
+          mb={1}
           onSubmit={handleSubmit(onSubmit, (e) => {
             console.log(e);
-          })}>
+          })}
+        >
           <Typography variant="h4" mb={2}>
             Create your account
           </Typography>
@@ -157,7 +160,7 @@ export default function Page() {
           />
           <PasswordValidation password={password} />
           <TextField
-          margin="normal"
+            margin="normal"
             label="Confirm Password"
             type={showConfirmPassword ? "text" : "password"}
             {...register("confirmPassword")}
@@ -193,29 +196,32 @@ export default function Page() {
           <Button fullWidth variant="contained" color="primary" type="submit">
             Sign Up
           </Button>
-        <Box gap={0.5} mt={1} width="100vh" fontSize={14}  display="flex" justifyContent="left">
-        <Typography variant="body1" fontSize={14} > By signing up, you agree to{" "}</Typography>
-          <Link
-            href="/terms"
-            passHref
-            style={{ color: "#22983C"}}
+          <Box
+            gap={0.5}
+            mt={1}
+            width="100vh"
+            fontSize={14}
+            display="flex"
+            justifyContent="left"
           >
-            our terms
-          </Link>
-          <Typography variant="body1"fontSize={14}  >
-            &
-          </Typography>
-          <Link
-            href="/privacy"
-            passHref
-            style={{ color: "#22983C"}}
-          >
-            privacy policy
-          </Link>
-        </Box>
-        </Box>
+            <Typography variant="body1" fontSize={14}>
+              {" "}
+              By signing up, you agree to{" "}
+            </Typography>
+            <Link href="/terms" passHref style={{ color: "#22983C" }}>
+              our terms
+            </Link>
+            <Typography variant="body1" fontSize={14}>
+              &
+            </Typography>
+            <Link href="/privacy" passHref style={{ color: "#22983C" }}>
+              privacy policy
+            </Link>
+          </Box>
 
-        <Typography variant="h4" mb={1} mt={6}>
+          </Box>
+
+          <Typography  variant="h4" mb={1} mt={6}>
           Or Sign Up With Google
         </Typography>
         <Button fullWidth variant="outlined" sx={{ marginBottom: "2rem" }}>
@@ -248,9 +254,12 @@ export default function Page() {
             sx={{ width: 18, height: 18, marginLeft: 0.5 }}
           />
         </Link>
+        </Box>
+
+
+   
       </Box>
     </Container>
-    
   );
 }
 

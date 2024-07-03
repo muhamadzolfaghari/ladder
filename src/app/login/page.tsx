@@ -95,7 +95,7 @@ export default function Page() {
               src="/ICONS/google-icon.svg"
               alt="G-MAIL"
               style={{ marginRight: "0.5rem" }}
-            />{" "}
+            />
             Google
           </Button>
 
