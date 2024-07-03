@@ -7,6 +7,7 @@ import {
   Typography,
   InputAdornment,
   IconButton,
+  styled,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -17,6 +18,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import logoImage from "../../../public/Images/Logo.svg";
+import { log } from "console";
 
 type Inputs = {
   name: string;
@@ -25,23 +27,24 @@ type Inputs = {
   confirmPassword: string;
 };
 
-const schema = yup.object({
+const schema = yup
+  .object({
     name: yup.string().required("Name is required"),
     email: yup.string().email("Invalid email").required("Email is required"),
     password: yup
       .string()
-      .min(8, "Password must be at least 8 characters")
-      .required("Password is required")
-      .matches(/(?=.*[!@#$%^&*])/, "Must contain a special character")
-      .matches(/(?=.*[A-Z])/, "Must contain an uppercase letter")
-      .matches(/(?=.*[a-z])/, "Must contain a lowercase letter"),
+      // .min(8, "Password must be at least 8 characters")
+
+      // .matches(/(?=.*[!@#$%^&*])/, "Must contain a special character")
+      // .matches(/(?=.*[A-Z])/, "Must contain an uppercase letter")
+      // .matches(/(?=.*[a-z])/, "Must contain a lowercase letter")
+      .required("Password is required"),
     confirmPassword: yup
       .string()
       .required("Confirm Password is required")
       .oneOf([yup.ref("password")], "Passwords must match"),
   })
   .required();
-
 
 export default function Page() {
   const [showPassword, setShowPassword] = useState(false);
@@ -73,7 +76,7 @@ export default function Page() {
   ) => event.preventDefault();
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" sx={{ mt: 4, px: "1rem" }}>
       <Box
         display="flex"
         flexDirection="column"
@@ -86,27 +89,28 @@ export default function Page() {
           height={47}
           style={{ margin: "1rem" }}
           src={logoImage.src}
-          alt="Wait screen illustration"
+          alt="ladder logo"
         />
         <Typography variant="h6" gutterBottom>
           Your AI Learning Assistance :)
         </Typography>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          style={{ marginBottom: "1rem" }}
-        >
+
+      <Box component="form" width="100%" mt={3} mb={1}
+          onSubmit={handleSubmit(onSubmit, (e) => {
+            console.log(e);
+          })}>
           <Typography variant="h4" mb={2}>
             Create your account
           </Typography>
           <TextField
             label="Name"
+            placeholder="Nova"
             {...register("name")}
             InputLabelProps={{ shrink: true }}
-            placeholder="Nova"
             error={!!errors.name}
             helperText={errors.name?.message}
             fullWidth
-            sx={{ marginBottom: 2 }}
+            margin="normal"
           />
           <TextField
             label="Email"
@@ -118,12 +122,10 @@ export default function Page() {
             helperText={errors.email?.message}
             fullWidth
             margin="normal"
-            sx={{ marginBottom: 2 }}
           />
           <TextField
             label="Password"
             type={showPassword ? "text" : "password"}
-            {...register("password")}
             placeholder="********"
             InputLabelProps={{ shrink: true }}
             error={!!errors.password}
@@ -145,12 +147,17 @@ export default function Page() {
                 </InputAdornment>
               ),
             }}
-            onChange={(e) => setPassword(e.target.value)}
-            onFocus={() => setPasswordFocused(true)}
-            onBlur={() => setPasswordFocused(false)}
+            {...register("password", {
+              onChange: (e) => setPassword(e.target.value),
+              onBlur: () => setPasswordFocused(false),
+            })}
+            onFocus={() => {
+              setPasswordFocused(true);
+            }}
           />
           <PasswordValidation password={password} />
           <TextField
+          margin="normal"
             label="Confirm Password"
             type={showConfirmPassword ? "text" : "password"}
             {...register("confirmPassword")}
@@ -174,29 +181,40 @@ export default function Page() {
                 </InputAdornment>
               ),
             }}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            onFocus={() => setConfirmPasswordFocused(true)}
-            onBlur={() => setConfirmPasswordFocused(false)}
+            {...register("confirmPassword", {
+              onChange: (e) => setConfirmPassword(e.target.value),
+              onBlur: () => setConfirmPasswordFocused(false),
+            })}
+            onFocus={() => {
+              setConfirmPasswordFocused(true);
+            }}
           />
 
           <Button fullWidth variant="contained" color="primary" type="submit">
             Sign Up
           </Button>
-        </form>
-        <Typography variant="body1" align="center">
+        <Box gap={0.5} mt={1} width="100vh" fontSize={13} display="flex" justifyContent="left">
           By signing up, you agree to{" "}
-          <Link href="/terms" passHref>
-            <Typography component="a" color="primary">
-              our Terms
-            </Typography>
-          </Link>{" "}
-          &{" "}
-          <Link href="/terms">
-            <Typography component="a" color="primary">
-              Privacy Policy
-            </Typography>
+          <Link
+            href="/terms"
+            passHref
+            style={{ color: "#22983C"}}
+          >
+            our terms
           </Link>
-        </Typography>
+          <Typography variant="body1" fontSize={13} >
+            &
+          </Typography>
+          <Link
+            href="/privacy"
+            passHref
+            style={{ color: "#22983C"}}
+          >
+            privacy policy
+          </Link>
+        </Box>
+        </Box>
+
         <Typography variant="h4" mb={1} mt={6}>
           Or Sign Up With Google
         </Typography>
@@ -232,9 +250,9 @@ export default function Page() {
         </Link>
       </Box>
     </Container>
+    
   );
 }
-
 
 const PasswordValidation: React.FC<{ password: string }> = ({ password }) => {
   const validations = [
