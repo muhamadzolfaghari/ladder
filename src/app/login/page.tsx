@@ -33,7 +33,7 @@ export default function Page() {
         <Typography variant="h6" gutterBottom>
           Hey! Great to see you :)
         </Typography>
-        <Box>
+        <Box  width="100%">
         <Box width="100%" mt={3} component="form">
           <Typography variant="h4" mb={2}>
             Login to your account{" "}

@@ -92,7 +92,7 @@ export default function Page() {
         <Typography variant="h6" gutterBottom>
           Your AI Learning Assistance :)
         </Typography>
-        <Box>
+        <Box  width="100%">
           <Box
             component="form"
             width="100%"
