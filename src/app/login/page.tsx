@@ -33,6 +33,7 @@ export default function Page() {
         <Typography variant="h6" gutterBottom>
           Hey! Great to see you :)
         </Typography>
+        <Box  width="100%">
         <Box width="100%" mt={3} component="form">
           <Typography variant="h4" mb={2}>
             Login to your account{" "}
@@ -42,6 +43,7 @@ export default function Page() {
             InputLabelProps={{ shrink: true }}
             placeholder="youremail@gmail.com"
             fullWidth
+            margin="normal"
             sx={{ marginBottom: 2 }}
           />
           <Box
@@ -83,6 +85,7 @@ export default function Page() {
           >
             Login
           </Button>
+         </Box>
 
           <Typography variant="h4" mb={1}>
             Or Login With Google
@@ -94,7 +97,7 @@ export default function Page() {
               src="/ICONS/google-icon.svg"
               alt="G-MAIL"
               style={{ marginRight: "0.5rem" }}
-            />{" "}
+            />
             Google
           </Button>
 
