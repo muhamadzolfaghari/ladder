@@ -14,7 +14,6 @@ export default function Page() {
 
     const [step, setStep] = useState<number>(1);
     const [email, setEmail] = useState<string>('');
-    const [code, setCode] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
   
@@ -41,7 +40,7 @@ export default function Page() {
         </Typography>
         <Box mt={5}>
         {step === 1 && <RequestCode email={email} setEmail={setEmail} nextStep={handleNextStep} />}
-        {step === 2 && <EnterCode code={code} setCode={setCode} nextStep={handleNextStep} prevStep={handlePrevStep} />}
+        {step === 2 && <EnterCode  nextStep={handleNextStep} prevStep={handlePrevStep} />}
         {step === 3 && (
           <ResetPassword
             password={password}
