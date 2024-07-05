@@ -15,6 +15,7 @@
     "@hookform/resolvers": "^3.8.0",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
+    "@supabase/supabase-js": "^2.44.2",
     "@types/axios": "^0.14.0",
     "mui-one-time-password-input": "^2.0.2",
     "next": "14.2.3",
