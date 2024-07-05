@@ -160,8 +160,8 @@ export default function Page() {
             />
             <PasswordValidation password={password} />
             <TextField
-              margin="normal"
               label="Confirm Password"
+              margin="normal"
               type={showConfirmPassword ? "text" : "password"}
               {...register("confirmPassword")}
               placeholder="********"
