@@ -1,0 +1,121 @@
+{
+  "fieldOfStudy": "UIUX",
+  "goal": "Become an expert",
+  "currentLevel": "Basic",
+  "timeCommitment": "10 hours a day",
+  "preferredLearningStyle": "Videos",
+  "learningPace": "Fast",
+  "resourcesAvailable": "$1000",
+  "preferredToolsAndPlatforms": "Figma",
+  "language": "English",
+  "learningPath": [
+    {
+      "phase": "Foundation",
+      "duration": "4 weeks",
+      "description": "Build a strong understanding of UI/UX principles and methodologies.",
+      "dailyRoutine": [
+        {
+          "task": "Watch 2 hours of UI/UX design fundamentals videos on platforms like YouTube, Skillshare, or Udemy.",
+          "duration": "2 hours"
+        },
+        {
+          "task": "Complete interactive exercises and quizzes on websites like UX Collective or Interaction Design Foundation.",
+          "duration": "1 hour"
+        },
+        {
+          "task": "Read articles and blog posts from reputable sources like Nielsen Norman Group, UX Planet, or Smashing Magazine.",
+          "duration": "1 hour"
+        },
+        {
+          "task": "Practice design principles by creating simple wireframes and mockups using pen and paper or basic design tools.",
+          "duration": "1 hour"
+        },
+        {
+          "task": "Reflect on your learning and identify areas for improvement.",
+          "duration": "1 hour"
+        }
+      ]
+    },
+    {
+      "phase": "Figma Mastery",
+      "duration": "4 weeks",
+      "description": "Become proficient in using Figma for UI/UX design.",
+      "dailyRoutine": [
+        {
+          "task": "Complete Figma tutorials and workshops from platforms like Figma's official website, YouTube, or Skillshare.",
+          "duration": "2 hours"
+        },
+        {
+          "task": "Practice creating UI elements, layouts, and prototypes in Figma.",
+          "duration": "2 hours"
+        },
+        {
+          "task": "Explore advanced Figma features like plugins, libraries, and collaboration tools.",
+          "duration": "1 hour"
+        },
+        {
+          "task": "Participate in Figma community forums and ask questions to learn from experienced designers.",
+          "duration": "1 hour"
+        },
+        {
+          "task": "Review and critique your own work and seek feedback from peers or mentors.",
+          "duration": "1 hour"
+        }
+      ]
+    },
+    {
+      "phase": "Project-Based Learning",
+      "duration": "8 weeks",
+      "description": "Apply your knowledge and skills to real-world UI/UX design projects.",
+      "dailyRoutine": [
+        {
+          "task": "Choose a UI/UX design project based on your interests or career goals.",
+          "duration": "1 hour"
+        },
+        {
+          "task": "Conduct user research, define user personas, and create user flows for your project.",
+          "duration": "2 hours"
+        },
+        {
+          "task": "Design wireframes, mockups, and prototypes using Figma.",
+          "duration": "3 hours"
+        },
+        {
+          "task": "Test your designs with users and gather feedback.",
+          "duration": "2 hours"
+        },
+        {
+          "task": "Iterate on your designs based on user feedback and refine your UI/UX solutions.",
+          "duration": "2 hours"
+        }
+      ]
+    },
+    {
+      "phase": "Advanced Techniques",
+      "duration": "4 weeks",
+      "description": "Explore advanced UI/UX design concepts and techniques.",
+      "dailyRoutine": [
+        {
+          "task": "Learn about accessibility, usability testing, and A/B testing.",
+          "duration": "2 hours"
+        },
+        {
+          "task": "Study design patterns, micro-interactions, and animation principles.",
+          "duration": "2 hours"
+        },
+        {
+          "task": "Explore emerging UI/UX trends and technologies.",
+          "duration": "1 hour"
+        },
+        {
+          "task": "Network with other UI/UX designers and attend industry events.",
+          "duration": "1 hour"
+        },
+        {
+          "task": "Build a portfolio showcasing your best UI/UX design projects.",
+          "duration": "1 hour"
+        }
+      ]
+    }
+  ]
+}

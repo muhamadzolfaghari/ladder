@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// Access your API key as an environment variable (see "Set up your API key" above)
+// const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
+
 interface GeminiContentPart {
   text: string;
 }
@@ -52,7 +57,7 @@ const createGeminiRequest = (commands: { text: string }[]): GeminiRequest => ({
     {
       parts: [
         {
-          text: "Role and Purpose: You are a mentor responsible for creating personalized learning paths. Your primary goal is to design concise, realistic, and well-structured learning paths that guide learners from their current skill level to their desired proficiency. Each learning path should be divided into phases, with each phase containing a daily/weekly routine of small, manageable tasks.",
+          text: "Role and Purpose: You are a mentor responsible for creating personalized learning paths. Your primary goal is to design concise, realistic, and well-structured learning paths that guide learners from their current skill level to their desired proficiency. Each learning path should be divided into phases, with each phase containing a daily routine of small, manageable tasks.",
         },
         {
           text: "Output Format: JSON format use all information in camel case keys.",
@@ -76,16 +81,49 @@ const createGeminiRequest = (commands: { text: string }[]): GeminiRequest => ({
   },
 });
 
+function test() {
+  const apiKey = process.env.API_KEY;
+
+  // Define the request URL
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+
+  // Define the request data
+  const data = {
+    contents: [
+      {
+        parts: [
+          {
+            text: "Explain how AI works",
+          },
+        ],
+      },
+    ],
+  };
+
+  // Make the POST request
+  axios
+    .post(url, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      console.log("Response:", response.data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
 async function requestGemini(
   prompts: { text: string }[],
 ): Promise<string | undefined> {
   const url = new URL(
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent",
   );
-  url.searchParams.append("key", process.env.GEMINI_API_KEY!);
+  url.searchParams.append("key", "AIzaSyBQYCuNCTiOHyFgTd_E3t0L7pSbAvz_m3s");
 
   const data = createGeminiRequest(prompts);
-
   const response = await axios.post<GeminiResponse>(url.toString(), data, {
     headers: { "Content-Type": "application/json" },
   });
@@ -115,6 +153,8 @@ const getPrompts = (requestJson: RequestJson) =>
  *         description: Hello World!
  */
 export async function POST(request: NextRequest) {
+  test();
+
   try {
     const requestJson = (await request.json()) as RequestJson;
     const prompts = getPrompts(requestJson);
