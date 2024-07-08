@@ -81,40 +81,6 @@ const createGeminiRequest = (commands: { text: string }[]): GeminiRequest => ({
   },
 });
 
-function test() {
-  const apiKey = process.env.API_KEY;
-
-  // Define the request URL
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
-
-  // Define the request data
-  const data = {
-    contents: [
-      {
-        parts: [
-          {
-            text: "Explain how AI works",
-          },
-        ],
-      },
-    ],
-  };
-
-  // Make the POST request
-  axios
-    .post(url, data, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then((response) => {
-      console.log("Response:", response.data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
-
 async function requestGemini(
   prompts: { text: string }[],
 ): Promise<string | undefined> {
@@ -153,8 +119,6 @@ const getPrompts = (requestJson: RequestJson) =>
  *         description: Hello World!
  */
 export async function POST(request: NextRequest) {
-  test();
-
   try {
     const requestJson = (await request.json()) as RequestJson;
     const prompts = getPrompts(requestJson);
@@ -177,24 +141,3 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(e);
   }
 }
-
-// interface ProductProps {
-//   id: number;
-//   title: string;
-//   price: number;
-// }
-//
-// const Product = ({ id, title, price }: ProductProps) => {};
-//
-// interface Props {
-//   id: number;
-//   title: string;
-//   price: number;
-// }
-//
-// const Product = ({ id, title, price }: Props) => {};
-//
-//
-// interface IProduct {
-//   id: number;
-// }
