@@ -40,3 +40,6 @@ next-env.d.ts
 public/sw.js
 public/workbox-e43f5367.js
 /scripts/node_modules/
+
+.vs
+.idea
