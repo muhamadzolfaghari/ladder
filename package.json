@@ -12,28 +12,26 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@google/generative-ai": "^0.13.0",
-    "@hookform/resolvers": "^3.6.0",
+    "@hookform/resolvers": "^3.8.0",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
+    "@supabase/supabase-js": "^2.44.2",
     "@types/axios": "^0.14.0",
     "mui-one-time-password-input": "^2.0.2",
     "next": "14.2.3",
-    "next-swagger-doc": "^0.4.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.0",
-    "swagger-ui-react": "^5.17.14",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@types/swagger-ui-react": "^4.18.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "prettier": "^3.3.2",
     "typescript": "^5"
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  }
 }

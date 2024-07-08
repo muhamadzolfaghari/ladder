@@ -43,6 +43,7 @@ export default function Page() {
             InputLabelProps={{ shrink: true }}
             placeholder="youremail@gmail.com"
             fullWidth
+            margin="normal"
             sx={{ marginBottom: 2 }}
           />
           <Box
