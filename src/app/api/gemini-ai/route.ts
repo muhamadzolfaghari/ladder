@@ -87,7 +87,7 @@ async function requestGemini(
   const url = new URL(
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent",
   );
-  url.searchParams.append("key", "AIzaSyBQYCuNCTiOHyFgTd_E3t0L7pSbAvz_m3s");
+  url.searchParams.append("key", process.env.GEMINI_API_KEY!);
 
   const data = createGeminiRequest(prompts);
   const response = await axios.post<GeminiResponse>(url.toString(), data, {
