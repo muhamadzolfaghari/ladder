@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import logoImage from "../../../public/Images/Logo.svg";
+import PasswordValidation from "@/components/PasswordValidation ";
 import { zodResolver } from "@hookform/resolvers/zod";
 import signupSchema from "@/lib/signupSchema";
 
@@ -267,45 +268,4 @@ export default function Page() {
   );
 }
 
-const PasswordValidation: React.FC<{ password: string }> = ({ password }) => {
-  const validations = [
-    {
-      test: (pw: string) => pw.length >= 8,
-      message: "At least 8 characters, ",
-    },
-    {
-      test: (pw: string) => /[!@#$%^&*]/.test(pw),
-      message: "Symbols, ",
-    },
-    {
-      test: (pw: string) => /[A-Z]/.test(pw),
-      message: "Uppercase &",
-    },
-    {
-      test: (pw: string) => /[a-z]/.test(pw),
-      message: "letter case",
-    },
-  ];
 
-  return (
-    <Box
-      display={password.length > 0 ? "flex" : "none"}
-      flexDirection="row"
-      flexWrap="wrap"
-      gap={0.5}
-      mt={1}
-      mb={1}
-    >
-      {validations.map((validation, index) => (
-        <Typography
-          key={index}
-          variant="body1"
-          fontSize="12px"
-          style={{ color: validation.test(password) ? "green" : "red" }}
-        >
-          {validation.message}
-        </Typography>
-      ))}
-    </Box>
-  );
-};

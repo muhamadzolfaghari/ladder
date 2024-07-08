@@ -2,33 +2,27 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Image from "next/image";
-import { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { MuiOtpInput } from "mui-one-time-password-input";
 
 interface EnterCodeProps {
-  code: string;
-  setCode: (code: string) => void;
   nextStep: () => void;
   prevStep: () => void;
 }
 
-export default function EnterCode({
-  code,
-  setCode,
-  nextStep,
-  prevStep,
-}: EnterCodeProps) {
+export default function EnterCode({  nextStep, prevStep}: EnterCodeProps) {
 
-    const handleChange = (value: string) => {
-        setCode(value);
-      };
-    
-      const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
-        // Verify code
-        nextStep();
-      };
+  const [otp, setOtp] = useState<string>('');
 
+  const handleChange = (value: string) => {
+    setOtp(value);
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    // Verify code
+    nextStep();
+  };
 
   return (
     <Box width="100%" mt={2}>
@@ -44,7 +38,7 @@ export default function EnterCode({
         margin="normal"
         mt={6}
           length={6}
-          value={code}
+          value={otp}
           onChange={handleChange}
           TextFieldsProps={{ inputProps: { style: { textAlign: 'center' } } }}/>
         <Button
@@ -53,7 +47,7 @@ export default function EnterCode({
           color="primary"
           type="submit"
           sx={{ mb: 6 , mt:2 }}
-          disabled={code.length < 6}
+          disabled={otp.length < 6}
         >
           Reset Password
         </Button>

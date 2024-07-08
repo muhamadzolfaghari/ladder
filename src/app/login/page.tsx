@@ -63,7 +63,7 @@ export default function Page() {
                 endAdornment: (
                   <InputAdornment position="end">
                     <Link
-                      href="/forgot-password"
+                      href="/reset-password"
                       style={{
                         textDecoration: "none",
                         color: "inherit",
