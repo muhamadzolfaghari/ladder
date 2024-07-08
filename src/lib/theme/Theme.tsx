@@ -1,56 +1,51 @@
 "use client";
 import { createTheme, ThemeOptions, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
-import { Alumni_Sans } from "next/font/google";
-import { Rubik } from "next/font/google";
-
-const alumniSans = Alumni_Sans({
-  weight: ["500", "600", "700"],
-  subsets: ["latin"],
-});
-
-const rubik = Rubik({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-});
+import "@fontsource/alumni-sans/500.css";
+import "@fontsource/alumni-sans/600.css";
+import "@fontsource/alumni-sans/700.css";
+import "@fontsource/rubik/400.css";
+import "@fontsource/rubik/500.css";
+import "@fontsource/rubik/600.css";
+import "@fontsource/rubik/700.css";
 
 const theme = createTheme({
   typography: {
-    fontFamily: `${alumniSans.style.fontFamily}, ${rubik.style.fontFamily}`,
+    fontFamily: "Alumni Sans, Rubik",
     h1: {
-      fontFamily: alumniSans.style.fontFamily,
+      fontFamily: "Alumni Sans",
       fontSize: "7rem",
       fontWeight: 600,
       color: "#181D17",
     },
     h2: {
-      fontFamily: alumniSans.style.fontFamily,
+      fontFamily: "Alumni Sans",
       fontWeight: 600,
       fontSize: "4rem",
       color: "#2D322C",
     },
     h3: {
-      fontFamily: alumniSans.style.fontFamily,
+      fontFamily: "Alumni Sans",
       fontWeight: 600,
       fontSize: "2.8rem",
       color: "#2D322C",
     },
     h4: {
-      fontFamily: alumniSans.style.fontFamily,
+      fontFamily: "Alumni Sans",
       fontWeight: 600,
       fontSize: "2.2rem",
       color: "#2D322C",
     },
     h5: {
-      fontFamily: alumniSans.style.fontFamily,
+      fontFamily: "Alumni Sans",
       fontWeight: 600,
       fontSize: "1.8rem",
       color: "#2D322C",
     },
     body1: {
-      fontFamily: rubik.style.fontFamily,
+      fontFamily: "Rubik",
       fontWeight: 400,
-      fontSize: "1.1rem",
+      fontSize: "16px",
       color: "#424940",
     },
   },
@@ -87,6 +82,7 @@ const theme = createTheme({
         },
       },
     },
+
     MuiAccordionSummary: {
       styleOverrides: {
         root: {
@@ -97,7 +93,7 @@ const theme = createTheme({
 
           "& .MuiTypography-root": {
             color: "white",
-            fontFamily: alumniSans.style.fontFamily,
+            fontFamily: "Alumni Sans",
             fontSize: "1.8rem",
           },
         },
@@ -133,7 +129,7 @@ const theme = createTheme({
           alignItems: "center",
         },
         label: {
-          fontFamily: rubik.style.fontFamily,
+          fontFamily: "Rubik",
           fontWeight: 500,
           "&.Mui-completed": {
             color: "rgb(34, 152, 60)",
@@ -162,12 +158,19 @@ const theme = createTheme({
         },
       },
     },
-
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontFamily: "Rubik",
+          fontSize: "0.9rem",
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
           textTransform: "capitalize",
-          fontFamily: rubik.style.fontFamily,
+          fontFamily: "Rubik",
           borderRadius: "10px",
           padding: " 0.7rem 1rem",
           fontSize: "1.1rem",
