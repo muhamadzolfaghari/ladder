@@ -47,15 +47,15 @@ const GeminiExample = () => {
       .reduce((prev, [key, value]) => ({ ...prev, [key]: value }), {});
 
     // const data = {
-    //   // field_of_study: "UIUX",
-    //   // goal: "Become an expert",
-    //   // current_level: "Basic",
-    //   // time_commitment: "3 hours a day",
-    //   // preferred_learning_style: "Videos",
-    //   // learning_pace: "Fast",
-    //   // resources_available: "$1000",
-    //   // preferred_tools_and_platforms: "Figma",
-    //   // language: "English",
+    //   field_of_study: UIUX
+    //   goal: Become an expert
+    //   current_level: Basic
+    //   time_commitment: 3 hours a day
+    //   preferred_learning_style: Videos
+    //   learning_pace: Fast
+    //   resources_available: $1000
+    //   preferred_tools_and_platforms: Figma
+    //   language: English
     // };
     setIsLoading(true);
 

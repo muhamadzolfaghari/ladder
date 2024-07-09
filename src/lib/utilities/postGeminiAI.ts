@@ -1,8 +1,8 @@
 import axios from "axios";
 import {
+  GeminiAIContentPart,
   GeminiAIRequest,
   GeminiAIResponse,
-  GeminiAIContentPart,
 } from "@/types/GeminiAI";
 
 const ROLE_AND_PURPOSE =
@@ -28,7 +28,7 @@ const GENERATION_CONFIG = {
 const normalizeParts = (parts: GeminiAIContentPart[]) =>
   parts.map((part) => ({ text: part.text }));
 
-const createData = (parts: GeminiAIContentPart[]): GeminiAIRequest => ({
+export const createData = (parts: GeminiAIContentPart[]): GeminiAIRequest => ({
   contents: [
     {
       parts: [
@@ -49,6 +49,8 @@ export default async function postGeminiAI(
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent",
   );
   url.searchParams.append("key", process.env.GEMINI_API_KEY!);
+
+  console.log(url.toString());
 
   const data = createData(parts);
 
