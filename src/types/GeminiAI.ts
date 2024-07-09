@@ -1,13 +1,13 @@
-interface GeminiContentPart {
+export interface GeminiAIContentPart {
   text: string;
 }
 
-interface GeminiContent {
-  parts: GeminiContentPart[];
+interface GeminiAIContent {
+  parts: GeminiAIContentPart[];
 }
 
-interface GeminiRequest {
-  contents: GeminiContent[];
+export interface GeminiAIRequest {
+  contents: GeminiAIContent[];
   safetySettings: { threshold: string; category: string }[];
   generationConfig: {
     topK: number;
@@ -18,12 +18,12 @@ interface GeminiRequest {
   };
 }
 
-interface GeminiResponse {
+export interface GeminiAIResponse {
   candidates: {
     finishReason: string;
     index: number;
     safetyRatings: { probability: string; category: string }[];
-    content: { role: string; parts: { text: string }[] };
+    content: { role: string; parts: GeminiAIContentPart[] };
   }[];
   usageMetadata: {
     candidatesTokenCount: number;
@@ -32,7 +32,7 @@ interface GeminiResponse {
   };
 }
 
-interface GeminiAIRequest {
+export interface GeminiAIPayload {
   goal: string;
   current_level: string;
   preferred_learning_style: string;
