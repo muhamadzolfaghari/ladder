@@ -4,6 +4,7 @@ import {
   GeminiAIRequest,
   GeminiAIResponse,
 } from "@/types/GeminiAI";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const ROLE_AND_PURPOSE =
   "Role and Purpose: You are a mentor responsible for creating personalized learning paths. Your primary goal is to design concise, realistic, and well-structured learning paths that guide learners from their current skill level to their desired proficiency. Each learning path should be divided into phases, with each phase containing a daily routine of small, manageable tasks.";
@@ -68,4 +69,19 @@ export default async function postGeminiAI(
     console.error("Error posting to GeminiAI:", error);
     return undefined;
   }
+}
+
+export async function generateGeminiAIContent(parts: string[]) {
+  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+  const model = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+    generationConfig: GENERATION_CONFIG,
+  });
+  const result = await model.generateContent([
+    ROLE_AND_PURPOSE,
+    OUTPUT_FORMAT,
+    ...parts,
+  ]);
+  const response1 = result.response;
+  return response1.text();
 }
