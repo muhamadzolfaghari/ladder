@@ -4,6 +4,7 @@ import postGeminiAI, {
   generateGeminiAIContent,
 } from "@/lib/utilities/postGeminiAI";
 import getGeminiAIContentParts from "@/lib/utilities/getGeminiAIContentParts";
+import parseGeminiAIResponse from "@/lib/utilities/parseGeminiAIResponse";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
@@ -21,8 +22,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       geminiAIParts.map((x) => x.text),
     );
 
-    if (text) {
-      return NextResponse.json({ text });
+    const json = parseGeminiAIResponse(text);
+
+    if (json) {
+      return NextResponse.json({ json });
     }
 
     const response = await postGeminiAI(geminiAIParts);
