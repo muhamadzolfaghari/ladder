@@ -1,18 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GeminiAIContentPart, GeminiAIPayload } from "@/types/GeminiAI";
+import { GeminiAIPayload } from "@/types/GeminiAI";
 import postGeminiAI from "@/lib/utilities/postGeminiAI";
-
-function getGeminiAIContentParts(
-  payload: GeminiAIPayload,
-): GeminiAIContentPart[] | undefined {
-  const data = Object.entries(payload);
-
-  if (data.length < 9) {
-    return undefined;
-  }
-
-  return data.map(([key, value]) => ({ text: `${key}=${value}` }));
-}
+import getGeminiAIContentParts from "@/lib/utilities/getGeminiAIContentParts";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
