@@ -45,8 +45,8 @@ export default function Page() {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
-    // Handle form submission here
-
+    // Save the payload to local storage
+    //  localStorage.setItem("signupData", JSON.stringify(data));
     fetch("/api/signup", { method: "POST", body: JSON.stringify(data) })
       .then((res) => {
         console.log("response", res);

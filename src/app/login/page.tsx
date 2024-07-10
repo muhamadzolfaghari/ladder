@@ -1,3 +1,4 @@
+"use client"
 import {
   Box,
   Button,
@@ -12,8 +13,31 @@ import Image from "next/image";
 import Link from "next/link";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import logoImage from "../../../public/Images/Logo.svg"
+import { useState } from "react";
 
 export default function Page() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const data = { email, password };
+    try {
+      const res = await fetch("/api/login", { method: "POST",body: JSON.stringify(data)});
+      if (res.ok) {
+        const result = await res.json();
+        localStorage.setItem("userName", result.data.name);
+        localStorage.setItem("email", data.email); //result.email return undefind
+
+        console.log("Logged in successfully:", result.data);
+      } else {
+        console.error("Login failed");
+      }
+    } catch (err) {
+      console.log("error", err);
+    }
+  };
+  
   return (
     <Container maxWidth="sm">
       <Box
@@ -34,7 +58,11 @@ export default function Page() {
           Hey! Great to see you :)
         </Typography>
         <Box  width="100%">
-        <Box width="100%" mt={3} component="form">
+        <form
+            
+            onSubmit={handleSubmit} >
+
+        <Box width="100%" mt={3} >
           <Typography variant="h4" mb={2}>
             Login to your account{" "}
           </Typography>
@@ -44,6 +72,8 @@ export default function Page() {
             placeholder="youremail@gmail.com"
             fullWidth
             margin="normal"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             sx={{ marginBottom: 2 }}
           />
           <Box
@@ -59,6 +89,8 @@ export default function Page() {
               placeholder="********"
               InputLabelProps={{ shrink: true }}
               margin="normal"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -86,6 +118,7 @@ export default function Page() {
             Login
           </Button>
          </Box>
+         </form>
 
           <Typography variant="h4" mb={1}>
             Or Login With Google
