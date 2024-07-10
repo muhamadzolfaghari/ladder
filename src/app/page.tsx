@@ -1,4 +1,5 @@
 "use client";
+import { useAuth } from "@/components/AuthContext";
 import GetStartSteps from "@/components/getStart/GetStartSteps";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -6,7 +7,6 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [showGetStart, setShowGetStart] = useState<boolean>(false);
   const router = useRouter();
-
   useEffect(() => {
     // Check user  already seen the GetStart page
     const hasVisitedBefore = localStorage.getItem("hasVisited");

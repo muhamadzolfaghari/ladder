@@ -14,8 +14,10 @@ import Link from "next/link";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import logoImage from "../../../public/Images/Logo.svg"
 import { useState } from "react";
+import { useAuth } from "@/components/AuthContext";
 
 export default function Page() {
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,12 +25,13 @@ export default function Page() {
     event.preventDefault();
     const data = { email, password };
     try {
-      const res = await fetch("/api/login", { method: "POST",body: JSON.stringify(data)});
+      const res = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
       if (res.ok) {
         const result = await res.json();
-        localStorage.setItem("userName", result.data.name);
-        localStorage.setItem("email", data.email); //result.email return undefind
-
+        login(result.data.name, data.email); // Store data in localStorage via context
         console.log("Logged in successfully:", result.data);
       } else {
         console.error("Login failed");
