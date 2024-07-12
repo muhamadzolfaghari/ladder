@@ -18,6 +18,8 @@ import logoImage from "../../../public/Images/Logo.svg";
 import PasswordValidation from "@/components/PasswordValidation ";
 import { zodResolver } from "@hookform/resolvers/zod";
 import signupSchema from "@/lib/signupSchema";
+import { useRouter } from "next/navigation";
+import ButtonSignUpwithGoogle from "@/components/ButtonSignUpwithGoogle";
 
 type Inputs = {
   name: string;
@@ -33,7 +35,7 @@ export default function Page() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
-
+  const router = useRouter();
   const {
     register,
     control,
@@ -43,24 +45,29 @@ export default function Page() {
     resolver: zodResolver(signupSchema),
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-    // Handle form submission here
-
-    fetch("/api/signup", { method: "POST", body: JSON.stringify(data) })
-      .then((res) => {
-        console.log("response", res);
-      })
-      .catch((err) => {
-        console.log("error", err);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        body: JSON.stringify(data),
       });
+      if (res.ok) {
+        const result = await res.json();
+        
+        router.push("/login");
+      } else {
+        console.error("Login failed");
+      }
+    } catch (err) {
+      console.log("error", err);
+    }
   };
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword(!showConfirmPassword);
   const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>,
+    event: React.MouseEvent<HTMLButtonElement>
   ) => event.preventDefault();
 
   return (
@@ -220,21 +227,8 @@ export default function Page() {
           <Typography variant="h4" mb={1} mt={6}>
             Or Sign Up With Google
           </Typography>
-          <a
-            href={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/confirm?token_hash=${process.env.PUBLIC_KEY_SUPABASE_KEY}&type=magiclink`}
-          >
-            sdfhsduf
-          </a>
-          <Button fullWidth variant="outlined" sx={{ marginBottom: "2rem" }}>
-            <Image
-              width={18}
-              height={18}
-              src="/ICONS/google-icon.svg"
-              alt="G-MAIL"
-              style={{ marginRight: "0.5rem" }}
-            />{" "}
-            Google
-          </Button>
+
+          <ButtonSignUpwithGoogle />
           <Box
             display="flex"
             flexDirection="column"

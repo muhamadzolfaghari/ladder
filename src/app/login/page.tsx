@@ -1,19 +1,43 @@
+"use client";
+
 import {
   Box,
   Button,
   Container,
+  InputAdornment,
   TextField,
   Typography,
-  InputAdornment,
-  colors,
-  Grid,
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import logoImage from "../../../public/Images/Logo.svg"
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import logoImage from "../../../public/Images/Logo.svg";
+import { useState } from "react";
 
 export default function Page() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const data = { email, password };
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        const result = await res.json();
+        // localStorage.setItem("userName", result.name);
+        console.log("Logged in successfully:", result);
+      } else {
+        console.error("Login failed");
+      }
+    } catch (err) {
+      console.log("error", err);
+    }
+  };
+
   return (
     <Container maxWidth="sm">
       <Box
@@ -33,59 +57,120 @@ export default function Page() {
         <Typography variant="h6" gutterBottom>
           Hey! Great to see you :)
         </Typography>
-        <Box  width="100%">
-        <Box width="100%" mt={3} component="form">
-          <Typography variant="h4" mb={2}>
-            Login to your account{" "}
-          </Typography>
-          <TextField
-            label="Email"
-            InputLabelProps={{ shrink: true }}
-            placeholder="youremail@gmail.com"
-            fullWidth
-            margin="normal"
-            sx={{ marginBottom: 2 }}
-          />
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            mb={2}
-          >
+        <Box width="100%">
+          <Box width="100%" mt={3} component="form">
+            <Typography variant="h4" mb={2}>
+              Login to your account{" "}
+            </Typography>
             <TextField
-              fullWidth
-              label="Password"
-              type="password"
-              placeholder="********"
+              label="Email"
               InputLabelProps={{ shrink: true }}
+              placeholder="youremail@gmail.com"
+              fullWidth
               margin="normal"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Link
-                      href="/reset-password"
-                      style={{
-                        textDecoration: "none",
-                        color: "inherit",
-                      }}
-                    >
-                      forget?
-                    </Link>
-                  </InputAdornment>
-                ),
-              }}
+              sx={{ marginBottom: 2 }}
             />
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              mb={2}
+            >
+              <TextField
+                fullWidth
+                label="Password"
+                type="password"
+                placeholder="********"
+                InputLabelProps={{ shrink: true }}
+                margin="normal"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Link
+                        href="/reset-password"
+                        style={{
+                          textDecoration: "none",
+                          color: "inherit",
+                        }}
+                      >
+                        forget?
+                      </Link>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Box>
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              type="submit"
+              sx={{ mb: 6 }}
+            >
+              Login
+            </Button>
           </Box>
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            type="submit"
-            sx={{ mb: 6 }}
-          >
-            Login
-          </Button>
-         </Box>
+
+          <Box width="100%">
+            <form noValidate onSubmit={handleSubmit}>
+              <Box width="100%" mt={3}>
+                <Typography variant="h4" mb={2}>
+                  Login to your account{" "}
+                </Typography>
+                <TextField
+                  label="Email"
+                  InputLabelProps={{ shrink: true }}
+                  placeholder="youremail@gmail.com"
+                  fullWidth
+                  margin="normal"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  sx={{ marginBottom: 2 }}
+                />
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  mb={2}
+                >
+                  <TextField
+                    fullWidth
+                    label="Password"
+                    type="password"
+                    placeholder="********"
+                    InputLabelProps={{ shrink: true }}
+                    margin="normal"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <Link
+                            href="/reset-password"
+                            style={{
+                              textDecoration: "none",
+                              color: "inherit",
+                            }}
+                          >
+                            forget?
+                          </Link>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Box>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  sx={{ mb: 6 }}
+                >
+                  Login
+                </Button>
+              </Box>
+            </form>
+          </Box>
 
           <Typography variant="h4" mb={1}>
             Or Login With Google
@@ -100,14 +185,15 @@ export default function Page() {
             />
             Google
           </Button>
-
           <Box
             display="flex"
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
           >
-            <Typography variant="body1" mb={1}>Don&#39;t have an account?</Typography>
+            <Typography variant="body1" mb={1}>
+              Don&#39;t have an account?
+            </Typography>
             <Link
               href="/sign-up"
               style={{
@@ -121,7 +207,10 @@ export default function Page() {
                 {" "}
                 Sign Up
               </Typography>
-              <ArrowForwardIcon  color="primary" sx={{ width: 18, height: 18 , marginLeft:0.5}} />
+              <ArrowForwardIcon
+                color="primary"
+                sx={{ width: 18, height: 18, marginLeft: 0.5 }}
+              />
             </Link>
           </Box>
         </Box>

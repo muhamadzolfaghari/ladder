@@ -15,9 +15,10 @@
     "@hookform/resolvers": "^3.8.0",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
-    "@supabase/supabase-js": "^2.44.2",
+    "@supabase/ssr": "^0.4.0",
+    "@supabase/supabase-js": "^2.44.3",
     "@types/axios": "^0.14.0",
-    "mui-one-time-password-input": "^2.0.2",
+    "mui-one-time-password-input": "^2.0.3",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
@@ -33,5 +34,6 @@
     "eslint-config-next": "14.2.3",
     "prettier": "^3.3.2",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
