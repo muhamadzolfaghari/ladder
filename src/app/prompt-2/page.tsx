@@ -1,4 +1,3 @@
-import PromptSteps from "@/components/PromptSteps";
 import StepBar from "@/components/StepBar";
 import {
   Box,
