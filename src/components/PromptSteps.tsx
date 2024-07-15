@@ -8,7 +8,6 @@ import {
   TextField,
   List,
 } from "@mui/material";
-import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -75,7 +74,6 @@ export default function PromptSteps() {
               </Typography>
             </ListItem>
           </List>
-          {/* Field-Specific */}
           <Box sx={{ mt: 3 }}>
             <TextField
               label="Field-Specific"
@@ -110,7 +108,7 @@ export default function PromptSteps() {
               </Typography>
             </ListItem>
           </List>
-          {/* Goal */}
+
           <Box sx={{ mt: 3 }}>
             <TextField
               label="Goal"
@@ -126,7 +124,7 @@ export default function PromptSteps() {
           </Box>
         </Box>
 
-        {/* Current Level */}
+
         <Box sx={{ mt: 4, pl: 2 }}>
           <Box sx={{ display: "flex", gap: "1rem" }}>
             <Typography variant="h4">3 .</Typography>
@@ -145,7 +143,7 @@ export default function PromptSteps() {
               </Typography>
             </ListItem>
           </List>
-          {/* Current Level */}
+          
           <Box sx={{ mt: 3 }}>
             <TextField
               label="Current Level"

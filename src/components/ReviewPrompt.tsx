@@ -3,10 +3,8 @@ import {
   Typography,
   List,
   ListItem,
-  TextField,
   Button,
 } from "@mui/material";
-import Link from "next/link";
 import React from "react";
 
 export default function ReviewPrompt() {
@@ -14,7 +12,7 @@ export default function ReviewPrompt() {
     <Box sx={{ mt: 4 }}>
       <Typography variant="h4">Review Your prompt</Typography>
       <Typography variant="body1">
-        Lets have a last check on what you want in Ladder.
+        Let&#10076;s have a last check on what you want in Ladder.
       </Typography>
       <Box sx={{ mt: 4, pl: 2 }}>
         <Box sx={{ display: "flex", gap: "1rem" }}>
@@ -32,7 +30,6 @@ export default function ReviewPrompt() {
         </List>
       </Box>
 
-      {/* goals */}
       <Box sx={{ mt: 4, pl: 2 }}>
         <Box sx={{ display: "flex", gap: "1rem" }}>
           <Typography variant="h4">2 .</Typography>

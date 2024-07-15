@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Box,
   Button,
@@ -8,7 +7,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import Link from "next/link";
 import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
@@ -93,8 +91,8 @@ export default function PromptStepsForm() {
           </ListItem>
           <ListItem sx={{ display: "list-item", p: 0 }}>
             <Typography variant="body1">
-              Any specific resources or types of resources you prefer (e.g.,
-              books, online courses, tutorials).
+              Any specific resources or types of resources you prefer
+              &#10088;e.g., books, online courses, tutorials &#10089;.
             </Typography>
           </ListItem>
         </List>
