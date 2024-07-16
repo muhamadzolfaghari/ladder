@@ -11,6 +11,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@fontsource/alumni-sans": "^5.0.20",
+    "@fontsource/rubik": "^5.0.20",
     "@google/generative-ai": "^0.13.0",
     "@hookform/resolvers": "^3.8.0",
     "@mui/icons-material": "^5.15.20",
@@ -24,7 +26,6 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.0",
-    "yup": "^1.4.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
