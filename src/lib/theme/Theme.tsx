@@ -185,6 +185,39 @@ const theme = createTheme({
         },
       },
     },
+    MuiCard:{
+      styleOverrides: {
+        root: {
+          border: '1px solid #72796F',
+            backgroundColor: '#ffffff',
+            borderRadius: '8px',
+        }}
+    },
+    MuiPaper:{
+      styleOverrides: {
+        root: {
+            border: '1px solid #72796F',
+            backgroundColor: '#ffffff',
+            borderRadius: '8px',
+            boxShadow: 'none',
+            }}
+    },
+    MuiBottomNavigation:{
+      styleOverrides: {
+        root: {
+          borderTop: '2px solid #72796F',
+          backgroundColor: '#ffffff',
+              }}
+    },
+    // MuiSvgIcon:{
+    //   styleOverrides: {
+    //     root: {
+    //       '&:hover': {
+    //         backgroundColor: '#22983C',
+    //         borderRadius: '100%',
+    //       }
+    //     }}
+    // },
   },
 });
 
