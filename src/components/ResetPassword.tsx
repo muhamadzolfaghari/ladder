@@ -1,14 +1,15 @@
-import {  Box,
+import {
+  Box,
   Button,
-  Container,
+  IconButton,
+  InputAdornment,
   TextField,
   Typography,
-  InputAdornment,
-  IconButton } from "@mui/material";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { FormEvent, useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+} from "@mui/material";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import PasswordValidation from "./PasswordValidation ";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
@@ -19,22 +20,21 @@ interface ResetPasswordProps {
   setConfirmPassword: (confirmPassword: string) => void;
   prevStep: () => void;
 }
+
 interface FormData {
   password: string;
   confirmPassword: string;
 }
 
-const schema = yup
+const schema = z
   .object({
-    password: yup
-      .string()
-      .required("Password is required"),
-    confirmPassword: yup
-      .string()
-      .required("Confirm Password is required")
-      .oneOf([yup.ref("password")], "Passwords must match"),
+    password: z.string().min(1, "Password is required"),
+    confirmPassword: z.string().min(1, "Confirm Password is required"),
   })
-  .required();
+  .refine((values) => values.password === values.confirmPassword, {
+    message: "Passwords must match!",
+    path: ["confirmPassword"],
+  });
 
 export default function ResetPassword({
   password,
@@ -43,7 +43,6 @@ export default function ResetPassword({
   setConfirmPassword,
   prevStep,
 }: ResetPasswordProps) {
-
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
@@ -53,7 +52,7 @@ export default function ResetPassword({
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(schema),
+    resolver: zodResolver(schema),
     defaultValues: {
       password,
       confirmPassword,
@@ -71,9 +70,8 @@ export default function ResetPassword({
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword(!showConfirmPassword);
   const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => event.preventDefault();
-
 
   return (
     <Box width="100%" mt={2}>
@@ -85,73 +83,73 @@ export default function ResetPassword({
         send you a code to insert.
       </Typography>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-              label="Password"
-              type={showPassword ? "text" : "password"}
-              placeholder="********"
-              InputLabelProps={{ shrink: true }}
-              error={!!errors.password}
-              helperText={errors.password?.message}
-              FormHelperTextProps={{ style: { color: "red" } }}
-              fullWidth
-              margin="normal"
-              InputProps={{
-                endAdornment: (passwordFocused || password) && (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              {...register("password", {
-                onChange: (e) => setPassword(e.target.value),
-                onBlur: () => setPasswordFocused(false),
-              })}
-              onFocus={() => {
-                setPasswordFocused(true);
-              }}
-            />
+        <TextField
+          label="Password"
+          type={showPassword ? "text" : "password"}
+          placeholder="********"
+          InputLabelProps={{ shrink: true }}
+          error={!!errors.password}
+          helperText={errors.password?.message}
+          FormHelperTextProps={{ style: { color: "red" } }}
+          fullWidth
+          margin="normal"
+          InputProps={{
+            endAdornment: (passwordFocused || password) && (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+          {...register("password", {
+            onChange: (e) => setPassword(e.target.value),
+            onBlur: () => setPasswordFocused(false),
+          })}
+          onFocus={() => {
+            setPasswordFocused(true);
+          }}
+        />
         <PasswordValidation password={password} />
 
         <TextField
-              label="Confirm Password"
-              margin="normal"
-              type={showConfirmPassword ? "text" : "password"}
-              {...register("confirmPassword")}
-              placeholder="********"
-              InputLabelProps={{ shrink: true }}
-              error={!!errors.confirmPassword}
-              helperText={errors.confirmPassword?.message}
-              fullWidth
-              style={{ marginBottom: "1rem" }}
-              InputProps={{
-                endAdornment: (confirmPasswordFocused || confirmPassword) && (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle confirm password visibility"
-                      onClick={handleClickShowConfirmPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              {...register("confirmPassword", {
-                onChange: (e) => setConfirmPassword(e.target.value),
-                onBlur: () => setConfirmPasswordFocused(false),
-              })}
-              onFocus={() => {
-                setConfirmPasswordFocused(true);
-              }}
-            />
+          label="Confirm Password"
+          margin="normal"
+          type={showConfirmPassword ? "text" : "password"}
+          {...register("confirmPassword")}
+          placeholder="********"
+          InputLabelProps={{ shrink: true }}
+          error={!!errors.confirmPassword}
+          helperText={errors.confirmPassword?.message}
+          fullWidth
+          style={{ marginBottom: "1rem" }}
+          InputProps={{
+            endAdornment: (confirmPasswordFocused || confirmPassword) && (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle confirm password visibility"
+                  onClick={handleClickShowConfirmPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+          {...register("confirmPassword", {
+            onChange: (e) => setConfirmPassword(e.target.value),
+            onBlur: () => setConfirmPasswordFocused(false),
+          })}
+          onFocus={() => {
+            setConfirmPasswordFocused(true);
+          }}
+        />
         <Button
           fullWidth
           variant="contained"

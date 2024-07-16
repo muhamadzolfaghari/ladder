@@ -1,14 +1,6 @@
 "use client";
 
-import React, {
-  ChangeEvent,
-  FormEvent,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import axios from "axios";
 import {
   Button,
@@ -36,10 +28,12 @@ const GeminiExample = () => {
     setPrompt(event.target.value);
   }
 
+  console.log(process.env.NEXT_PUBLIC_API_URL)
+
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    // const url = "https://ladder-nu.vercel.app/api/gemini-ai";
-    const url = "/api/gemini-ai";
+    const url = process.env.NEXT_PUBLIC_API_URL + "/gemini-ai";
+    // const url = "/api/gemini-ai";
 
     const data = prompt
       ?.split("\n")
@@ -58,6 +52,16 @@ const GeminiExample = () => {
     //   language: English
     // };
     setIsLoading(true);
+
+    // field_of_study: "UIUX",
+    // goal: "Become an expert",
+    // current_level: "Basic",
+    // time_commitment: "3 hours a day",
+    // preferred_learning_style: "Videos",
+    // learning_pace: "Fast",
+    // resources_available: "$1000",
+    // preferred_tools_and_platforms: "Figma",
+    // language: "English",
 
     axios
       .post(url, data)
