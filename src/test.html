@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google OAuth 2.0 Login Example</title>
+</head>
+<body>
+<script src="https://apis.google.com/js/client.js"></script>
+<script>
+    function initClient() {
+        gapi.client.init({
+            apiKey: 'YOUR_API_KEY',
+            clientId: 'YOUR_CLIENT_ID',
+            scope: 'profile',
+            discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/oauth2/v2/rest'],
+        }).then(function() {
+            gapi.auth2.getAuthInstance().signIn().then(function(response) {
+                console.log('Sign-in successful: ' + response.getAuthResponse());
+            });
+        });
+    }
+</script>
+<button onclick="initClient()">Sign In with Google</button>
+</body>
+</html>
