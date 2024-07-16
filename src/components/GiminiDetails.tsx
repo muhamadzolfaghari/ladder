@@ -72,7 +72,9 @@ const GiminiDetails = () => {
             with caution
           </Link>
         </Box>
-        <ContentCopyOutlinedIcon fontSize="small" />
+        <IconButton>
+          <ContentCopyOutlinedIcon fontSize="small" />
+        </IconButton>
       </Box>
       {/* describtion */}
       <Box mt={2}>
@@ -130,11 +132,7 @@ const GiminiDetails = () => {
         <IconButton>
           <ContentCopyOutlinedIcon />
         </IconButton>
-        <Link
-          href="/"
-          passHref
-         
-        >
+        <Link href="/" passHref>
           <Image
             width={24}
             height={24}
@@ -143,7 +141,7 @@ const GiminiDetails = () => {
           />
         </Link>
         <IconButton>
-          <TuneOutlinedIcon />
+          <TuneOutlinedIcon sx={{ transform: "rotate(90deg)" }} />
         </IconButton>
         <IconButton>
           <ShareOutlinedIcon />
