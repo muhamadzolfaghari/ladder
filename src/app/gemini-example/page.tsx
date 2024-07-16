@@ -16,18 +16,52 @@ const GeminiExample = () => {
   const [prompt, setPrompt] = useState<string>();
   const [data, setData] = useState<string>();
 
+  // compute, time complexity
+  // const price = useMemo(() => {
+  //   // O(n) * 4
+  //   return data.filter(x => x.isValid).max()
+
   function handlePromptChange(
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void {
     setData(undefined);
     setPrompt(event.target.value);
   }
 
+  console.log(process.env.NEXT_PUBLIC_API_URL)
+
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    const url = "https://ladder-nu.vercel.app/api/gemini-ai";
-    const data = { prompt };
+    const url = process.env.NEXT_PUBLIC_API_URL + "/gemini-ai";
+    // const url = "/api/gemini-ai";
+
+    const data = prompt
+      ?.split("\n")
+      .map((line) => line.split(":").map((x) => x.trim()))
+      .reduce((prev, [key, value]) => ({ ...prev, [key]: value }), {});
+
+    // const data = {
+    //   // field_of_study: "UIUX",
+    //   // goal: "Become an expert",
+    //   // current_level: "Basic",
+    //   // time_commitment: "3 hours a day",
+    //   // preferred_learning_style: "Videos",
+    //   // learning_pace: "Fast",
+    //   // resources_available: "$1000",
+    //   // preferred_tools_and_platforms: "Figma",
+    //   // language: "English",
+    // };
     setIsLoading(true);
+
+    // field_of_study: "UIUX",
+    // goal: "Become an expert",
+    // current_level: "Basic",
+    // time_commitment: "3 hours a day",
+    // preferred_learning_style: "Videos",
+    // learning_pace: "Fast",
+    // resources_available: "$1000",
+    // preferred_tools_and_platforms: "Figma",
+    // language: "English",
 
     axios
       .post(url, data)

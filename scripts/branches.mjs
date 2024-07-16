@@ -116,6 +116,9 @@ async function deleteBranches(branches) {
 
 async function main() {
   const branches = await getBranches();
+  branches.forEach(branch => {
+    console.log(`branch ${branch.name} commited at: ${branch.date}`);
+  })
   await deleteBranches(branches);
 }
 
