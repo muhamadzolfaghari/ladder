@@ -6,7 +6,13 @@ import SpinnerLoader from "@/components/SpinnerLoader";
 export default function Page() {
   return (
     <Container maxWidth="sm">
-      <Box flexDirection="column" alignItems="center" p={1} height="100vh">
+      <Box  display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        height="100vh"
+        p={1}
+        textAlign="center">
         <Image
           width={320}
           height={306}
