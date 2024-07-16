@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
   );
 
   // Save the tokenSet in cookies or a secure storage
-  const response = NextResponse.redirect("/");
+  const response = NextResponse.redirect(process.envNEXT_PUBLIC_BASE_URL!);
 
   response.cookies.set("tokenSet", JSON.stringify(tokenSet), {
     httpOnly: true,
