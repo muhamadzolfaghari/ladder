@@ -30,7 +30,7 @@ export default function Page() {
       <Image src={logogemini} alt="Gemini Logo" width={150} height={100} />
       <Typography variant="body1">Ask anything that helps you with your path</Typography>
     </Box>
-    <Box sx={{ position: 'fixed', bottom: 20, left: 0, right: 0,flexDirection: 'column' }}>
+    <Box sx={{ position: 'absolute', bottom: 20, left: 0, right: 0,flexDirection: 'column' }}>
     <NewMessageInput onSend={handleSend} />
     <BottomNav/>
     </Box>
