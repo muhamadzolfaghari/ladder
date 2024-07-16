@@ -7,8 +7,8 @@ import {  Box,
   IconButton } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormEvent, useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import PasswordValidation from "./PasswordValidation ";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
@@ -24,17 +24,16 @@ interface FormData {
   confirmPassword: string;
 }
 
-const schema = yup
+const schema = z
   .object({
-    password: yup
-      .string()
-      .required("Password is required"),
-    confirmPassword: yup
-      .string()
-      .required("Confirm Password is required")
-      .oneOf([yup.ref("password")], "Passwords must match"),
+    password: z.string().min(1, "Password is required"),
+    confirmPassword: z
+      .string().min(1,"Confirm Password is required")
   })
-  .required();
+  .refine((values) => values.password === values.confirmPassword, {
+    message: "Passwords must match!",
+    path: ["confirmPassword"],
+  });
 
 export default function ResetPassword({
   password,
@@ -53,7 +52,7 @@ export default function ResetPassword({
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(schema),
+    resolver: zodResolver(schema),
     defaultValues: {
       password,
       confirmPassword,

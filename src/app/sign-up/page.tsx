@@ -53,7 +53,7 @@ export default function Page() {
       });
       if (res.ok) {
         const result = await res.json();
-        
+
         router.push("/login");
       } else {
         console.error("Login failed");
@@ -61,6 +61,17 @@ export default function Page() {
     } catch (err) {
       console.log("error", err);
     }
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    // Save the payload to local storage
+    //  localStorage.setItem("signupData", JSON.stringify(data));
+    fetch("/api/signup", { method: "POST", body: JSON.stringify(data) })
+      .then((res) => {
+        console.log("response", res);
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
   };
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
