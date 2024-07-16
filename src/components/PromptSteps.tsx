@@ -52,7 +52,7 @@ export default function PromptSteps() {
     <Box sx={{ mt: 4 }}>
       <Typography variant="h4">Write The Prompt</Typography>
       <Typography variant="body1">
-        Let's give Gemini what it needs to create your first Ladder.
+        Let&apos;s give Gemini what it needs to create your first Ladder.
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ mt: 4, pl: 2 }}>
