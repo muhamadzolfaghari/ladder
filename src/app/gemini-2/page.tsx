@@ -32,7 +32,7 @@ export default function Page() {
       <GiminiDetails />
       <Box
         sx={{
-          position: "static",
+          display: "flex",
           bottom: 20,
           left: 0,
           right: 0,
