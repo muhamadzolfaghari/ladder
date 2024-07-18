@@ -15,7 +15,6 @@ export async function GET(req: NextRequest) {
 
   const code_verifier = req.cookies.get("code_verifier")?.value;
 
-
   if (!code_verifier) {
     return NextResponse.json(
       { error: "Code verifier not found in cookies" },
@@ -34,10 +33,10 @@ export async function GET(req: NextRequest) {
     { code_verifier },
   );
 
-  // Save the tokenSet in cookies or a secure storage
+  const userInfo = await client.userinfo(tokenSet.access_token as string);
   const response = NextResponse.redirect(process.env.NEXT_PUBLIC_BASE_URL!);
 
-  response.cookies.set("tokenSet", JSON.stringify(tokenSet), {
+  response.cookies.set("tokenSet", JSON.stringify({ ...tokenSet, userInfo }), {
     httpOnly: true,
     secure: true,
   });
