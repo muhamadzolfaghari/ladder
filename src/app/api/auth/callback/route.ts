@@ -15,6 +15,7 @@ export async function GET(req: NextRequest) {
 
   const code_verifier = req.cookies.get("code_verifier")?.value;
 
+
   if (!code_verifier) {
     return NextResponse.json(
       { error: "Code verifier not found in cookies" },
