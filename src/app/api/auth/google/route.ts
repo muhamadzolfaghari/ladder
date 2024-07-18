@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { generators, Issuer } from "openid-client";
 
-export async function GET(req: Request) {
+export async function GET() {
   const googleIssuer = await Issuer.discover("https://accounts.google.com");
   const client = new googleIssuer.Client({
     client_id: process.env.GOOGLE_CLIENT_ID as string,
