@@ -1,8 +1,17 @@
-import { type NextRequest } from "next/server";
-import { updateSession } from "./src/lib/utilities/supabase/middleware";
+import {type NextRequest, NextResponse} from "next/server";
 
 export async function middleware(request: NextRequest) {
-  return await updateSession(request);
+  // return await updateSession(request);
+
+  const token = request.cookies.get("auth_token"); // Assuming you store the token in a cookie
+  const url = request.nextUrl.clone();
+
+  if (!token && !url.pathname.endsWith("/auth")) {
+    // Redirect to login page if the user is not authenticated
+    return NextResponse.redirect(new URL("/api/auth/google", request.url));
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
