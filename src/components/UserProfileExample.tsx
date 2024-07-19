@@ -12,7 +12,7 @@ const UserProfile: React.FC = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch("/api/user");
+        const response = await fetch("/api/auth/user");
         if (response.ok) {
           const data = await response.json();
           setUserInfo(data.userInfo);
