@@ -1,10 +1,14 @@
-
+"use client";
 import ReviewPrompt from "@/components/ReviewPrompt";
 import StepBarReview from "@/components/StepBarReview";
-import { Container } from "@mui/material";
-import React from "react";
+import { Box, Container, Typography } from "@mui/material";
 
-export default function page() {
+
+
+
+export default function Page() {
+
+
   return (
     <>
       <Container sx={{ mt: 4, px: "1rem" }}>

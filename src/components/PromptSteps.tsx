@@ -11,6 +11,7 @@ import {
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 interface FormData {
   fieldSpecific: string;
@@ -25,6 +26,7 @@ const schema = z.object({
 });
 
 export default function PromptSteps() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -46,6 +48,8 @@ export default function PromptSteps() {
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     window.localStorage.setItem("formDataPrompt1", JSON.stringify(data));
+    console.log(data);
+    router.push("/prompt-2");
   };
 
   return (
@@ -124,7 +128,6 @@ export default function PromptSteps() {
           </Box>
         </Box>
 
-
         <Box sx={{ mt: 4, pl: 2 }}>
           <Box sx={{ display: "flex", gap: "1rem" }}>
             <Typography variant="h4">3 .</Typography>
@@ -143,7 +146,7 @@ export default function PromptSteps() {
               </Typography>
             </ListItem>
           </List>
-          
+
           <Box sx={{ mt: 3 }}>
             <TextField
               label="Current Level"
@@ -159,12 +162,7 @@ export default function PromptSteps() {
           </Box>
         </Box>
         <Box sx={{ mt: 4, pl: 2, mb: 12 }}>
-          <Button
-            href="/prompt-2"
-            type="submit"
-            sx={{ width: "100%" }}
-            variant={"contained"}
-          >
+          <Button type="submit" sx={{ width: "100%" }} variant={"contained"}>
             Next
           </Button>
         </Box>
