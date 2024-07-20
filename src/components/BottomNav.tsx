@@ -14,16 +14,16 @@ const BottomNav: React.FC = () => {
     setValue(newValue);
     switch (newValue) {
       case 0:
-        router.push("/gemini");
+        router.push("/home");
         break;
       case 1:
         router.push("/gemini");
         break;
       case 2:
-        router.push("/gemini");
+        router.push("/ladder");
         break;
       case 3:
-        router.push("/gemini");
+        router.push("/notification");
         break;
       default:
         break;
