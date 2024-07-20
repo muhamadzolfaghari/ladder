@@ -4,6 +4,8 @@ import { Button } from "@mui/material";
 import React from "react";
 import Image from "next/image";
 import { signInWithGoogle } from "@/lib/auth-actions";
+import googleicon from "../../public/icons/google-icon.svg";
+
 
 export default function ButtonSignUpwithGoogle() {
   return (
@@ -18,10 +20,10 @@ export default function ButtonSignUpwithGoogle() {
       <Image
         width={18}
         height={18}
-        src="/ICONS/google-icon.svg"
+        src={googleicon.src}
         alt="G-MAIL"
         style={{ marginRight: "0.5rem" }}
-      />{" "}
+      />
       Google
     </Button>
   );
