@@ -6,8 +6,6 @@ export const config = {
   matcher: "/api/:function*",
 };
 
-const FORBIDDEN_ROUTES = ["auth/google", "auth/callback", "auth/status"];
-
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
 

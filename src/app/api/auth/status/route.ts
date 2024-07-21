@@ -9,6 +9,6 @@ export async function GET(req: NextRequest) {
       tokenSet: JSON.parse(tokenSet),
     });
   } else {
-    return NextResponse.json({ authenticated: false });
+    return NextResponse.json({ authenticated: false }, { status: 401 });
   }
 }
