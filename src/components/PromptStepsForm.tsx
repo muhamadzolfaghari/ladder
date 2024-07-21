@@ -11,6 +11,7 @@ import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 interface formData {
   timeCommitment: string;
@@ -25,6 +26,7 @@ const schema = z.object({
 });
 
 export default function PromptStepsForm() {
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -44,7 +46,9 @@ export default function PromptStepsForm() {
   }, [setValue]);
 
   const onSubmit: SubmitHandler<formData> = (data) => {
-    window.localStorage.setItem("formDataPrompt2", JSON.stringify(data));
+    localStorage.setItem("formDataPrompt2", JSON.stringify(data));
+    console.log(data);
+    router.push("/prompt-3");
   };
 
   return (
@@ -143,12 +147,7 @@ export default function PromptStepsForm() {
         </Box>
       </Box>
       <Box sx={{ mt: 4, pl: 2, mb: 12 }}>
-        <Button
-          type="submit"
-          href="/prompt-3"
-          variant="contained"
-          sx={{ width: "100%" }}
-        >
+        <Button type="submit" variant="contained" sx={{ width: "100%" }}>
           Next
         </Button>
       </Box>

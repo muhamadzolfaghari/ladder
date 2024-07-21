@@ -15,6 +15,7 @@ import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 interface FormData {
   resources: string;
@@ -31,6 +32,7 @@ const schema = z.object({
 });
 
 export default function Page() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -52,6 +54,8 @@ export default function Page() {
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     window.localStorage.setItem("formDataPrompt3", JSON.stringify(data));
+    console.log(data);
+    router.push('/review');
   };
 
   return (

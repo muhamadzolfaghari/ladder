@@ -79,12 +79,22 @@ const theme = createTheme({
         root: {
           backgroundColor: "transparent",
           boxShadow: "none",
+          border: "none",
         },
       },
     },
 
     MuiAccordionSummary: {
       styleOverrides: {
+        content: {
+          display: "flex",
+          flexGrow: 1,
+          margin: "0.5rem 0",
+          "&.Mui-expanded": {
+            margin: "0.5rem 0",
+          },
+        },
+
         root: {
           backgroundColor: "#22983C",
           borderRadius: "9px",
@@ -202,30 +212,66 @@ const theme = createTheme({
             boxShadow: 'none',
             }}
     },
-    MuiBottomNavigation: {
+    MuiBottomNavigation:{
       styleOverrides: {
         root: {
-          borderTop: '1px solid #72796F',
-          backgroundColor: '#ffffff',
-          "& .MuiBottomNavigationAction-label": {
-            fontSize: '0.865rem',
-            color: '#181D17',
-          },
-          "& .Mui-selected .MuiBottomNavigationAction-label": {
-            fontSize: '0.875rem',
-            color: '#181D17', // Change color for selected label
-            fontWeight: '600', // Example of additional style for selected label
-          },
+          borderTop: "1px solid #72796F",
+          backgroundColor: "#ffffff",
+          paddingTop: "2.5rem",
+          paddingBottom: "2.5rem",
         },
       },
     },
-  //   MuiBottomNavigationAction-label.Mui-selected: {
-  //     styleOverrides: {
-  //       root: {
-  //     font-size: 0.875rem;
-  //     color: #545745;
-  //   }}
-  // },
+    MuiBottomNavigationAction: {
+      styleOverrides: {
+        label: {
+          fontFamily: "Rubik",
+          fontSize: "0.9rem",
+        },
+        root: {},
+      },
+    },
+    MuiSlider: {
+      styleOverrides: {
+        rail: {
+          height: "1rem",
+          background: "#C2C9BD",
+        },
+        track: {
+          color: "#4caf50",
+          height: "1rem",
+          border: "none",
+          borderRadius: "none",
+          borderTopLeftRadius: "9px",
+          borderTopRightRadius: "0px",
+          borderBottomLeftRadius: "9px",
+          borderBottomRightRadius: "0px",
+        },
+
+        valueLabel: {
+          fontSize: "1.2rem",
+          fontFamily: "Rubik",
+          borderRadius: "50px",
+          fontWeight: "400",
+          background: "#424940",
+          padding: "6px 15px",
+          "&::before": {
+            display: "none",
+          },
+        },
+        thumb: {
+          width: "4px",
+          color: "#424940",
+          height: "40px",
+          marginLeft: "0.4rem",
+          borderRadius: "10px",
+          "&.Mui-active": {
+            boxShadow: "none",
+          },
+        },
+        root: {},
+      },
+    },
   },
 });
 

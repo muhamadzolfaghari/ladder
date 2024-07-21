@@ -1,13 +1,40 @@
-import {
-  Box,
-  Typography,
-  List,
-  ListItem,
-  Button,
-} from "@mui/material";
-import React from "react";
+import { Box, Typography, List, ListItem, Button } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
+
+interface TextFieldTypes {
+  fieldSpecific: string;
+  currentLevel: string;
+  goal: string;
+  timeCommitment: string;
+  learningStyle: string;
+  learningPace: string;
+  resources: string;
+  language: string;
+  toolPlatform: string;
+}
 export default function ReviewPrompt() {
+  const [formData, setFormData] = useState<TextFieldTypes | null>(null);
+
+  useEffect(() => {
+    const getData1 = localStorage.getItem("formDataPrompt1");
+    const getData2 = localStorage.getItem("formDataPrompt2");
+    const getData3 = localStorage.getItem("formDataPrompt3");
+
+    if (getData1 && getData2 && getData3) {
+      const data1: Partial<TextFieldTypes> = JSON.parse(getData1);
+      const data2: Partial<TextFieldTypes> = JSON.parse(getData2);
+      const data3: Partial<TextFieldTypes> = JSON.parse(getData3);
+
+      const combinedData = {
+        ...data1,
+        ...data2,
+        ...data3,
+      } as TextFieldTypes;
+
+      setFormData(combinedData);
+    }
+  }, []);
   return (
     <Box sx={{ mt: 4 }}>
       <Typography variant="h4">Review Your prompt</Typography>
@@ -23,8 +50,7 @@ export default function ReviewPrompt() {
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
             <Typography variant="body1">
-              HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, SQL, Git,
-              deployment processes.
+              {formData?.fieldSpecific}
             </Typography>
           </ListItem>
         </List>
@@ -39,20 +65,11 @@ export default function ReviewPrompt() {
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
             <Typography variant="body1">
-              To become proficient in full-stack web development.
+             {formData?.goal}
             </Typography>
           </ListItem>
-          <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">
-              Achieve competency in building and deploying fully functional web
-              applications.
-            </Typography>
-          </ListItem>
-          <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">
-              Obtain a certification in web development within 12 months.
-            </Typography>
-          </ListItem>
+  
+    
         </List>
       </Box>
 
@@ -65,14 +82,10 @@ export default function ReviewPrompt() {
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
             <Typography variant="body1">
-              Basic understanding of HTML, CSS, and JavaScript.
+              {formData?.currentLevel}
             </Typography>
           </ListItem>
-          <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">
-              No prior experience with backend development or databases.
-            </Typography>
-          </ListItem>
+         
         </List>
       </Box>
       <Box sx={{ mt: 4, pl: 2 }}>
@@ -82,11 +95,10 @@ export default function ReviewPrompt() {
         </Box>
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">2 hours daily on weekdays.</Typography>
+            <Typography variant="body1">{formData?.timeCommitment
+            }</Typography>
           </ListItem>
-          <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">4 hours on weekends.</Typography>
-          </ListItem>
+          
         </List>
       </Box>
       <Box sx={{ mt: 4, pl: 2 }}>
@@ -97,14 +109,10 @@ export default function ReviewPrompt() {
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
             <Typography variant="body1">
-              Combination of reading, watching videos, and hands-on practice.
+              {formData?.learningStyle}
             </Typography>
           </ListItem>
-          <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">
-              Prefer structured online courses with projects and quizzes.
-            </Typography>
-          </ListItem>
+          
         </List>
       </Box>
       <Box sx={{ mt: 4, pl: 2 }}>
@@ -115,8 +123,7 @@ export default function ReviewPrompt() {
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
             <Typography variant="body1">
-              Moderate pace, aiming to complete beginner to advanced material
-              within 12 months.
+             {formData?.learningPace}
             </Typography>
           </ListItem>
         </List>
@@ -127,14 +134,10 @@ export default function ReviewPrompt() {
           <Typography variant="h4">Resources Available</Typography>
         </Box>
         <List sx={{ pl: 3, listStyleType: "disc" }}>
+          
           <ListItem sx={{ display: "list-item", p: 0 }}>
             <Typography variant="body1">
-              Budget of $500 for courses, books, and tools.
-            </Typography>
-          </ListItem>
-          <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">
-              Access to a personal laptop with internet connectivity.
+              {formData?.resources}
             </Typography>
           </ListItem>
         </List>
@@ -146,7 +149,7 @@ export default function ReviewPrompt() {
         </Box>
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">English</Typography>
+            <Typography variant="body1">{formData?.language}</Typography>
           </ListItem>
         </List>
       </Box>
@@ -158,18 +161,15 @@ export default function ReviewPrompt() {
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
             <Typography variant="body1">
-              Learning platforms: Codecademy, Coursera, Udemy.
+             {formData?.toolPlatform}
             </Typography>
           </ListItem>
-          <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">
-              Tools: VS Code, GitHub, Postman.
-            </Typography>
-          </ListItem>
+          
         </List>
       </Box>
       <Box sx={{ mt: 4, pl: 2, mb: 12, display: "flex", gap: "1rem" }}>
         <Button
+         href="/prompt-1"
           sx={{
             width: "30%",
             background: "white",
