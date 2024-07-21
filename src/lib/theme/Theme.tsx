@@ -89,9 +89,9 @@ const theme = createTheme({
         content: {
           display: "flex",
           flexGrow: 1,
-          margin: "0.5rem 0", 
+          margin: "0.5rem 0",
           "&.Mui-expanded": {
-            margin: "0.5rem 0", 
+            margin: "0.5rem 0",
           },
         },
 
@@ -222,15 +222,48 @@ const theme = createTheme({
         },
       },
     },
-    // MuiSvgIcon:{
-    //   styleOverrides: {
-    //     root: {
-    //       '&:hover': {
-    //         backgroundColor: '#22983C',
-    //         borderRadius: '100%',
-    //       }
-    //     }}
-    // },
+
+    MuiSlider: {
+      styleOverrides: {
+        rail: {
+          height: "1rem",
+          background: "#C2C9BD",
+        },
+        track: {
+          color: "#4caf50",
+          height: "1rem",
+          border: "none",
+          borderRadius: "none",
+          borderTopLeftRadius: "9px",
+          borderTopRightRadius: "0px",
+          borderBottomLeftRadius: "9px",
+          borderBottomRightRadius: "0px",
+        },
+
+        valueLabel: {
+          fontSize: "1.2rem",
+          fontFamily: "Rubik",
+          borderRadius: "50px",
+          fontWeight: "400",
+          background: "#424940",
+          padding: "6px 15px",
+          "&::before": {
+            display: "none",
+          },
+        },
+        thumb: {
+          width: "4px",
+          color: "#424940",
+          height: "40px",
+          marginLeft: "0.4rem",
+          borderRadius: "10px",
+          "&.Mui-active": {
+            boxShadow: "none",
+          },
+        },
+        root: {},
+      },
+    },
   },
 });
 

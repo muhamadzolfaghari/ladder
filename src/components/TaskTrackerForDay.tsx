@@ -73,6 +73,12 @@ const TaskTrackerForDay = () => {
         </div>
       </Box>
       <ModalAddTask />
+      <Box
+        sx={{
+          borderBottom: "1px solid #72796F",
+          mt:'1.5rem'
+        }}
+      ></Box>
     </Box>
   );
 };

@@ -8,14 +8,29 @@ const ModalAddTask = () => {
   const handleClose = () => setOpen(false);
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: 5,
+        }}
+      >
+        <Button
+          onClick={handleOpen}
+          variant="contained"
+          sx={{ textTransform: "none" }}
+        >
+          Add a Task
+        </Button>
+      </Box>
       <Modal
         open={open}
         sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "100vh",
+          mx:4
         }}
       >
         <Box
