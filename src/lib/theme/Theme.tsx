@@ -217,12 +217,22 @@ const theme = createTheme({
     MuiBottomNavigation: {
       styleOverrides: {
         root: {
-          borderTop: "2px solid #72796F",
+          borderTop: "1px solid #72796F",
           backgroundColor: "#ffffff",
+          paddingTop: "2.5rem",
+          paddingBottom: "2.5rem",
         },
       },
     },
-
+    MuiBottomNavigationAction: {
+      styleOverrides: {
+        label: {
+          fontFamily: "Rubik",
+          fontSize: "0.9rem",
+        },
+        root: {},
+      },
+    },
     MuiSlider: {
       styleOverrides: {
         rail: {

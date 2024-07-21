@@ -58,8 +58,8 @@ const WeekDaysLadder = () => {
           See the hole Ladder <ArrowForwardIcon />{" "}
         </Button>
       </Box>
-      <Box sx={{ borderBottom: 1, borderColor: "#72796F", mb: 5 , pt:4 }}></Box>
-      
+      <Box sx={{ borderBottom: 1, borderColor: "#72796F", mb: 2 , pt:4 }}></Box>
+
     </Box>
   );
 };
