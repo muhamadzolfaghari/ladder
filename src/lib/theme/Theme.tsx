@@ -79,12 +79,22 @@ const theme = createTheme({
         root: {
           backgroundColor: "transparent",
           boxShadow: "none",
+          border: "none",
         },
       },
     },
 
     MuiAccordionSummary: {
       styleOverrides: {
+        content: {
+          display: "flex",
+          flexGrow: 1,
+          margin: "0.5rem 0", 
+          "&.Mui-expanded": {
+            margin: "0.5rem 0", 
+          },
+        },
+
         root: {
           backgroundColor: "#22983C",
           borderRadius: "9px",
@@ -185,29 +195,32 @@ const theme = createTheme({
         },
       },
     },
-    MuiCard:{
+    MuiCard: {
       styleOverrides: {
         root: {
-          border: '1px solid #72796F',
-            backgroundColor: '#ffffff',
-            borderRadius: '8px',
-        }}
+          border: "1px solid #72796F",
+          backgroundColor: "#ffffff",
+          borderRadius: "8px",
+        },
+      },
     },
-    MuiPaper:{
+    MuiPaper: {
       styleOverrides: {
         root: {
-            border: '1px solid #72796F',
-            backgroundColor: '#ffffff',
-            borderRadius: '8px',
-            boxShadow: 'none',
-            }}
+          border: "1px solid #72796F",
+          backgroundColor: "#ffffff",
+          borderRadius: "8px",
+          boxShadow: "none",
+        },
+      },
     },
-    MuiBottomNavigation:{
+    MuiBottomNavigation: {
       styleOverrides: {
         root: {
-          borderTop: '2px solid #72796F',
-          backgroundColor: '#ffffff',
-              }}
+          borderTop: "2px solid #72796F",
+          backgroundColor: "#ffffff",
+        },
+      },
     },
     // MuiSvgIcon:{
     //   styleOverrides: {
