@@ -5,16 +5,17 @@ import {
   BottomNavigationAction,
   Box,
 } from "@mui/material";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ArchiveIcon from "@mui/icons-material/Archive";
-import HomeIcon from "@mui/icons-material/Home";
+
 
 import { useState } from "react";
 import LadderIconBottom from "./LadderIconBottom";
 import GeminiIconBottom from "./GeminiIconBottom";
 import NotificationsOutlinedIcon from "./NotificationsOutlinedIcon";
 import HomeIconBottom from "./HomeIconBottom";
+import HomeIconOutline from "./HomeIconOutline";
+import GeminiIconActive from "./GeminiIconActive";
+import LadderIconBottomActive from "./LadderIconBottomActive";
+import NotifactionIconBottomActive from "./NotifactionIconBottomActive";
 
 const NavigationBottom = () => {
   const [value, setValue] = useState(0);
@@ -42,7 +43,7 @@ const NavigationBottom = () => {
                 padding: "3px 1.25rem",
               }}
             >
-              <HomeIconBottom />
+              {value === 0 ? <HomeIconBottom /> : <HomeIconOutline />}
             </Box>
           }
         />
@@ -58,7 +59,7 @@ const NavigationBottom = () => {
                 padding: "3px 1.25rem",
               }}
             >
-              <GeminiIconBottom />
+              {value === 1 ? <GeminiIconActive /> : <GeminiIconBottom />}
             </Box>
           }
         />
@@ -73,7 +74,7 @@ const NavigationBottom = () => {
                 padding: "3px 1.25rem",
               }}
             >
-              <LadderIconBottom />
+              {value === 2 ? <LadderIconBottomActive /> : <LadderIconBottom />}
             </Box>
           }
         />
@@ -88,7 +89,11 @@ const NavigationBottom = () => {
                 padding: "3px 1.25rem",
               }}
             >
-              <NotificationsOutlinedIcon />
+              {value === 3 ? (
+                <NotifactionIconBottomActive />
+              ) : (
+                <NotificationsOutlinedIcon />
+              )}
             </Box>
           }
         />
