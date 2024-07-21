@@ -2,13 +2,9 @@
 import {
   Typography,
   Box,
-  Grid,
-  Stack,
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  List,
-  ListItem,
   useTheme,
   FormControlLabel,
   FormGroup,
@@ -18,6 +14,7 @@ import {
 import React, { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import ModalAddTask from "./ModalAddTask";
 
 const TaskTrackerForDay = () => {
   const [expanded, setExpanded] = useState<string | false>(false);
@@ -75,6 +72,7 @@ const TaskTrackerForDay = () => {
           </Accordion>
         </div>
       </Box>
+      <ModalAddTask />
     </Box>
   );
 };
