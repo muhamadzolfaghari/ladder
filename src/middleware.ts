@@ -11,10 +11,7 @@ const FORBIDDEN_ROUTES = ["auth/google", "auth/callback", "auth/status"];
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
 
-  if (
-    !FORBIDDEN_ROUTES.every((route) => url.href.endsWith(route)) &&
-    !isAuthenticated(request)
-  ) {
+  if (!url.href.includes("auth") && !isAuthenticated(request)) {
     return NextResponse.json(
       { message: "request is unauthorized" },
       { status: 401 },
