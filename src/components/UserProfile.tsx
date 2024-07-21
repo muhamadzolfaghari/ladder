@@ -4,18 +4,22 @@ import {
   Avatar,
   Box,
   Divider,
-  Grid,
   IconButton,
   SvgIcon,
   Typography,
+  TextField,
 } from "@mui/material";
 
 const UserProfile = () => {
   const [user, setUser] = useState({ name: "nova", avatar: "" });
+  const [isEditing, setIsEditing] = useState(false);
+  const [text, setText] = useState("Write a Java function that takes a path as an input and creates a file storing the current system date. Consider edge cases.");
+
   const capitalizeFirstLetter = (str: string): string => {
     if (str.length === 0) return str;
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
+
   useEffect(() => {
     axios
       .get("api/user/profile")
@@ -29,6 +33,19 @@ const UserProfile = () => {
         console.error("Error fetching user data:", error);
       });
   }, []);
+
+  const handleEditClick = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setText(event.target.value);
+  };
+
+  const handleSearch = () => {
+    // Implement the search functionality based on the new text
+    console.log("Searching for:", text);
+  };
 
   return (
     <Box>
@@ -44,7 +61,7 @@ const UserProfile = () => {
             {capitalizeFirstLetter(user.name)}
           </Typography>
         </Box>
-        <IconButton>
+        <IconButton onClick={handleEditClick}>
           <SvgIcon>
             <svg
               width="24"
@@ -62,10 +79,20 @@ const UserProfile = () => {
         </IconButton>
       </Box>
 
-      <Typography variant="body1" mb={2}>
-        Write a Java function that takes a path as an input and creates a file
-        storing the current system date. Consider edge cases.
-      </Typography>
+      {isEditing ? (
+        <TextField
+          variant="outlined"
+          fullWidth
+          value={text}
+          onChange={handleTextChange}
+          onBlur={() => { handleEditClick(); handleSearch(); }}
+          sx={{ marginBottom: 2, marginTop: 2 }}
+        />
+      ) : (
+        <Typography variant="body1" mb={2} onClick={handleEditClick}>
+          {text}
+        </Typography>
+      )}
       <Divider color="secondary" />
     </Box>
   );

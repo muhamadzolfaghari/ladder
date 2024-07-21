@@ -1,4 +1,4 @@
-// app/components/BottomNav.tsx
+"use client"
 import React, { useState } from "react";
 import { BottomNavigation, BottomNavigationAction, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
