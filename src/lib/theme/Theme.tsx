@@ -202,22 +202,30 @@ const theme = createTheme({
             boxShadow: 'none',
             }}
     },
-    MuiBottomNavigation:{
+    MuiBottomNavigation: {
       styleOverrides: {
         root: {
-          borderTop: '2px solid #72796F',
+          borderTop: '1px solid #72796F',
           backgroundColor: '#ffffff',
-              }}
+          "& .MuiBottomNavigationAction-label": {
+            fontSize: '0.865rem',
+            color: '#181D17',
+          },
+          "& .Mui-selected .MuiBottomNavigationAction-label": {
+            fontSize: '0.875rem',
+            color: '#181D17', // Change color for selected label
+            fontWeight: '600', // Example of additional style for selected label
+          },
+        },
+      },
     },
-    // MuiSvgIcon:{
-    //   styleOverrides: {
-    //     root: {
-    //       '&:hover': {
-    //         backgroundColor: '#22983C',
-    //         borderRadius: '100%',
-    //       }
-    //     }}
-    // },
+  //   MuiBottomNavigationAction-label.Mui-selected: {
+  //     styleOverrides: {
+  //       root: {
+  //     font-size: 0.875rem;
+  //     color: #545745;
+  //   }}
+  // },
   },
 });
 

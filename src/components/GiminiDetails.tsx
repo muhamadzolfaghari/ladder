@@ -6,7 +6,6 @@ import Link from "next/link";
 import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
-import { Margin } from "@mui/icons-material";
 
 interface CodeSnippetProps {
   code: string;

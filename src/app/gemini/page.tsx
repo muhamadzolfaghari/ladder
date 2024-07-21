@@ -27,13 +27,15 @@ export default function Page() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        height: "60vh",
+        height: "100vh",
         justifyContent: "space-between",
       }}
     >
       <ChatHistory messages={messages} />
       <Box
-        my={8}
+       sx={{
+        marginTop: '0px !important',
+        marginBottom: '0px !important'}}
         textAlign="center"
         display="flex"
         flexDirection="column"
@@ -48,8 +50,8 @@ export default function Page() {
       </Box>
       <Box
         sx={{
-          position: "absolute",
-          bottom: 20,
+         display:"flex",
+          bottom:0,
           left: 0,
           right: 0,
           flexDirection: "column",
