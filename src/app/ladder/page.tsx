@@ -30,14 +30,14 @@ export default function Page() {
       <Typography variant="h4" mt={2}>
         Ladders
       </Typography>
-      <Card sx={{  bgcolor: "#4caf50", color: "white",justifyContent:'space-around'}}>
+      <Card sx={{ mb: 2, bgcolor: "#4caf50", color: "white",justifyContent:'space-around'}}>
         <CardContent>
           <Box
             display="flex"
             alignItems="center"
             width="100%"
             justifyContent="space-between"
-            my={3}
+            my={2}
           >
             <Typography variant="h5" sx={{ color: "white" }}>
               Full-Stack Web Development
@@ -49,7 +49,7 @@ export default function Page() {
               />
             </IconButton>
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+          <Box sx={{ display: "flex", justifyContent: "space-around", mt: 2 }}>
             <Box
               sx={{
                 display: "flex",
@@ -100,18 +100,17 @@ export default function Page() {
         </CardContent>
       </Card>
 
-      <Box   sx={{
-        marginTop: '0px !important',
-        marginBottom: '0px !important'}}
-        textAlign="center"
-        display="flex"
-        flexDirection="column"
-        flexGrow={1}
-        alignItems="center"
-        justifyContent="center">
-        <IconButton>
-          <Image src={addicon.src} alt="Add Icon" width={56} height={56} />
-        </IconButton>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          justifyContent: "start",
+        }}
+      >
+          <IconButton>
+            <Image src={addicon.src} alt="Add Icon" width={56} height={56} />
+          </IconButton>
       </Box>
 
       <Box
