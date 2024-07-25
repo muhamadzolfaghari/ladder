@@ -3,28 +3,27 @@
 import { Button } from "@mui/material";
 import React from "react";
 import Image from "next/image";
-import { signInWithGoogle } from "@/lib/auth-actions";
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import googleicon from "../../public/icons/google-icon.svg";
 
-
 export default function ButtonSignUpwithGoogle() {
+  const { data: session } = useSession();
+  const router = useRouter();
+  console.log(session);
+  
+   const handleSignIn = async () => {
+     await signIn("google", { callbackUrl: "/home" });
+   };
   return (
-    <Button
-      fullWidth
-      variant="outlined"
-      sx={{ marginBottom: "2rem" }}
-      onClick={() => {
-        signInWithGoogle();
-      }}
-    >
-      <Image
-        width={18}
-        height={18}
-        src={googleicon.src}
-        alt="G-MAIL"
-        style={{ marginRight: "0.5rem" }}
-      />
-      Google
-    </Button>
+    <>
+      {!session ? (
+        <button onClick={handleSignIn}>Sign in with Google</button>
+      ) : (
+        <button onClick={() => signOut()}>Sign out</button>
+      )}
+    </>
   );
 }
