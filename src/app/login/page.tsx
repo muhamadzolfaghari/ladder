@@ -15,6 +15,8 @@ import logoImage from "../../../public/Images/Logo.svg";
 import { useState } from "react";
 import { useAuth } from "@/components/AuthContext";
 import ButtonSignUpwithGoogle from "@/components/ButtonSignUpwithGoogle";
+import { signIn } from "@/auth";
+import serverAction from "@/app/login/serverAction";
 
 export default function Page() {
   const { login } = useAuth();
@@ -23,6 +25,11 @@ export default function Page() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    await signIn("credentials", {
+      redirect: false,
+    });
+
     const data = { email, password };
     try {
       const res = await fetch("/api/login", {
@@ -61,7 +68,7 @@ export default function Page() {
           Hey! Great to see you :)
         </Typography>
         <Box width="100%">
-          <form onSubmit={handleSubmit}>
+          <form action={serverAction}>
             <Box width="100%" mt={3}>
               <Typography variant="h4" mb={2}>
                 Login to your account{" "}
@@ -119,39 +126,39 @@ export default function Page() {
               </Button>
             </Box>
           </form>
-     
-          <Typography variant="h4" mb={1} mt={6}>
-          Or Login With Google
-            </Typography>
 
-            <ButtonSignUpwithGoogle />
-            <Box
-              display="flex"
-              flexDirection="column"
-              justifyContent="center"
-              alignItems="center"
+          <Typography variant="h4" mb={1} mt={6}>
+            Or Login With Google
+          </Typography>
+
+          <ButtonSignUpwithGoogle />
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Typography variant="body1" mb={1}>
+              Don&apos;t have account?
+            </Typography>
+            <Link
+              href="/sign-up"
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+                display: "flex",
+                alignItems: "center",
+              }}
             >
-              <Typography variant="body1" mb={1}>
-              Don&apos;t have account? 
+              <Typography variant="body1" color="primary">
+                Sign Up
               </Typography>
-              <Link
-                href="/sign-up"
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <Typography variant="body1" color="primary">
-                Sign Up 
-                </Typography>
-                <ArrowForwardIcon
-                  color="primary"
-                  sx={{ width: 18, height: 18, marginLeft: 0.5 }}
-                />
-              </Link>
-            </Box>
+              <ArrowForwardIcon
+                color="primary"
+                sx={{ width: 18, height: 18, marginLeft: 0.5 }}
+              />
+            </Link>
+          </Box>
         </Box>
       </Box>
     </Container>
