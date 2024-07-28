@@ -100,6 +100,7 @@ const theme = createTheme({
           borderRadius: "9px",
           flexDirection: "row-reverse",
           boxShadow: "none",
+          border:"none",
 
           "& .MuiTypography-root": {
             color: "white",

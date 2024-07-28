@@ -14,8 +14,10 @@ import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 import addicon from "../../../public/icons/addicon.svg";
 import Path from "../../../public/icons/Path.svg";
 import Speedometer from "../../../public/icons/Speedometer.svg";
-import Ruler  from "../../../public/icons/Ruler.svg";
+import Ruler from "../../../public/icons/Ruler.svg";
 import Image from "next/image";
+import LadderStatus from "@/components/LadderStatus";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -30,7 +32,14 @@ export default function Page() {
       <Typography variant="h4" mt={2}>
         Ladders
       </Typography>
-      <Card sx={{ mb: 2, bgcolor: "#4caf50", color: "white",justifyContent:'space-around'}}>
+      <Card
+        sx={{
+          mb: 2,
+          bgcolor: "#4caf50",
+          color: "white",
+          justifyContent: "space-around",
+        }}
+      >
         <CardContent>
           <Box
             display="flex"
@@ -50,18 +59,22 @@ export default function Page() {
             </IconButton>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-around", mt: 2 }}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-          <Image src={Path.src} alt="Add Icon" width={24} height={24} />
-          <Typography variant="body1" sx={{ color: "white" }}>
-                Road Map
-              </Typography>
-            </Box>
+            <Link legacyBehavior href="/road-map" passHref>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <Image src={Path.src} alt="Add Icon" width={24} height={24} />
+                <Typography variant="body1" sx={{ color: "white" }}>
+                  Road Map
+                </Typography>
+              </Box>
+            </Link>
+
             <Divider
               orientation="vertical"
               flexItem
@@ -74,8 +87,13 @@ export default function Page() {
                 alignItems: "center",
               }}
             >
-          <Image src={Speedometer.src} alt="Add Icon" width={24} height={24} />
-          <Typography variant="body1" sx={{ color: "white" }}>
+              <Image
+                src={Speedometer.src}
+                alt="Add Icon"
+                width={24}
+                height={24}
+              />
+              <Typography variant="body1" sx={{ color: "white" }}>
                 Week Sheet
               </Typography>
             </Box>
@@ -91,15 +109,15 @@ export default function Page() {
                 alignItems: "center",
               }}
             >
-          <Image src={Ruler.src} alt="Add Icon" width={24} height={24} />
-          <Typography variant="body1" sx={{ color: "white" }}>
+              <Image src={Ruler.src} alt="Add Icon" width={24} height={24} />
+              <Typography variant="body1" sx={{ color: "white" }}>
                 Stats
               </Typography>
             </Box>
           </Box>
         </CardContent>
       </Card>
-
+      <LadderStatus />
       <Box
         sx={{
           display: "flex",
@@ -108,9 +126,15 @@ export default function Page() {
           justifyContent: "start",
         }}
       >
-          <IconButton>
-            <Image src={addicon.src} alt="Add Icon" width={56} height={56} />
-          </IconButton>
+        <IconButton
+          sx={{
+            "&:hover": {
+              backgroundColor: "transparent",
+            },
+          }}
+        >
+          <Image src={addicon.src} alt="Add Icon" width={56} height={56} />
+        </IconButton>
       </Box>
 
       <Box
