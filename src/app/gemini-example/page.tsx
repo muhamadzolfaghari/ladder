@@ -28,8 +28,6 @@ const GeminiExample = () => {
     setPrompt(event.target.value);
   }
 
-  console.log(process.env.NEXT_PUBLIC_API_URL)
-
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     const url = process.env.NEXT_PUBLIC_BASE_API_URL + "/gemini-ai";
@@ -40,19 +38,18 @@ const GeminiExample = () => {
       .map((line) => line.split(":").map((x) => x.trim()))
       .reduce((prev, [key, value]) => ({ ...prev, [key]: value }), {});
 
-
-      // Implement payload by JSON
-        const payload = {
-          field_of_study: "UIUX",
-          goal: "Become an expert",
-          current_level: "Basic",
-          time_commitment: "3 hours a day",
-          preferred_learning_style: "Videos",
-          learning_pace: "Fast",
-          resources_available: "$1000",
-          preferred_tools_and_platforms: "Figma",
-          language: "English",
-        };
+    // Implement payload by JSON
+    const payload = {
+      field_of_study: "UIUX",
+      goal: "Become an expert",
+      current_level: "Basic",
+      time_commitment: "3 hours a day",
+      preferred_learning_style: "Videos",
+      learning_pace: "Fast",
+      resources_available: "$1000",
+      preferred_tools_and_platforms: "Figma",
+      language: "English",
+    };
 
     // const data = {
     //   field_of_study: UIUX
