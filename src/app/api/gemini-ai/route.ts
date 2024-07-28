@@ -42,24 +42,3 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json(e);
   }
 }
-
-// interface ProductProps {
-//   id: number;
-//   title: string;
-//   price: number;
-// }
-//
-// const Product = ({ id, title, price }: ProductProps) => {};
-//
-// interface Props {
-//   id: number;
-//   title: string;
-//   price: number;
-// }
-//
-// const Product = ({ id, title, price }: Props) => {};
-//
-//
-// interface IProduct {
-//   id: number;
-// }
