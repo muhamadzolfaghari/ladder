@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Theme from "@/lib/theme/Theme";
 import { AuthProvider } from "@/components/AuthContext";
+import NextAuthProvider from "@/components/NextAuthProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,9 +20,11 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body>
-      <AuthProvider>
-        <Theme>{children}</Theme>
-        </AuthProvider>
+        <NextAuthProvider>
+          <AuthProvider>
+            <Theme>{children}</Theme>
+          </AuthProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/pg-adapter": "^1.4.1",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@fontsource/alumni-sans": "^5.0.20",
@@ -17,12 +18,14 @@
     "@hookform/resolvers": "^3.8.0",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
-    "@supabase/ssr": "^0.4.0",
-    "@supabase/supabase-js": "^2.44.3",
+    "@neondatabase/serverless": "^0.9.4",
     "@types/axios": "^0.14.0",
+    "bcrypt": "^5.1.1",
     "mui-one-time-password-input": "^2.0.3",
     "next": "14.2.3",
+    "next-auth": "^5.0.0-beta.19",
     "openid-client": "^5.6.5",
+    "pg": "^8.12.0",
     "prism-react-renderer": "^2.3.1",
     "react": "^18",
     "react-dom": "^18",
@@ -30,7 +33,9 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
+    "@types/pg": "^8.11.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
