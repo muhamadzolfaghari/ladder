@@ -17,6 +17,7 @@ import Speedometer from "../../../public/icons/Speedometer.svg";
 import Ruler from "../../../public/icons/Ruler.svg";
 import Image from "next/image";
 import LadderStatus from "@/components/LadderStatus";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -58,18 +59,22 @@ export default function Page() {
             </IconButton>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-around", mt: 2 }}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Image src={Path.src} alt="Add Icon" width={24} height={24} />
-              <Typography variant="body1" sx={{ color: "white" }}>
-                Road Map
-              </Typography>
-            </Box>
+            <Link legacyBehavior href="/road-map" passHref>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <Image src={Path.src} alt="Add Icon" width={24} height={24} />
+                <Typography variant="body1" sx={{ color: "white" }}>
+                  Road Map
+                </Typography>
+              </Box>
+            </Link>
+
             <Divider
               orientation="vertical"
               flexItem
@@ -122,12 +127,12 @@ export default function Page() {
         }}
       >
         <IconButton
-           sx={{
-            '&:hover': {
-              backgroundColor: 'transparent', 
+          sx={{
+            "&:hover": {
+              backgroundColor: "transparent",
             },
           }}
-          >
+        >
           <Image src={addicon.src} alt="Add Icon" width={56} height={56} />
         </IconButton>
       </Box>
