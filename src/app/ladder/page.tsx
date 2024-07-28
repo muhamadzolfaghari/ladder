@@ -121,7 +121,13 @@ export default function Page() {
           justifyContent: "start",
         }}
       >
-        <IconButton>
+        <IconButton
+           sx={{
+            '&:hover': {
+              backgroundColor: 'transparent', 
+            },
+          }}
+          >
           <Image src={addicon.src} alt="Add Icon" width={56} height={56} />
         </IconButton>
       </Box>
