@@ -32,7 +32,7 @@ const GeminiExample = () => {
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    const url = process.env.NEXT_PUBLIC_API_URL + "/gemini-ai";
+    const url = process.env.NEXT_PUBLIC_BASE_API_URL + "/gemini-ai";
     // const url = "/api/gemini-ai";
 
     const data = prompt
