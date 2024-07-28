@@ -12,7 +12,7 @@ export async function GET() {
     }
 
     const row = await getVisitorStatusById(user.id);
-    const isFirstVisit = row?.is_first_visit;
+    const isFirstVisit = row?.is_first_visit !== false;
 
     return NextResponse.json(
       { is_first_visit: isFirstVisit ?? false },
@@ -37,7 +37,8 @@ export async function POST() {
     await insertOrExistVisitorStatus(user.id);
 
     return NextResponse.json(undefined, { status: 200 });
-  } catch {
+  } catch (error) {
+    console.log("visitor-status route", error);
     return NextResponse.json(
       { error: "Some errors happened" },
       { status: 400 },

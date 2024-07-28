@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   Typography,
   Box,
@@ -10,7 +9,6 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
-import logoImage from "../../../public/Images/Logo.svg";
 import HeaderSignUp from "@/components/HeaderSignUp";
 import PasswordValidation from "@/components/PasswordValidation ";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -28,7 +26,7 @@ type Inputs = {
   password: string;
   confirmPassword: string;
 };
-const page = () => {
+const SingUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -230,4 +228,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SingUp;
