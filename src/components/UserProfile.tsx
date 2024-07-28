@@ -82,6 +82,7 @@ const UserProfile = () => {
       {isEditing ? (
         <TextField
           variant="outlined"
+          multiline
           fullWidth
           value={text}
           onChange={handleTextChange}
