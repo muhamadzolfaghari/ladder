@@ -36,7 +36,7 @@ export async function POST() {
 
     await insertOrExistVisitorStatus(user.id);
 
-    return NextResponse.json(undefined, { status: 200 });
+    return NextResponse.json({}, { status: 200 });
   } catch (error) {
     console.log("visitor-status route", error);
     return NextResponse.json(
