@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import getUser from "@/lib/utilities/getUser";
 import { NextRequest, NextResponse } from "next/server";
 
