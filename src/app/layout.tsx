@@ -3,6 +3,7 @@ import "./globals.css";
 import Theme from "@/lib/theme/Theme";
 import { AuthProvider } from "@/components/AuthContext";
 import NextAuthProvider from "@/components/NextAuthProvider";
+import QueryClientProviderWrapper from "@/components/QueryClientProviderWrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,8 +15,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
+    return (
+      <QueryClientProviderWrapper>   
+         <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
       </head>
@@ -27,5 +29,6 @@ export default function RootLayout({
         </NextAuthProvider>
       </body>
     </html>
+    </QueryClientProviderWrapper>
   );
 }
