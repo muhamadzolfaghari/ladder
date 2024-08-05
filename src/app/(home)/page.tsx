@@ -1,22 +1,33 @@
 import getUser from "@/lib/utilities/getUser";
 import getVisitorStatusById from "../api/visitor-status/db/getVisitorStatusById";
 import { redirect } from "next/navigation";
+import insertVisitorStatusByUserId from "../api/visitor-status/db/insertVisitorStatusByUserId";
+import VisitorStatus from "../api/visitor-status/types/VisitorStatus";
 
 const Home = async () => {
-  const user = await getUser();
+  let visitorStatus: VisitorStatus | undefined;
 
-  if (!user) {
-    return <div>Not authenticated</div>;
+  try {
+    const user = await getUser();
+
+    if (!user?.id) {
+      return <div>unauthorized</div>;
+    }
+
+    visitorStatus = await getVisitorStatusById(user.id);
+
+    if (!visitorStatus) {
+      await insertVisitorStatusByUserId(user.id);
+    }
+  } catch {
+    return <div>Some error occured</div>;
   }
 
-  const result = await getVisitorStatusById(user.id);
-  const isFirstVisit = result?.is_first_visit !== false;
-
-  if (isFirstVisit) {
+  if (!visitorStatus || visitorStatus.is_first_visit) {
     return redirect("/get-start");
   }
 
-  return <div>prompt</div>;
+  return redirect("/prompt-1");
 };
 
 export default Home;
