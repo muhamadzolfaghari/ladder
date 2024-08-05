@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
+
+import React from "react";
 import {
   Button,
   ListItem,
@@ -8,49 +9,10 @@ import {
   TextField,
   List,
 } from "@mui/material";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-
-interface FormData {
-  fieldSpecific: string;
-  goal: string;
-  currentLevel: string;
-}
-
-const schema = z.object({
-  fieldSpecific: z.string().min(1, "Field-Specific information is required"),
-  goal: z.string().min(1, "Goal information is required"),
-  currentLevel: z.string().min(1, "Current Level information is required"),
-});
+import usePrompt1 from "./hooks/usePrompt1";
 
 export default function PromptSteps() {
-  const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-  });
-
-  useEffect(() => {
-    const saveData = localStorage.getItem("formDataPrompt1");
-    if (saveData) {
-      const formData = JSON.parse(saveData);
-      setValue("fieldSpecific", formData.fieldSpecific);
-      setValue("goal", formData.goal);
-      setValue("currentLevel", formData.currentLevel);
-    }
-  }, [setValue]);
-
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    window.localStorage.setItem("formDataPrompt1", JSON.stringify(data));
-    console.log(data);
-    router.push("/prompt-2");
-  };
+  const { onSubmit, errors, handleSubmit, register } = usePrompt1();
 
   return (
     <Box sx={{ mt: 4 }}>
@@ -84,9 +46,9 @@ export default function PromptSteps() {
               InputLabelProps={{ shrink: true }}
               multiline
               rows={6}
-              {...register("fieldSpecific")}
-              error={!!errors.fieldSpecific}
-              helperText={errors.fieldSpecific?.message}
+              {...register("field_of_study")}
+              error={!!errors.field_of_study}
+              helperText={errors.field_of_study?.message}
               placeholder="Key topics: HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, SQL, Git, deployment processes. Foundational knowledge: Basic computer science principles, understanding of HTTP and RESTful APIs."
               fullWidth
             />
@@ -127,13 +89,11 @@ export default function PromptSteps() {
             />
           </Box>
         </Box>
-
         <Box sx={{ mt: 4, pl: 2 }}>
           <Box sx={{ display: "flex", gap: "1rem" }}>
             <Typography variant="h4">3 .</Typography>
             <Typography variant="h4">Current Level:</Typography>
           </Box>
-
           <List sx={{ pl: 3, listStyleType: "disc" }}>
             <ListItem sx={{ display: "list-item", p: 0 }}>
               <Typography variant="body1">
@@ -146,16 +106,15 @@ export default function PromptSteps() {
               </Typography>
             </ListItem>
           </List>
-
-          <Box sx={{ mt: 3 }}>
+          <Box mt={3}>
             <TextField
               label="Current Level"
               InputLabelProps={{ shrink: true }}
               multiline
               rows={4}
-              {...register("currentLevel")}
-              error={!!errors.currentLevel}
-              helperText={errors.currentLevel?.message}
+              {...register("current_level")}
+              error={!!errors.current_level}
+              helperText={errors.current_level?.message}
               placeholder="Basic understanding of HTML, CSS, and JavaScript. No prior experience with backend development or databases."
               fullWidth
             />

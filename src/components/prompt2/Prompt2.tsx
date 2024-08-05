@@ -46,9 +46,21 @@ export default function PromptStepsForm() {
   }, [setValue]);
 
   const onSubmit: SubmitHandler<formData> = (data) => {
-    localStorage.setItem("formDataPrompt2", JSON.stringify(data));
-    console.log(data);
-    router.push("/prompt-3");
+    // localStorage.setItem("formDataPrompt2", JSON.stringify(data));
+    // console.log(data);
+    // router.push("/prompt-3");
+    try {
+      const prompts = JSON.parse(localStorage.getItem("prompts") as string);
+      const newPrompts = { ...prompts, ...data };
+      localStorage.setItem("prompts", JSON.stringify(newPrompts));
+
+      // step 3
+      // localStorage clear
+      // POST /postGeminiAI
+      // POST /visitor-status/prompts-finished
+    } catch {
+      router.push("/prompt-1");
+    }
   };
 
   return (
