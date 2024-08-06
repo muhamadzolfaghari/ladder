@@ -12,7 +12,7 @@ interface FormData {
   preferredToolsAndPlatforms: string;
 }
 async function postGeminiAI(formData: FormData): Promise<PostGeminiAIResponse> {
-  const response = await fetch("/api/gemini-api", {
+  const response = await fetch("/api/gemini-ai", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
