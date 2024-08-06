@@ -31,3 +31,31 @@ export const usePostGeminiAi = () => {
     },
   });
 };
+
+
+async function postVisitorStatus(): Promise<void> {
+  const response = await fetch("/api/visitor-status/prompts-finished", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+}
+
+export const usePostVisitorStatus = () => {
+  const queryClient = useQueryClient();
+  return useMutation<void, Error>({
+    mutationFn: () => postVisitorStatus(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["visitor-status"] });
+    },
+    onError: (error) => {
+      console.error("Error updating visitor status:", error);
+      // Handle error, e.g., show error message, retry
+    },
+  });
+};
