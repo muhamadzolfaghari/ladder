@@ -10,57 +10,17 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import Link from "next/link";
 import React, { useEffect } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import usePrompt3 from "./hooks/usePrompt3";
 
-interface FormData {
-  resources: string;
-  language: string;
-  toolPlatform: string;
-}
-
-const schema = z.object({
-  resources: z.string().min(1, "Resources Available information is required"),
-  language: z.string().min(1, "Language information is required"),
-  toolPlatform: z
-    .string()
-    .min(1, "Preferred Tools and Platforms information is required"),
-});
 
 export default function Prompt3() {
-  const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-  });
+  const { onSubmit, errors, handleSubmit, register } = usePrompt3();
 
-  useEffect(() => {
-    const savedData = localStorage.getItem("formDataPrompt3");
-    if (savedData) {
-      const formData = JSON.parse(savedData);
-      setValue("resources", formData.resources);
-      setValue("language", formData.language);
-      setValue("toolPlatform", formData.toolPlatform);
-    }
-  }, [setValue]);
-
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    window.localStorage.setItem("formDataPrompt3", JSON.stringify(data));
-    console.log(data);
-    router.push('/review');
-  };
 
   return (
     <Container sx={{ mt: 4, px: "1rem" }}>
-      <StepBar />
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ mt: 4, pl: 2 }}>
           <Box sx={{ display: "flex", gap: "1rem" }}>
@@ -87,9 +47,9 @@ export default function Prompt3() {
               InputLabelProps={{ shrink: true }}
               multiline
               rows={4}
-              {...register("resources")}
-              error={!!errors.resources}
-              helperText={errors.resources?.message}
+              {...register("resourcesAvailable")}
+              error={!!errors.resourcesAvailable}
+              helperText={errors.resourcesAvailable?.message}
               placeholder="Budget of $500 for courses, books, and tools. Access to a personal laptop with internet connectivity."
               fullWidth
             />
@@ -151,9 +111,9 @@ export default function Prompt3() {
               label="Tools and Platforms"
               InputLabelProps={{ shrink: true }}
               multiline
-              {...register("toolPlatform")}
-              error={!!errors.toolPlatform}
-              helperText={errors.toolPlatform?.message}
+              {...register("preferredToolsAndPlatforms")}
+              error={!!errors.preferredToolsAndPlatforms}
+              helperText={errors.preferredToolsAndPlatforms?.message}
               rows={4}
               placeholder="Learning platforms: Codecademy, Coursera, Udemy. Tools: VS Code, GitHub, Postman."
               fullWidth
