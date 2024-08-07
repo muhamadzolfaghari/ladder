@@ -17,8 +17,8 @@ export const fetchVisitorStatus = async (): Promise<VisitorStatus> => {
   return response.json();
 };
 
-const updateVisitorStatus = async (): Promise<void> => {
-  const response = await fetch("/api/visitor-status", {
+const updateFirstVisistFinished = async (): Promise<void> => {
+  const response = await fetch("/api/visitor-status/first-visit-finished", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export const useVisitorStatus = () => {
 export const useUpdateVisitorStatus = () => {
   const queryClient = useQueryClient();
   return useMutation<void, Error>({
-    mutationFn: updateVisitorStatus,
+    mutationFn: updateFirstVisistFinished,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["visitorStatus"] });
     },
