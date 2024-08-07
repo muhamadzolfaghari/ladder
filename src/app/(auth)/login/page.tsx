@@ -11,7 +11,6 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import logoImage from "@/public/images/Logo.svg";
 import { useState } from "react";
 import { useAuth } from "@/components/AuthContext";
 import ButtonSignUpwithGoogle from "@/components/ButtonSignUpwithGoogle";
@@ -61,7 +60,7 @@ export default function Page() {
           width={177}
           height={47}
           style={{ margin: "1rem" }}
-          src={logoImage.src}
+          src={"/images/logo.svg"}
           alt="Wait screen illustration"
         />
         <Typography variant="h6" gutterBottom>
