@@ -1,7 +1,8 @@
-import { GeminiAIContentPart, GeminiAIPayload } from "@/types/GeminiAI";
+import { GeminiAIContentPart } from "@/types/GeminiAI";
+import GenerateLadderRequest from "@/types/GenerateLadderRequest";
 
 export default function getGeminiAIContentParts(
-  payload: GeminiAIPayload,
+  payload: GenerateLadderRequest,
 ): GeminiAIContentPart[] | undefined {
   const data = Object.entries(payload);
 

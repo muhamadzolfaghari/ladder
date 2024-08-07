@@ -1,10 +1,12 @@
 "use client";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { usePostGeminiAi, usePostPromptStatus } from "@/hooks/usePostGeminiAi";
+import { useGenerateLadder } from "../../../hooks/useGenerateLadder";
+import GenerateLadderRequest from "@/types/GenerateLadderRequest";
+import { useUpdatePromptsFinished } from "@/hooks/useUpdatePromptsFinished";
 interface FormData {
   field_of_study: string;
   goal: string;
@@ -29,8 +31,8 @@ const schema = z.object({
 
 const usePrompt3 = (initialData?: FormData) => {
   const router = useRouter();
-  const { mutate: postGeminiAI } = usePostGeminiAi();
-  const { mutate: postPromptStatus } = usePostPromptStatus();
+  const { mutate: generateLadder } = useGenerateLadder();
+  const { mutate: updatePromptsFinished } = useUpdatePromptsFinished();
   const {
     register,
     handleSubmit,
@@ -53,12 +55,12 @@ const usePrompt3 = (initialData?: FormData) => {
   const onSubmit: SubmitHandler<FormData> = (data) => {
     try {
       const prompts = JSON.parse(localStorage.getItem("prompts") as string);
-      const newPrompts = { ...prompts, ...data };
+      const newPrompts = { ...prompts, ...data } as GenerateLadderRequest;
       localStorage.setItem("prompts", JSON.stringify(newPrompts));
 
-      postGeminiAI(data, {
+      generateLadder(newPrompts, {
         onSuccess: () => {
-          postPromptStatus(undefined, {
+          updatePromptsFinished(undefined, {
             onSuccess: () => {
               localStorage.clear();
               router.push("/review");
