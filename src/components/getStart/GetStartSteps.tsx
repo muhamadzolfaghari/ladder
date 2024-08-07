@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { useRouter } from "next/navigation";
+import { useUpdateVisitorStatus } from "@/hooks/VisitorStatus";
 
 // Define the interface for each step
 interface Step {
@@ -16,7 +17,7 @@ interface Step {
 }
 
 // Define the component
-export default function GetStartSteps({ onComplete }: { onComplete: () => void }) {
+export default function GetStartSteps() {
   // Define your steps array
   const steps: Step[] = [
     {
@@ -42,6 +43,7 @@ export default function GetStartSteps({ onComplete }: { onComplete: () => void }
   ];
 
   const [currentStep, setCurrentStep] = useState<number>(0);
+  const { mutate: updateVisitorStatus } = useUpdateVisitorStatus();
   const router = useRouter();
 
   // Handle browser back button
@@ -57,15 +59,19 @@ export default function GetStartSteps({ onComplete }: { onComplete: () => void }
     };
   }, []);
 
-  const handleNext = () => {
+  async function handleNext() {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
-      window.history.pushState(null, "", window.location.href); // Add a new url  to the history browser 
+      window.history.pushState(null, "", window.location.href); // Add a new url to the history browser
     } else {
-      onComplete();
+      try {
+        await updateVisitorStatus();
+        router.push("/prompt-1");
+      } catch (error) {
+        console.error("Error updating visitor status:", error);
+      }
     }
-  };
-
+  }
   return (
     <Container maxWidth="sm">
       <Box

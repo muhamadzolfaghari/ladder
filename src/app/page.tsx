@@ -3,34 +3,36 @@ import UserGreetText from "@/components/UserGreetText";
 import GetStartSteps from "@/components/getStart/GetStartSteps";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useVisitorStatus } from "@/hooks/VisitorStatus";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
-  const [showGetStart, setShowGetStart] = useState<boolean>(false);
+  const { data: session } = useSession();
+  const { data, isLoading, error } = useVisitorStatus();
   const router = useRouter();
-  useEffect(() => {
-    // Check user  already seen the GetStart page
-    const hasVisitedBefore = localStorage.getItem("hasVisited");
 
-    // The first visit
-    if (!hasVisitedBefore) {
-      setShowGetStart(true);
-    } else {
-     
+  useEffect(() => {
+    if (session && data?.is_first_visit === false) {
       router.push("/prompt-1");
     }
-  }, [router]);
+  }, [session, data, router]);
 
-  //save step ,push to prompt
-  const handleGetStartComplete = () => {
-    localStorage.setItem("hasVisited", "true");
-    router.push("/prompt-1");
-  };
+  if (!session) {
+    return   router.push("/login");
+  }
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
-
-      {showGetStart && <GetStartSteps onComplete={handleGetStartComplete} />}
-       <p>heelo</p>
+      {data?.is_first_visit ? (
+        <GetStartSteps />
+      ) : (
+        <p>Redirecting...</p>
+      )}
+      <p>heelo</p>
       <UserGreetText />
     </>
   );
