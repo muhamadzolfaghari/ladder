@@ -44,14 +44,12 @@ export const createData = (parts: GeminiAIContentPart[]): GeminiAIRequest => ({
 });
 
 export default async function postGeminiAI(
-  parts: GeminiAIContentPart[],
+  parts: GeminiAIContentPart[]
 ): Promise<string | undefined> {
   const url = new URL(
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent",
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent"
   );
   url.searchParams.append("key", process.env.GEMINI_API_KEY!);
-
-  console.log(url.toString());
 
   const data = createData(parts);
 
@@ -59,7 +57,7 @@ export default async function postGeminiAI(
     const { data: response } = await axios.post<GeminiAIResponse>(
       url.toString(),
       data,
-      { headers: { "Content-Type": "application/json" } },
+      { headers: { "Content-Type": "application/json" } }
     );
 
     const firstCandidate = response.candidates?.[0];

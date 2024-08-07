@@ -2,7 +2,7 @@ import client from "@/lib/db";
 import VisitorStatus from "@/app/api/visitor-status/types/VisitorStatus";
 
 export default async function getVisitorStatusById(
-  userId: string | undefined,
+  userId: string
 ): Promise<VisitorStatus | undefined> {
   const query = "SELECT * FROM visitor_status WHERE user_id = $1";
   const values = [userId];

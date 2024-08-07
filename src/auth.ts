@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import Credential from 'next-auth/providers/credentials'
+import Credential from "next-auth/providers/credentials";
 import PostgresAdapter from "@auth/pg-adapter";
 import { Pool } from "@neondatabase/serverless";
 
@@ -22,22 +22,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth(() => {
       }),
       Credential({
         credentials: {
-          email: {}
+          email: {},
         },
-        authorize: async (credentials) =>{
-
-          console.log(credentials)
-
+        authorize: async (credentials) => {
           return null;
-        }
+        },
       }),
     ],
     adapter: PostgresAdapter(pool),
-    // callbacks: {
-    //   authorized: async ({ auth }) => {
-    //     // Logged-in users are authenticated, otherwise redirect to login page
-    //     return !!auth
-    //   },
-    // },
   };
 });
