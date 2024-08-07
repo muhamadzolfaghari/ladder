@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { usePostGeminiAi } from "@/hooks/usePostGeminiAi";
+import { usePostGeminiAi, usePostVisitorStatus } from "@/hooks/usePostGeminiAi";
 interface FormData {
     resourcesAvailable: string;
     language: string;
