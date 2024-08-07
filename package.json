@@ -21,12 +21,10 @@
     "@mui/material": "^5.15.20",
     "@neondatabase/serverless": "^0.9.4",
     "@tanstack/react-query": "^5.51.21",
-    "@types/axios": "^0.14.0",
-    "bcrypt": "^5.1.1",
+    "axios": "^1.7.3",
     "mui-one-time-password-input": "^2.0.3",
     "next": "14.2.3",
     "next-auth": "^5.0.0-beta.19",
-    "openid-client": "^5.6.5",
     "pg": "^8.12.0",
     "prism-react-renderer": "^2.3.1",
     "react": "^18",
@@ -36,17 +34,13 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/pg": "^8.11.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
-    "install": "^0.13.0",
-    "npm": "^10.8.2",
     "prettier": "^3.3.2",
     "typescript": "^5"
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  }
 }
