@@ -10,6 +10,7 @@ interface LearningPhase {
   dailyRoutine: LearningTask[];
 }
 
+
 export default interface PostGeminiAIResponse {
   fieldOfStudy: string;
   goal: string;

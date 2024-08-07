@@ -12,56 +12,29 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import usePrompt2 from "./hooks/usePromt2";
 
-interface formData {
-  timeCommitment: string;
-  learningStyle: string;
-  learningPace: string;
-}
-
-const schema = z.object({
-  timeCommitment: z.string().min(1, "Time Commitment information is required"),
-  learningStyle: z.string().min(1, "Learning Style information is required"),
-  learningPace: z.string().min(1, "Learning Pace information is required"),
-});
 
 export default function PromptStepsForm() {
-  const router = useRouter();
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-    setValue,
-  } = useForm<formData>({
-    resolver: zodResolver(schema),
-  });
-  useEffect(() => {
-    const saveData = localStorage.getItem("formDataPrompt2");
-    if (saveData) {
-      const formData = JSON.parse(saveData);
-      setValue("timeCommitment", formData.timeCommitment);
-      setValue("learningStyle", formData.learningStyle);
-      setValue("learningPace", formData.learningPace);
-    }
-  }, [setValue]);
+  const { onSubmit, errors, handleSubmit, register } = usePrompt2();
 
-  const onSubmit: SubmitHandler<formData> = (data) => {
-    // localStorage.setItem("formDataPrompt2", JSON.stringify(data));
-    // console.log(data);
-    // router.push("/prompt-3");
-    try {
-      const prompts = JSON.parse(localStorage.getItem("prompts") as string);
-      const newPrompts = { ...prompts, ...data };
-      localStorage.setItem("prompts", JSON.stringify(newPrompts));
+  // const onSubmit: SubmitHandler<formData> = (data) => {
+  //   // localStorage.setItem("formDataPrompt2", JSON.stringify(data));
+  //   // console.log(data);
+  //   // router.push("/prompt-3");
+  //   try {
+  //     const prompts = JSON.parse(localStorage.getItem("prompts") as string);
+  //     const newPrompts = { ...prompts, ...data };
+  //     localStorage.setItem("prompts", JSON.stringify(newPrompts));
 
-      // step 3
-      // localStorage clear
-      // POST /postGeminiAI
-      // POST /visitor-status/prompts-finished
-    } catch {
-      router.push("/prompt-1");
-    }
-  };
+  //     // step 3
+  //     // localStorage clear
+  //     // POST /postGeminiAI
+  //     // POST /visitor-status/prompts-finished
+  //   } catch {
+  //     router.push("/prompt-1");
+  //   }
+  // };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -117,9 +90,9 @@ export default function PromptStepsForm() {
             label="Learning Style"
             InputLabelProps={{ shrink: true }}
             multiline
-            {...register("learningStyle")}
-            error={!!errors.learningStyle}
-            helperText={errors.learningStyle?.message}
+            {...register("preferredLearningStyle")}
+            error={!!errors.preferredLearningStyle}
+            helperText={errors.preferredLearningStyle?.message}
             rows={4}
             placeholder="Combination of reading, watching videos, and hands-on practice. Prefer structured online courses with projects and quizzes."
             fullWidth

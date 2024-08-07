@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { usePostGeminiAi } from "@/hooks/usePostGeminiAi";
+
 
 interface FormData {
   field_of_study: string;
@@ -20,7 +20,6 @@ const schema = z.object({
 
 const usePrompt1 = (initialData?: FormData) => {
   const router = useRouter();
-  const { mutate: postGeminiAI } = usePostGeminiAi();
   const {
     register,
     handleSubmit,
@@ -41,20 +40,9 @@ const usePrompt1 = (initialData?: FormData) => {
   }, [setValue]);
 
   const onSubmit: SubmitHandler<FormData> = (formData) => {
-    // console.log(formData, "formdata");
+    localStorage.setItem("prompts", JSON.stringify(formData));
+    router.push("/prompt-2");
 
-    // window.localStorage.setItem("formDataPrompt1", JSON.stringify(formData));
-    localStorage.setItem("promps", JSON.stringify(formData));
-    router.push("/prompt2");
-    // console.log(formData);
-    // postGeminiAI(formData, {
-    //   onSuccess: () => {
-    //     router.push("/prompt-2");
-    //   },
-    //   onError: (error: Error) => {
-    //     console.error("Error sending data:", error);
-    //   },
-    // });
   };
 
   return { onSubmit, errors, handleSubmit, register };
