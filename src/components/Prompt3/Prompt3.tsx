@@ -13,7 +13,6 @@ import {
 import React, { useEffect } from "react";
 import usePrompt3 from "./hooks/usePrompt3";
 
-
 export default function Prompt3() {
   const { onSubmit, errors, handleSubmit, register } = usePrompt3();
 
