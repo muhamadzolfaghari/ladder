@@ -38,7 +38,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     // return NextResponse.json({ data: response }, { status: 200 });
   } catch (e) {
-    console.log(e);
-    return NextResponse.json(e);
+    console.error("generate-ladder-api", e);
+    return NextResponse.json({ error: "Error" }, { status: 500 });
   }
 }

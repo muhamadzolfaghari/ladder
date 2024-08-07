@@ -17,9 +17,9 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import logoImage from "../../../public/images/Logo.svg";
 import PasswordValidation from "@/components/PasswordValidation ";
 import { zodResolver } from "@hookform/resolvers/zod";
-import signupSchema from "@/lib/signupSchema";
 import { useRouter } from "next/navigation";
 import ButtonSignUpwithGoogle from "@/components/ButtonSignUpwithGoogle";
+import signupSchema from "@/lib/resources/signupSchema";
 
 type Inputs = {
   name: string;

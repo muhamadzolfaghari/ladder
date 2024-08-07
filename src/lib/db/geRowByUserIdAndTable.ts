@@ -1,5 +1,5 @@
-import pool from "@/lib/db";
 import { PoolClient } from "pg";
+import pool from "../resources/pool";
 
 export default async function getRowByUserIdAndTable<T>(
   userId: string,

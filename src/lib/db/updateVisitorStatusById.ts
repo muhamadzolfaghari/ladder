@@ -1,4 +1,4 @@
-import pool from "@/lib/db";
+import pool from "../resources/pool";
 
 export default async function updateVisitorStatusById(
   userId: string,
