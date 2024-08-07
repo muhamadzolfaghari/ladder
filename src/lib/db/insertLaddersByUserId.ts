@@ -1,6 +1,6 @@
-import pool from "@/lib/db";
 import Ladder from "@/types/Ladder";
 import { PoolClient } from "pg";
+import pool from "../resources/pool";
 
 export const insertLaddersByUserId = async (
   userId: string,

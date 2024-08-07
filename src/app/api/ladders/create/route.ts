@@ -26,7 +26,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     return NextResponse.json({ result: "ok" });
   } catch (e) {
-    console.log(e);
-    return NextResponse.json(e);
+    console.error("create-ladder-api", e);
+    return NextResponse.json({ error: "Error" }, { status: 500 });
   }
 }

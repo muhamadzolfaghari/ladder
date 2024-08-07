@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import Theme from "@/lib/theme/Theme";
-import { AuthProvider } from "@/components/AuthContext";
+import "./globals.css";import { AuthProvider } from "@/components/AuthContext";
 import NextAuthProvider from "@/components/NextAuthProvider";
 import QueryClientProviderWrapper from "@/components/QueryClientProviderWrapper";
+import Theme from "@/components/UI/Theme";
 
 export const metadata: Metadata = {
   title: "Create Next App",

@@ -19,10 +19,6 @@ const GeminiExample = () => {
   const [prompt, setPrompt] = useState<string>();
   const [data, setData] = useState<string>();
   const { mutate: generateLadder, data: generateLadderData } = useGenerateLadder();
-
-
-
-
   const { mutate: createLadder } = useUpdateLadder();
 
   useEffect(() => {
