@@ -15,7 +15,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     if (!geminiAIParts) {
       return NextResponse.json(
         { error: "Parts are required" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     // return NextResponse.json({ data: response }, { status: 200 });
   } catch (e) {
-    console.log(e)
+    console.log(e);
     return NextResponse.json(e);
   }
 }
