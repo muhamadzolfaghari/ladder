@@ -1,10 +1,11 @@
 import CreateLadderRequest from "@/types/CreateLadderRequest";
-import CreateLadderResponse from "@/types/CreateLadderResponse";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import UpdateLadderRequest from "@/types/UpdateLadderRequest";
+import UpdateLadderResponse from "@/types/UpdateLadderResponse";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 async function updateLadder(
   data: CreateLadderRequest
-): Promise<CreateLadderResponse> {
+): Promise<UpdateLadderResponse> {
   const response = await fetch("/api/ladders/update", {
     method: "PUT",
     headers: {
@@ -22,7 +23,7 @@ async function updateLadder(
 
 export const useUpdateLadder = () => {
   const queryClient = useQueryClient();
-  return useMutation<CreateLadderResponse, Error, CreateLadderRequest>({
+  return useMutation<UpdateLadderResponse, Error, UpdateLadderRequest>({
     mutationFn: (data) => updateLadder(data),
     onSuccess: () => {
       localStorage.setItem("isPrompt3Completed", "true");

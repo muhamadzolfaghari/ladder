@@ -1,18 +1,13 @@
-import ShowCounter from "@/components/Test/ShowCounter";
-import axios from "axios";
 import getUser from "@/lib/utilities/getUser";
+import getLadderByUserId from "@/lib/db/getLadderByUserId";
 
 export default async function Test() {
     const user = await getUser();
-
-
+    const row = await getLadderByUserId(user!.id!);
 
   return (
     <div>
-      <span>sdfdsfs</span>
-      <button>fsdfsf</button>
-      <input type="text" />
-      <ShowCounter />
-    </div>
+     goal: {row?.goal}
+    </div>  
   );
 }

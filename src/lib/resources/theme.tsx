@@ -1,6 +1,5 @@
 "use client";
-import { createTheme, ThemeOptions, ThemeProvider } from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import "@fontsource/alumni-sans/500.css";
 import "@fontsource/alumni-sans/600.css";
 import "@fontsource/alumni-sans/700.css";
@@ -276,11 +275,5 @@ const theme = createTheme({
   },
 });
 
-export default function Theme({ children }: { children: React.ReactNode }) {
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
-  );
-}
+
+export default theme;
