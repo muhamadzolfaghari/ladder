@@ -1,5 +1,4 @@
 import getLadderByUserId from "@/lib/db/getLadderByUserId";
-import { insertLaddersByUserId } from "@/lib/db/insertLaddersByUserId";
 import { updateLaddersByUserId } from "@/lib/db/updateLaddersByUserId";
 import getUser from "@/lib/utilities/getUser";
 import CreateLadderRequest from "@/types/CreateLadderRequest";

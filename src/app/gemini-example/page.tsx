@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, use, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import axios from "axios";
 import {
   Button,
@@ -12,25 +12,32 @@ import {
 } from "@mui/material";
 import GenerateLadderRequest from "@/types/GenerateLadderRequest";
 import { useGenerateLadder } from "@/hooks/useGenerateLadder";
-import { useCreateLadder } from "@/hooks/useCreateLadder";
 import { useUpdateLadder } from "@/hooks/useUpdateLadder";
 
 const GeminiExample = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState<string>();
   const [data, setData] = useState<string>();
-  const { mutate: generateLadder, data: ladderData } = useGenerateLadder();
-  const {mutate: createLadder} = useUpdateLadder()
+  const { mutate: generateLadder, data: generateLadderData } = useGenerateLadder();
 
-  useEffect(( ) => {
-    if(ladderData?.result) {
-      createLadder(ladderData.result, {
-        onSuccess: () => {
-          console.log("success");
-        },
-      });
+
+
+
+  const { mutate: createLadder } = useUpdateLadder();
+
+  useEffect(() => {
+    if (generateLadderData?.result) {
+      // createLadder(ladderData.result, {
+      //   onSuccess: () => {
+      //     console.log("success");
+      //   },
+      // });
+
+
+      console.log(generateLadderData);
+      
     }
-  }, [createLadder, ladderData])
+  }, [createLadder, generateLadderData]);
 
   useEffect(() => {
     const request: GenerateLadderRequest = {
