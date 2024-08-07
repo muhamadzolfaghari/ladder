@@ -5,7 +5,11 @@ import Image from "next/image";
 import ChatHistory from "@/components/ChatHistory";
 import NewMessageInput from "@/components/NewMessageInput";
 import BottomNav from "@/components/BottomNav";
+<<<<<<< HEAD
 import logogemini from "../../../public/images/logo-gemini.svg";
+=======
+import logogemini from "/public/images/logo-gemini.svg";
+>>>>>>> 6c18058 (sfsdfs)
 
 export default function Page() {
   const [messages, setMessages] = useState<{ text: string; date: string }[]>([

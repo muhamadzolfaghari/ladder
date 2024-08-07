@@ -1,6 +1,10 @@
 import Image from "next/image";
 import { Typography, Box, Container } from "@mui/material";
+<<<<<<< HEAD
 import logoImage from "../../public/images/Logo.svg";
+=======
+import logoImage from "/public/images/logo.svg";
+>>>>>>> 6c18058 (sfsdfs)
 
 const HeaderSignUp = () => {
   return (
