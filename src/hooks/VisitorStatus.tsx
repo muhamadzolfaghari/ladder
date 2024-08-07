@@ -1,44 +1,59 @@
-import { useQuery, useMutation, useQueryClient, UseQueryResult,  } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-// Fetch function for fetching visitor status
-const fetchVisitorStatus = async (): Promise<any> => {
-  const response = await fetch("/api/visitor-status");
+interface VisitorStatus {
+  [x: string]: any;
+  hasCompletedGettingStarted: boolean;
+  hasVisitedGettingStarted: boolean;
+}
+
+interface UpdateVisitorStatusData {
+  hasCompletedGettingStarted: boolean;
+  hasVisitedGettingStarted: boolean;
+}
+
+const fetchVisitorStatus = async (): Promise<VisitorStatus> => {
+  const response = await fetch('/api/visitor-status');
   if (!response.ok) {
-    throw new Error("Network response was not ok");
+    throw new Error('Network response was not ok');
   }
   return response.json();
 };
 
-// Custom hook for fetching visitor status
-export const useVisitorStatus = (): UseQueryResult<any, Error> => {
-    return useQuery<any, Error>({
-      queryKey: ['visitorStatus'],
-      queryFn: fetchVisitorStatus,
-      onSuccess: (data: any) => {
-        localStorage.setItem('is_first_visit', JSON.stringify(data.is_first_visit));
-      },
-    } as any);
-  };
-
-// Update function for updating visitor status
-const updateVisitorStatus = async (): Promise<any> => {
-  const response = await fetch("/api/visitorstatus", {
-    method: "POST",
+const updateVisitorStatus = async (data: UpdateVisitorStatusData): Promise<void> => {
+  const response = await fetch('/api/update-visitor-status', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
   });
   if (!response.ok) {
-    throw new Error("Network response was not ok");
+    throw new Error('Network response was not ok');
   }
-  return response.json();
+  await response.json();
 };
 
-// Custom hook for updating visitor status
+export const useVisitorStatus = () => {
+  return useQuery<VisitorStatus, Error>({
+    queryKey: ['visitorStatus'],
+    queryFn: fetchVisitorStatus,
+    onError: (error: any) => {
+      console.error('Error fetching visitor status:', error);
+      // Handle error, e.g., show error message, retry
+    },
+  }as any);
+};
+
 export const useUpdateVisitorStatus = () => {
   const queryClient = useQueryClient();
-  return useMutation<any, Error, void>({
+  return useMutation<void, Error, UpdateVisitorStatusData>({
     mutationFn: updateVisitorStatus,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["visitorStatus"] });
-      localStorage.setItem('is_first_visit', JSON.stringify(false));
+      queryClient.invalidateQueries({ queryKey: ['visitorStatus'] });
+    },
+    onError: (error) => {
+      console.error('Error updating visitor status:', error);
+      // Handle error, e.g., show error message, retry
     },
   });
 };
