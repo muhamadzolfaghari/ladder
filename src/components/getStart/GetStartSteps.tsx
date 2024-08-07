@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { useRouter } from "next/navigation";
-import { useUpdateVisitorStatus } from "@/hooks/VisitorStatus";
+import { useUpdateVisitorStatus, useVisitorStatus } from "@/hooks/VisitorStatus";
 
 // Define the interface for each step
 interface Step {
@@ -15,38 +15,47 @@ interface Step {
   description: string;
   nextLink?: string;
 }
+const steps: Step[] = [
+  {
+    
+    imageSrc: "/Images/startstep1.svg",
+    title: "What is Ladder?",
+    description:
+      "Ladder is your roadmap for learning anything and tracking your progress. Our AI crafts a learning path tailored to your conditions and preferences.",
+  },
+  {
+    imageSrc: "/Images/startstep2.svg",
+    title: "How It Works?",
+    description:
+      "Simply provide an accurate and comprehensive prompt for our AI model, Gemini. It will then create a customized Ladder just for you.",
+  },
+  {
+    imageSrc: "/Images/startstep3.svg",
+    title: "Let’s Kick Off",
+    description:
+      "Create your first Ladder and start your journey. Whether it's small daily tasks or major milestones, Ladder supports you every step of the way.",
+    nextLink: "/prompt-1",
+  },
+];
 
-// Define the component
 export default function GetStartSteps() {
-  // Define your steps array
-  const steps: Step[] = [
-    {
-      
-      imageSrc: "/Images/startstep1.svg",
-      title: "What is Ladder?",
-      description:
-        "Ladder is your roadmap for learning anything and tracking your progress. Our AI crafts a learning path tailored to your conditions and preferences.",
-    },
-    {
-      imageSrc: "/Images/startstep2.svg",
-      title: "How It Works?",
-      description:
-        "Simply provide an accurate and comprehensive prompt for our AI model, Gemini. It will then create a customized Ladder just for you.",
-    },
-    {
-      imageSrc: "/Images/startstep3.svg",
-      title: "Let’s Kick Off",
-      description:
-        "Create your first Ladder and start your journey. Whether it's small daily tasks or major milestones, Ladder supports you every step of the way.",
-      nextLink: "/prompt-1",
-    },
-  ];
-
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const { mutate: updateVisitorStatus } = useUpdateVisitorStatus();
   const router = useRouter();
+  const { data: visitorStatus } = useVisitorStatus();
+  const { mutate: updateVisitorStatus } = useUpdateVisitorStatus();
 
-  // Handle browser back button
+  useEffect(() => {
+    if (!visitorStatus?.hasVisitedGettingStarted) {
+      updateVisitorStatus({ hasVisitedGettingStarted: true ,
+        hasCompletedGettingStarted:true
+       });
+    }
+
+    if (visitorStatus?.hasCompletedGettingStarted) {
+      router.push('/prompt');
+    }
+  }, [visitorStatus, updateVisitorStatus, router]);
+
   useEffect(() => {
     const handlePopstate = () => {
       setCurrentStep((prevStep) => (prevStep > 0 ? prevStep - 1 : prevStep));
@@ -59,19 +68,19 @@ export default function GetStartSteps() {
     };
   }, []);
 
-  async function handleNext() {
+  const handleNext = () => {
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
-      window.history.pushState(null, "", window.location.href); // Add a new url to the history browser
+      window.history.pushState(null, '', window.location.href); // Add a new url to the history browser
     } else {
-      try {
-        await updateVisitorStatus();
-        router.push("/prompt-1");
-      } catch (error) {
-        console.error("Error updating visitor status:", error);
-      }
+      updateVisitorStatus({
+        hasCompletedGettingStarted: true,
+        hasVisitedGettingStarted: true,
+      });
+      router.push('/prompt-1');
     }
-  }
+  };
+
   return (
     <Container maxWidth="sm">
       <Box
