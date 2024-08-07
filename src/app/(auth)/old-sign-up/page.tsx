@@ -14,7 +14,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import logoImage from "../../../public/Images/Logo.svg";
+import logoImage from "../../../public/images/Logo.svg";
 import PasswordValidation from "@/components/PasswordValidation ";
 import { zodResolver } from "@hookform/resolvers/zod";
 import signupSchema from "@/lib/signupSchema";
