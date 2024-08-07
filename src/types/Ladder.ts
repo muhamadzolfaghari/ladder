@@ -4,14 +4,14 @@ interface LearningTask {
   time: string;
 }
 
-interface LearningPhase {
+interface LearningPath {
   phase: string;
   duration: string;
   dailyRoutine: LearningTask[];
 }
 
 
-export default interface PostGeminiAIResponse {
+export default interface Ladder {
   fieldOfStudy: string;
   goal: string;
   currentLevel: string;
@@ -21,5 +21,5 @@ export default interface PostGeminiAIResponse {
   resourcesAvailable: string;
   preferredToolsAndPlatforms: string;
   language: string;
-  learningPath: LearningPhase[];
+  learningPath: LearningPath[];
 }
