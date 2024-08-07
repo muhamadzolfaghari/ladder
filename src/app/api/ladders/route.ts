@@ -2,7 +2,7 @@ import getLadderByUserId from "@/lib/db/getLadderByUserId";
 import getUser from "@/lib/utilities/getUser";
 import { NextResponse } from "next/server";
 
-export default async function GET() {
+export async function GET() {
   try {
     const user = await getUser();
 
