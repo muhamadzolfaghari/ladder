@@ -17,7 +17,7 @@ export default function Page() {
           width={320}
           height={306}
           style={{ margin: "1rem" }}
-          src="/Images/loading.svg"
+          src="/images/loading.svg"
           alt="Wait screen illustration"
         />
         <Typography variant="h3" mt={3}>

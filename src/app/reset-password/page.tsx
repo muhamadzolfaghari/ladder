@@ -2,7 +2,7 @@
 import { Box, Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import logoImage from "../../../public/Images/Logo.svg";
+import logoImage from "../../../public/images/Logo.svg";
 import RequestCode from "@/components/RequestCode";
 import EnterCode from "@/components/EnterCode";
 import ResetPassword from "@/components/ResetPassword";
