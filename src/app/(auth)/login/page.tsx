@@ -11,12 +11,12 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import logoImage from "../../../public/Images/Logo.svg";
+import logoImage from "../../../../public/images/Logo.svg";
 import { useState } from "react";
 import { useAuth } from "@/components/AuthContext";
 import ButtonSignUpwithGoogle from "@/components/ButtonSignUpwithGoogle";
 import { signIn } from "@/auth";
-import serverAction from "@/app/login/serverAction";
+import serverAction from "./serverAction";
 
 export default function Page() {
   const { login } = useAuth();
