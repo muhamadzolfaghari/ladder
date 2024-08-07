@@ -13,13 +13,14 @@ import {
 import GenerateLadderRequest from "@/types/GenerateLadderRequest";
 import { useGenerateLadder } from "@/hooks/useGenerateLadder";
 import { useCreateLadder } from "@/hooks/useCreateLadder";
+import { useUpdateLadder } from "@/hooks/useUpdateLadder";
 
 const GeminiExample = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState<string>();
   const [data, setData] = useState<string>();
   const { mutate: generateLadder, data: ladderData } = useGenerateLadder();
-  const {mutate: createLadder} = useCreateLadder()
+  const {mutate: createLadder} = useUpdateLadder()
 
   useEffect(( ) => {
     if(ladderData?.result) {
