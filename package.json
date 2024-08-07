@@ -22,6 +22,7 @@
     "@neondatabase/serverless": "^0.9.4",
     "@tanstack/react-query": "^5.51.21",
     "axios": "^1.7.3",
+    "bcrypt": "^5.1.1",
     "mui-one-time-password-input": "^2.0.3",
     "next": "14.2.3",
     "next-auth": "^5.0.0-beta.19",
@@ -34,16 +35,14 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/pg": "^8.11.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
-    "install": "^0.13.0",
-    "npm": "^10.8.2",
     "prettier": "^3.3.2",
     "typescript": "^5"
+  }
   }
 }
