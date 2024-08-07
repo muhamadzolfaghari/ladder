@@ -14,7 +14,6 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import logoImage from "../../../public/images/Logo.svg";
 import PasswordValidation from "@/components/PasswordValidation ";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -94,7 +93,7 @@ export default function Page() {
             width={177}
             height={47}
             style={{ margin: "1rem" }}
-            src={logoImage.src}
+            src={"images/logo.svg"}
             alt="ladder logo"
           />
           <Typography variant="h6" gutterBottom>
