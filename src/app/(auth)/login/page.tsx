@@ -11,7 +11,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import logoImage from "../../../../public/images/Logo.svg";
+import logoImage from "@/public/images/Log.svg";
 import { useState } from "react";
 import { useAuth } from "@/components/AuthContext";
 import ButtonSignUpwithGoogle from "@/components/ButtonSignUpwithGoogle";
