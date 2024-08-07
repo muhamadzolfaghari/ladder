@@ -18,7 +18,7 @@ export default function Page() {
           width={320}
           height={306}
           style={{ margin: "1rem" }}
-          src="/Images/pana.svg"
+          src="/images/pana.svg"
           alt="failed prompt"
         />
         <Typography variant="h3" mt={3}>
