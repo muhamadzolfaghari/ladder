@@ -5,6 +5,7 @@ import postGeminiAI, {
 } from "@/lib/utilities/postGeminiAI";
 import getGeminiAIContentParts from "@/lib/utilities/getGeminiAIContentParts";
 import parseGeminiAIResponse from "@/lib/utilities/parseGeminiAIResponse";
+import newResponse from './new.json';
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
@@ -14,32 +15,34 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     if (!geminiAIParts) {
       return NextResponse.json(
         { error: "Parts are required" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
-    const text = await generateGeminiAIContent(
-      geminiAIParts.map((x) => x.text),
-    );
+    return NextResponse.json(newResponse);
+    // todo using real api when it's ready
+    // const text = await generateGeminiAIContent(
+    //   geminiAIParts.map((x) => x.text)
+    // );
 
-    const json = parseGeminiAIResponse(text);
+    // const json = parseGeminiAIResponse(text);
 
-    if (json) {
-      return NextResponse.json({ json });
-    }
+    // if (json) {
+    //   return NextResponse.json({ json });
+    // }
 
-    const response = await postGeminiAI(geminiAIParts);
+    // const response = await postGeminiAI(geminiAIParts);
 
-    if (!response) {
-      return NextResponse.json(
-        { message: "Response is empty" },
-        { status: 404 },
-      );
-    }
+    // if (!response) {
+    //   return NextResponse.json(
+    //     { message: "Response is empty" },
+    //     { status: 404 }
+    //   );
+    // }
 
-    return NextResponse.json({ data: response }, { status: 200 });
+    // return NextResponse.json({ data: response }, { status: 200 });
   } catch (e) {
-    console.log(e)
+    console.log(e);
     return NextResponse.json(e);
   }
 }
