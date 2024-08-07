@@ -17,9 +17,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ButtonSignUpwithGoogle from "@/components/ButtonSignUpwithGoogle";
 import { useForm } from "react-hook-form";
-import signupSchema from "@/lib/signupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import signupSchema from "@/lib/resources/signupSchema";
 type Inputs = {
   name: string;
   email: string;
