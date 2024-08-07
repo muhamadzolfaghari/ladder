@@ -1,15 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GeminiAIPayload } from "@/types/GeminiAI";
-import postGeminiAI, {
-  generateGeminiAIContent,
-} from "@/lib/utilities/postGeminiAI";
 import getGeminiAIContentParts from "@/lib/utilities/getGeminiAIContentParts";
-import parseGeminiAIResponse from "@/lib/utilities/parseGeminiAIResponse";
-import newResponse from './new.json';
+import newResponse from "./new.json";
+import GenerateLadderRequest from "@/types/GenerateLadderRequest";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const requestJson = (await request.json()) as GeminiAIPayload;
+    const requestJson = (await request.json()) as GenerateLadderRequest;
     const geminiAIParts = getGeminiAIContentParts(requestJson);
 
     if (!geminiAIParts) {
@@ -19,7 +15,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       );
     }
 
-    return NextResponse.json(newResponse);
+    return NextResponse.json({ result: newResponse });
     // todo using real api when it's ready
     // const text = await generateGeminiAIContent(
     //   geminiAIParts.map((x) => x.text)
@@ -27,8 +23,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     // const json = parseGeminiAIResponse(text);
 
-    // if (json) {
-    //   return NextResponse.json({ json });
+    // if (result) {
+    //   return NextResponse.json({ result });
     // }
 
     // const response = await postGeminiAI(geminiAIParts);

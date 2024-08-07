@@ -1,11 +1,11 @@
 import getUser from "@/lib/utilities/getUser";
-import getVisitorStatusById from "../api/visitor-status/db/getVisitorStatusById";
 import { redirect } from "next/navigation";
-import insertVisitorStatusByUserId from "../api/visitor-status/db/insertVisitorStatusByUserId";
-import VisitorStatus from "../api/visitor-status/types/VisitorStatus";
+import VisitorStatus from "../../types/VisitorStatus";
+import getVisitorStatusByUserId from "@/lib/db/getVisitorStatusById";
+import insertVisitorStatusByUserId from "@/lib/db/insertVisitorStatusByUserId";
 
 const Home = async () => {
-  let visitorStatus: VisitorStatus | undefined;
+  let visitorStatus: VisitorStatus | null;
 
   try {
     const user = await getUser();
@@ -14,7 +14,7 @@ const Home = async () => {
       return <div>unauthorized</div>;
     }
 
-    visitorStatus = await getVisitorStatusById(user.id);
+    visitorStatus = await getVisitorStatusByUserId(user.id);
 
     if (!visitorStatus) {
       await insertVisitorStatusByUserId(user.id);

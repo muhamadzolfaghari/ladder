@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, use, useEffect, useState } from "react";
 import axios from "axios";
 import {
   Button,
@@ -10,19 +10,29 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { usePostGeminiAi } from "@/hooks/usePostGeminiAi";
-import { GeminiAIPayload } from "@/types/GeminiAI";
+import GenerateLadderRequest from "@/types/GenerateLadderRequest";
+import { useGenerateLadder } from "@/hooks/useGenerateLadder";
+import { useCreateLadder } from "@/hooks/useCreateLadder";
 
 const GeminiExample = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState<string>();
   const [data, setData] = useState<string>();
-  const { mutate, data: geminiAiData } = usePostGeminiAi();
+  const { mutate: generateLadder, data: ladderData } = useGenerateLadder();
+  const {mutate: createLadder} = useCreateLadder()
 
-  console.log(geminiAiData);
+  useEffect(( ) => {
+    if(ladderData?.result) {
+      createLadder(ladderData.result, {
+        onSuccess: () => {
+          console.log("success");
+        },
+      });
+    }
+  }, [createLadder, ladderData])
 
   useEffect(() => {
-    const payload: GeminiAIPayload = {
+    const request: GenerateLadderRequest = {
       field_of_study: "UIUX",
       goal: "Become an expert",
       current_level: "Basic",
@@ -34,12 +44,12 @@ const GeminiExample = () => {
       language: "English",
     };
 
-    mutate(payload, {
+    generateLadder(request, {
       onSuccess: () => {
         console.log("success");
       },
     });
-  }, [mutate]);
+  }, [generateLadder]);
 
   // compute, time complexity
   // const price = useMemo(() => {
