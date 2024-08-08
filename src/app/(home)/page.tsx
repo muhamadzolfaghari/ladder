@@ -10,24 +10,24 @@ const Home = async () => {
   try {
     const user = await getUser();
 
-    if (!user?.id) {
-      return <div>unauthorized</div>;
-    }
-
-    visitorStatus = await getVisitorStatusByUserId(user.id);
+    visitorStatus = await getVisitorStatusByUserId(user?.id!);
 
     if (!visitorStatus) {
-      await insertVisitorStatusByUserId(user.id);
+      await insertVisitorStatusByUserId(user?.id!);
     }
   } catch {
-    return <div>Some error occured</div>;
+    return <div>Internal Server Error</div>;
   }
 
   if (!visitorStatus || visitorStatus.is_first_visit) {
     return redirect("/get-start");
   }
 
-  return redirect("/prompt-1");
+  if (!visitorStatus.is_prompts_finished) {
+    return redirect("/prompt-1");
+  }
+
+  return redirect("/review")
 };
 
 export default Home;
