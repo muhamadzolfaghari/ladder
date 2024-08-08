@@ -3,8 +3,12 @@ import getGeminiAIContentParts from "@/lib/utils/getGeminiAIContentParts";
 import templateResponse from "./new.json";
 import GenerateLadderRequest from "@/types/GenerateLadderRequest";
 import Ladder from "@/types/Ladder";
-import createErrorResponse from "@/lib/utils/createErrorResponse";
 import convertToCamelCase from "@/lib/utils/convertToCamelCase";
+import {
+  createBadRequestErrorResponse,
+  createErrorResponse,
+  createResponse,
+} from "@/lib/utils/responseHandlers";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
@@ -12,7 +16,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const geminiAIParts = getGeminiAIContentParts(requestJson);
 
     if (!geminiAIParts) {
-      return createErrorResponse("Parts are required", 400);
+      return createBadRequestErrorResponse("parts are not valid");
     }
 
     const result: Ladder = {
@@ -20,7 +24,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       ...convertToCamelCase(requestJson),
     };
 
-    return NextResponse.json({ result });
+    return createResponse(result);
     // todo using real api when it's ready
     // const text = await generateGeminiAIContent(
     //   geminiAIParts.map((x) => x.text)
