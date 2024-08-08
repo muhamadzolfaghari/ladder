@@ -13,13 +13,31 @@ import {
 import GenerateLadderRequest from "@/types/GenerateLadderRequest";
 import { useGenerateLadder } from "@/hooks/useGenerateLadder";
 import { useUpdateLadder } from "@/hooks/useUpdateLadder";
+import { useAddLearningTask } from "@/hooks/useAddLearningTask";
 
 const GeminiExample = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState<string>();
   const [data, setData] = useState<string>();
-  const { mutate: generateLadder, data: generateLadderData } = useGenerateLadder();
-  const { mutate: createLadder, } = useUpdateLadder();
+  const { mutate: generateLadder, data: generateLadderData } =
+    useGenerateLadder();
+  const { mutate: createLadder } = useUpdateLadder();
+  const {mutate: addLearningTask} = useAddLearningTask();
+
+
+  useEffect(() => {
+    addLearningTask({
+      phase: "",
+      duration: "",
+      learningTask: {
+        task: "12",
+        resource: "12",
+        time: "12",
+      }
+    })
+  }, [addLearningTask])
+
+
 
   useEffect(() => {
     if (generateLadderData?.result) {
@@ -29,30 +47,27 @@ const GeminiExample = () => {
         },
       });
 
-
       console.log(generateLadderData);
-      
     }
   }, [createLadder, generateLadderData]);
 
   useEffect(() => {
-    const request: GenerateLadderRequest = {
-      field_of_study: "test",
-      goal: "Become an expert",
-      current_level: "Basic",
-      time_commitment: "3 hours a day",
-      preferred_learning_style: "Videos",
-      learning_pace: "Fast",
-      resources_available: "$1000",
-      preferred_tools_and_platforms: "Figma",
-      language: "English",
-    };
-
-    generateLadder(request, {
-      onSuccess: () => {
-        console.log("success");
-      },
-    });
+    // const request: GenerateLadderRequest = {
+    //   field_of_study: "test",
+    //   goal: "Become an expert",
+    //   current_level: "Basic",
+    //   time_commitment: "3 hours a day",
+    //   preferred_learning_style: "Videos",
+    //   learning_pace: "Fast",
+    //   resources_available: "$1000",
+    //   preferred_tools_and_platforms: "Figma",
+    //   language: "English",
+    // };
+    // generateLadder(request, {
+    //   onSuccess: () => {
+    //     console.log("success");
+    //   },
+    // });
   }, [generateLadder]);
 
   // compute, time complexity
@@ -67,7 +82,7 @@ const GeminiExample = () => {
     setPrompt(event.target.value);
   }
 
-  console.log(process.env.NEXT_PUBLIC_API_URL);
+  // console.log(process.env.NEXT_PUBLIC_API_URL);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
