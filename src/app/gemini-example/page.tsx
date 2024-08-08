@@ -22,8 +22,24 @@ const GeminiExample = () => {
   const { mutate: generateLadder, data: generateLadderData } =
     useGenerateLadder();
   const { mutate: createLadder } = useUpdateLadder();
-  const {mutate: addLearningTask} = useAddLearningTask();
+  const { mutate: addLearningTask } = useAddLearningTask();
+  const { mutate } = useGenerateLadder();
 
+
+  useEffect(() => {
+      const request: GenerateLadderRequest = {
+      field_of_study: "test",
+      goal: "Become an expert",
+      current_level: "Basic",
+      time_commitment: "3 hours a day",
+      preferred_learning_style: "Videos",
+      learning_pace: "Fast",
+      resources_available: "$1000",
+      preferred_tools_and_platforms: "Figma",
+      language: "English",
+    };
+    mutate(request)
+  }, [mutate])
 
   useEffect(() => {
     addLearningTask({
@@ -33,11 +49,9 @@ const GeminiExample = () => {
         task: "12",
         resource: "12",
         time: "12",
-      }
-    })
-  }, [addLearningTask])
-
-
+      },
+    });
+  }, [addLearningTask]);
 
   useEffect(() => {
     if (generateLadderData?.result) {
