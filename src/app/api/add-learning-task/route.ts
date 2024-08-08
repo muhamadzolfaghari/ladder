@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import getUser from "@/lib/utilities/getUser";
 import { insertLaddersByUserId } from "@/lib/db/insertLaddersByUserId";
 import getLadderByUserId from "@/lib/db/getLadderByUserId";
-import { LearningPath } from "@/types/Ladder";
+import Ladder, { LearningPath } from "@/types/Ladder";
 import { z } from "zod";
 
 const LearningTaskSchema = z.object({
@@ -20,9 +20,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
-    const learningPath = (await request.json()) as LearningPath;
+    const requestJson = (await request.json()) as LearningPath;
 
-    if (LearningTaskSchema.safeParse(learningPath).success) {
+    if (LearningTaskSchema.safeParse(requestJson).success) {
       return NextResponse.json(
         { error: "Learning path is not valid" },
         { status: 400 }
@@ -30,6 +30,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
 
     const ladder = await getLadderByUserId(user.id);
+    const newLadder = JSON.parse(JSON.stringify(ladder)) as Ladder;
+
+console.log(newLadder);
+
+    const learningPath = newLadder.learningPath.filter(
+      (path) =>
+        path.phase === requestJson.phase &&
+        path.duration === requestJson.duration
+    );
+
+    console.log(learningPath);
+    
+
 
     if (!ladder) {
       return NextResponse.json(
