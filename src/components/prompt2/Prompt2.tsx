@@ -18,24 +18,6 @@ import usePrompt2 from "./hooks/usePromt2";
 export default function PromptStepsForm() {
   const { onSubmit, errors, handleSubmit, register } = usePrompt2();
 
-  // const onSubmit: SubmitHandler<formData> = (data) => {
-  //   // localStorage.setItem("formDataPrompt2", JSON.stringify(data));
-  //   // console.log(data);
-  //   // router.push("/prompt-3");
-  //   try {
-  //     const prompts = JSON.parse(localStorage.getItem("prompts") as string);
-  //     const newPrompts = { ...prompts, ...data };
-  //     localStorage.setItem("prompts", JSON.stringify(newPrompts));
-
-  //     // step 3
-  //     // localStorage clear
-  //     // POST /postGeminiAI
-  //     // POST /visitor-status/prompts-finished
-  //   } catch {
-  //     router.push("/prompt-1");
-  //   }
-  // };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box sx={{ mt: 4, pl: 2 }}>
@@ -56,9 +38,9 @@ export default function PromptStepsForm() {
             label="Time Commitment"
             InputLabelProps={{ shrink: true }}
             multiline
-            {...register("timeCommitment")}
-            error={!!errors.timeCommitment}
-            helperText={errors.timeCommitment?.message}
+            {...register("time_commitment")}
+            error={!!errors.time_commitment}
+            helperText={errors.time_commitment?.message}
             rows={4}
             placeholder="2 hours daily on weekdays. 4 hours on weekends."
             fullWidth
@@ -90,9 +72,9 @@ export default function PromptStepsForm() {
             label="Learning Style"
             InputLabelProps={{ shrink: true }}
             multiline
-            {...register("preferredLearningStyle")}
-            error={!!errors.preferredLearningStyle}
-            helperText={errors.preferredLearningStyle?.message}
+            {...register("preferred_learning_style")}
+            error={!!errors.preferred_learning_style}
+            helperText={errors.preferred_learning_style?.message}
             rows={4}
             placeholder="Combination of reading, watching videos, and hands-on practice. Prefer structured online courses with projects and quizzes."
             fullWidth
@@ -123,9 +105,9 @@ export default function PromptStepsForm() {
             InputLabelProps={{ shrink: true }}
             multiline
             rows={4}
-            {...register("learningPace")}
-            error={!!errors.learningPace}
-            helperText={errors.learningPace?.message}
+            {...register("learning_pace")}
+            error={!!errors.learning_pace}
+            helperText={errors.learning_pace?.message}
             placeholder="Moderate pace, aiming to complete beginner to advanced material within 12 months. Specific goal to complete beginner level in 3 months, intermediate in 6 months, and advanced in 12 months."
             fullWidth
           />

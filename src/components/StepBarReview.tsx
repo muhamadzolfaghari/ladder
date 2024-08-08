@@ -2,7 +2,7 @@
 import { Box, Stepper, Step, StepLabel } from "@mui/material";
 import React, { useState } from "react";
 import Image from "next/image";
-import LogoIconPrompt from "/public/icons/Vector-promt-complete.svg";
+import LogoIconPrompt from "../../public/icons/Vector-complete-review.svg";
 import LogoIconReview from "/public/icons/Vector-review-read.svg";
 import LogoIconLadder from "/public/icons/Vector-ladder.svg";
 
