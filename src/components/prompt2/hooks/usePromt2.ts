@@ -6,15 +6,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 
 interface formData {
-    timeCommitment: string;
-    preferredLearningStyle: string;
-    learningPace: string;
+    time_commitment: string;
+     preferred_learning_style: string;
+    learning_pace: string;
   }
   
   const schema = z.object({
-    timeCommitment: z.string().min(1, "Time Commitment information is required"),
-    preferredLearningStyle: z.string().min(1, "Learning Style information is required"),
-    learningPace: z.string().min(1, "Learning Pace information is required"),
+    time_commitment: z.string().min(1, "Time Commitment information is required"),
+     preferred_learning_style: z.string().min(1, "Learning Style information is required"),
+    learning_pace: z.string().min(1, "Learning Pace information is required"),
   });
 
 const usePrompt2 = (initialData?: FormData) => {
@@ -31,9 +31,9 @@ const usePrompt2 = (initialData?: FormData) => {
       const saveData = localStorage.getItem("formDataPrompt2");
       if (saveData) {
         const formData = JSON.parse(saveData);
-        setValue("timeCommitment", formData.timeCommitment);
-        setValue("preferredLearningStyle", formData.learningStyle);
-        setValue("learningPace", formData.learningPace);
+        setValue("time_commitment", formData.time_commitment);
+        setValue("preferred_learning_style", formData.learningStyle);
+        setValue("learning_pace", formData.learning_pace);
       }
     }, [setValue]);
 
