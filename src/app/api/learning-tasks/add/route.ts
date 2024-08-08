@@ -1,52 +1,57 @@
-// /src/api/learning-path/add.ts
 import { NextRequest, NextResponse } from "next/server";
 import getUser from "@/lib/utils/getUser";
 import getLadderByUserId from "@/lib/db/getLadderByUserId";
 import { AddLearningTaskRequestSchema } from "@/lib/resources/schemas/addLearningTaskRequestSchema";
 import Ladder from "@/types/Ladder";
-import createErrorResponse from "@/lib/utils/createErrorResponse";
 import { AddLearningTaskRequest } from "@/types/AddLearningTaskRequest";
+import { updateLaddersByUserId } from "@/lib/db/updateLaddersByUserId";
+import {
+  createUnauthenticatedErrorResponse,
+  createErrorResponse,
+  createNotFundedErrorResponse,
+  createBadRequestErrorResponse,
+  createOKResponse,
+} from "@/lib/utils/responseHandlers";
 
-function findLearningPath(ladder: Ladder, phase: string, duration: string) {
-  return ladder.learningPath.find(
+const findLearningPath = (ladder: Ladder, phase: string, duration: string) =>
+  ladder.learningPath.find(
     (path) => path.phase === phase && path.duration === duration
   );
-}
 
-function validateRequest(payload: AddLearningTaskRequest): boolean {
-  return AddLearningTaskRequestSchema.safeParse(payload).success;
-}
+const validateRequest = (payload: AddLearningTaskRequest): boolean =>
+  AddLearningTaskRequestSchema.safeParse(payload).success;
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const user = await getUser();
 
     if (!user?.id) {
-      return createErrorResponse("Not authenticated", 401);
+      return createUnauthenticatedErrorResponse();
     }
 
     const requestJson = (await request.json()) as AddLearningTaskRequest;
 
     if (!validateRequest(requestJson)) {
-      return createErrorResponse("Learning path is not valid", 400);
+      return createBadRequestErrorResponse();
     }
 
     const ladder = await getLadderByUserId(user.id);
 
     if (!ladder) {
-      return createErrorResponse("Ladder does not exist", 400);
+      return createNotFundedErrorResponse("Ladder does not exist");
     }
 
     const { phase, duration, learningTask } = requestJson;
     const learningPath = findLearningPath(ladder, phase, duration);
 
     if (!learningPath) {
-      return createErrorResponse("Learning path does not exist", 400);
+      return createNotFundedErrorResponse("Learning path does not exist");
     }
 
     learningPath.dailyRoutine.push(learningTask);
+    await updateLaddersByUserId(user.id, ladder);
 
-    return NextResponse.json({ result: "ok" });
+    return createOKResponse();
   } catch (e) {
     console.error("create-ladder-api", e);
     return createErrorResponse("Internal Server Error", 500);

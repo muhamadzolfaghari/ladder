@@ -5,7 +5,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 async function addLearningTask(
   data: AddLearningTaskRequest
 ): Promise<AddLearningTaskResponse> {
-  const response = await fetch("/api/add-learning-task", {
+  const response = await fetch("/api/learning-tasks/add", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -25,11 +25,10 @@ export const useAddLearningTask = () => {
   return useMutation<AddLearningTaskResponse, Error, AddLearningTaskRequest>({
     mutationFn: (data) => addLearningTask(data),
     onSuccess: () => {
-      localStorage.setItem("isPrompt3Completed", "true");
-      queryClient.invalidateQueries({ queryKey: ["generate-ladder"] });
+      queryClient.invalidateQueries({ queryKey: ["add-learning-task"] });
     },
     onError: (error) => {
-      console.error("Error updating visitor status:", error);
+      console.error("Error adding learning task:", error);
     },
   });
 };

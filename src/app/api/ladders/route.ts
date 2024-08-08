@@ -1,23 +1,28 @@
 import getLadderByUserId from "@/lib/db/getLadderByUserId";
 import getUser from "@/lib/utils/getUser";
-import { NextResponse } from "next/server";
+import {
+  createUnauthenticatedErrorResponse,
+  createNotFundedErrorResponse,
+  createResponse,
+  createInternalServerErrorResponse,
+} from "@/lib/utils/responseHandlers";
 
 export async function GET() {
   try {
     const user = await getUser();
 
     if (!user?.id) {
-      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+      return createUnauthenticatedErrorResponse();
     }
 
-    const row = await getLadderByUserId(user.id);
+    const ladder = await getLadderByUserId(user.id);
 
-    if (!row) {
-      return NextResponse.json({ error: "Ladder not found" }, { status: 404 });
+    if (!ladder) {
+      return createNotFundedErrorResponse("Ladder does not exist");
     }
 
-    return NextResponse.json({ result: row });
+    return createResponse(ladder);
   } catch {
-    return NextResponse.json({ error: "Error" }, { status: 500 });
+    return createInternalServerErrorResponse();
   }
 }
