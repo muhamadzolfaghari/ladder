@@ -11,14 +11,24 @@ export default async function getLadderByUserId(
     "ladders"
   )) as RawLadder;
 
-  console.log(normalizeRow(rawLadder), "rawLadder");
-
   return normalizeRow(rawLadder);
 }
 
-const convertUnderScoreToCamelCase = (str: string): string =>
+/**
+ * Converts a string with underscores to camel case.
+ *
+ * @param str - The string to convert.
+ * @returns The string in camel case.
+ */
+const convertSnakeCaseToCamelCase = (str: string): string =>
   str.replace(/_([a-z])/g, (_match, letter) => letter.toUpperCase());
 
+/**
+ * Normalizes a raw database row by converting any snake_case keys to camelCase.
+ *
+ * @param row - The raw database row to normalize.
+ * @returns The normalized row, or `null` if the input row is `null`.
+ */
 function normalizeRow(row: RawLadder): Ladder | null {
   if (!row) {
     return null;
@@ -29,7 +39,7 @@ function normalizeRow(row: RawLadder): Ladder | null {
   for (const key in newRow) {
     if (newRow.hasOwnProperty(key)) {
       if (key.includes("_")) {
-        const newKey = convertUnderScoreToCamelCase(key);
+        const newKey = convertSnakeCaseToCamelCase(key);
         newRow[newKey] = newRow[key];
         delete newRow[key];
       }

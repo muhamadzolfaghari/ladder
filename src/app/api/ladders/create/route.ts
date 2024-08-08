@@ -1,6 +1,6 @@
 import CreateLadderRequest from "@/types/CreateLadderRequest";
 import { NextRequest, NextResponse } from "next/server";
-import getUser from "@/lib/utilities/getUser";
+import getUser from "@/lib/utils/getUser";
 import { insertLaddersByUserId } from "@/lib/db/insertLaddersByUserId";
 import getLadderByUserId from "@/lib/db/getLadderByUserId";
 

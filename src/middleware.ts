@@ -1,4 +1,4 @@
-import getUser from "@/lib/utilities/getUser";
+import getUser from "@/lib/utils/getUser";
 import { NextRequest, NextResponse } from "next/server";
 
 export default async function middleware(req: NextRequest) {
