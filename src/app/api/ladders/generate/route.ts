@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import getGeminiAIContentParts from "@/lib/utilities/getGeminiAIContentParts";
-import newResponse from "./new.json";
+import templateResponse from "./new.json";
 import GenerateLadderRequest from "@/types/GenerateLadderRequest";
+import { GenerateContentResponse } from "@google/generative-ai";
+import GenerateLadderResponse from "@/types/GenerateLadderResponse";
+import Ladder from "@/types/Ladder";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
@@ -14,6 +17,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         { status: 400 }
       );
     }
+
+    const newResponse = {...JSON.parse(JSON.stringify(templateResponse)), 
+      fieldOfStudy: requestJson.field_of_study,
+      goal: requestJson.goal,
+      currentLevel: requestJson.current_level,
+      timeCommitment: requestJson.time_commitment,
+      preferredLearningStyle: requestJson.preferred_learning_style,
+      learningPace: requestJson.learning_pace,
+      resourcesAvailable: requestJson.resources_available,
+      preferredToolsAndPlatforms: requestJson.preferred_tools_and_platforms,
+      language: requestJson.language,
+    } as Ladder;
+
 
     return NextResponse.json({ result: newResponse });
     // todo using real api when it's ready

@@ -19,15 +19,15 @@ const GeminiExample = () => {
   const [prompt, setPrompt] = useState<string>();
   const [data, setData] = useState<string>();
   const { mutate: generateLadder, data: generateLadderData } = useGenerateLadder();
-  const { mutate: createLadder } = useUpdateLadder();
+  const { mutate: createLadder, } = useUpdateLadder();
 
   useEffect(() => {
     if (generateLadderData?.result) {
-      // createLadder(ladderData.result, {
-      //   onSuccess: () => {
-      //     console.log("success");
-      //   },
-      // });
+      createLadder(generateLadderData.result, {
+        onSuccess: () => {
+          console.log("success");
+        },
+      });
 
 
       console.log(generateLadderData);
@@ -37,7 +37,7 @@ const GeminiExample = () => {
 
   useEffect(() => {
     const request: GenerateLadderRequest = {
-      field_of_study: "UIUX",
+      field_of_study: "test",
       goal: "Become an expert",
       current_level: "Basic",
       time_commitment: "3 hours a day",

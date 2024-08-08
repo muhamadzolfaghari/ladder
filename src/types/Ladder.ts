@@ -1,15 +1,14 @@
-interface LearningTask {
+export interface LearningTask {
   task: string;
   resource: string;
   time: string;
 }
 
-interface LearningPath {
+export interface LearningPath {
   phase: string;
   duration: string;
   dailyRoutine: LearningTask[];
 }
-
 
 export default interface Ladder {
   fieldOfStudy: string;
