@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import getUser from "@/lib/utilities/getUser";
+import getUser from "@/lib/utils/getUser";
 import updateVisitorStatusById from "@/lib/db/updateVisitorStatusById";
 
 export async function POST() {

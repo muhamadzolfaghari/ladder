@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import getGeminiAIContentParts from "@/lib/utilities/getGeminiAIContentParts";
+import getGeminiAIContentParts from "@/lib/utils/getGeminiAIContentParts";
 import templateResponse from "./new.json";
 import GenerateLadderRequest from "@/types/GenerateLadderRequest";
 import { GenerateContentResponse } from "@google/generative-ai";

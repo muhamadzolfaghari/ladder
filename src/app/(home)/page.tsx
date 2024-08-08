@@ -1,4 +1,4 @@
-import getUser from "@/lib/utilities/getUser";
+import getUser from "@/lib/utils/getUser";
 import { redirect } from "next/navigation";
 import VisitorStatus from "../../types/VisitorStatus";
 import getVisitorStatusByUserId from "@/lib/db/getVisitorStatusById";

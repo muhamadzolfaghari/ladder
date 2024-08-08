@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const signupSchema = z
+const SignupSchema = z
   .object({
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email").min(1, "Email is required"),
@@ -12,4 +12,4 @@ const signupSchema = z
     path: ["confirmPassword"],
   });
 
-export default signupSchema;
+export default SignupSchema;

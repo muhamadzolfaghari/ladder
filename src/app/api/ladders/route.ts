@@ -1,5 +1,5 @@
 import getLadderByUserId from "@/lib/db/getLadderByUserId";
-import getUser from "@/lib/utilities/getUser";
+import getUser from "@/lib/utils/getUser";
 import { NextResponse } from "next/server";
 
 export async function GET() {
