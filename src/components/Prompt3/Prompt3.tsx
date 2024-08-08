@@ -45,9 +45,9 @@ export default function Prompt3() {
               InputLabelProps={{ shrink: true }}
               multiline
               rows={4}
-              {...register("resources_available")}
-              error={!!errors.resources_available}
-              helperText={errors.resources_available?.message}
+              {...register("resourcesAvailable")}
+              error={!!errors.resourcesAvailable}
+              helperText={errors.resourcesAvailable?.message}
               placeholder="Budget of $500 for courses, books, and tools. Access to a personal laptop with internet connectivity."
               fullWidth
             />
@@ -109,9 +109,9 @@ export default function Prompt3() {
               label="Tools and Platforms"
               InputLabelProps={{ shrink: true }}
               multiline
-              {...register("preferred_tools_and_platforms")}
-              error={!!errors.preferred_tools_and_platforms}
-              helperText={errors.preferred_tools_and_platforms?.message}
+              {...register("preferredToolsAndPlatforms")}
+              error={!!errors.preferredToolsAndPlatforms}
+              helperText={errors.preferredToolsAndPlatforms?.message}
               rows={4}
               placeholder="Learning platforms: Codecademy, Coursera, Udemy. Tools: VS Code, GitHub, Postman."
               fullWidth
