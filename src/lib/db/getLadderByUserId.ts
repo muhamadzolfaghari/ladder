@@ -11,8 +11,13 @@ export default async function getLadderByUserId(
     "ladders"
   )) as RawLadder;
 
+  console.log(normalizeRow(rawLadder), "rawLadder");
+
   return normalizeRow(rawLadder);
 }
+
+const convertUnderScoreToCamelCase = (str: string): string =>
+  str.replace(/_([a-z])/g, (_match, letter) => letter.toUpperCase());
 
 function normalizeRow(row: RawLadder): Ladder | null {
   if (!row) {
@@ -23,12 +28,11 @@ function normalizeRow(row: RawLadder): Ladder | null {
 
   for (const key in newRow) {
     if (newRow.hasOwnProperty(key)) {
-      const newKey = key.replace(/_([a-z])/g, (_match, letter) =>
-        letter.toUpperCase()
-      );
-      console.log(newKey);
-      newRow[newKey] = newRow[key];
-      delete newRow[key];
+      if (key.includes("_")) {
+        const newKey = convertUnderScoreToCamelCase(key);
+        newRow[newKey] = newRow[key];
+        delete newRow[key];
+      }
     }
   }
 
