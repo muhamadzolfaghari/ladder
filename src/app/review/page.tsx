@@ -2,6 +2,7 @@ import ReviewPrompt from "@/components/Review/ReviewPrompt";
 import StepBarReview from "@/components/StepBarReview";
 import getLadderByUserId from "@/lib/db/getLadderByUserId";
 import getUser from "@/lib/utils/getUser";
+// import getUser from "@/lib/utilities/getUser";
 import { Box, Container, Typography } from "@mui/material";
 import { redirect } from "next/navigation";
 
