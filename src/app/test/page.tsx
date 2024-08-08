@@ -1,4 +1,4 @@
-import getUser from "@/lib/utilities/getUser";
+import getUser from "@/lib/utils/getUser";
 import getLadderByUserId from "@/lib/db/getLadderByUserId";
 
 export default async function Test() {

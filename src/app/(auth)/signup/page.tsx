@@ -19,7 +19,7 @@ import ButtonSignUpwithGoogle from "@/components/ButtonSignUpwithGoogle";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import signupSchema from "@/lib/resources/signupSchema";
+import SignupSchema from "@/lib/resources/schemas/signupSchema";
 type Inputs = {
   name: string;
   email: string;
@@ -41,7 +41,7 @@ const SingUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({
-    resolver: zodResolver(signupSchema),
+    resolver: zodResolver(SignupSchema),
   });
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);

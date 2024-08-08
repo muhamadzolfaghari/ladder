@@ -18,7 +18,7 @@ import PasswordValidation from "@/components/PasswordValidation ";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import ButtonSignUpwithGoogle from "@/components/ButtonSignUpwithGoogle";
-import signupSchema from "@/lib/resources/signupSchema";
+import SignupSchema from "@/lib/resources/schemas/signupSchema";
 
 type Inputs = {
   name: string;
@@ -41,7 +41,7 @@ export default function Page() {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({
-    resolver: zodResolver(signupSchema),
+    resolver: zodResolver(SignupSchema),
   });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
