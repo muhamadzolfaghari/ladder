@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import Prompt2Data from "@/types/Prompt2Data";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import {

@@ -1,6 +1,6 @@
 import CreateLadderRequest from "@/types/CreateLadderRequest";
 import CreateLadderResponse from "@/types/CreateLadderResponse";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 async function createLadder(
   data: CreateLadderRequest
@@ -21,16 +21,7 @@ async function createLadder(
   return response.json();
 }
 
-export const useCreateLadder = () => {
-  const queryClient = useQueryClient();
-  return useMutation<CreateLadderResponse, Error, CreateLadderRequest>({
+export const useCreateLadder = () =>
+  useMutation<CreateLadderResponse, Error, CreateLadderRequest>({
     mutationFn: (data) => createLadder(data),
-    onSuccess: () => {
-      localStorage.setItem("isPrompt3Completed", "true");
-      queryClient.invalidateQueries({ queryKey: ["generate-ladder"] });
-    },
-    onError: (error) => {
-      console.error("Error updating visitor status:", error);
-    },
   });
-};

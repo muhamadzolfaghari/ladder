@@ -41,7 +41,7 @@ const usePrompt3 = () => {
 
   const onSubmit: SubmitHandler<Prompt3Data> = async (data) => {
     dispatch(prompt3Changed(data));
-    dispatch(promptsStatusChanged("review"));
+    dispatch(promptsStatusChanged("review-prompt"));
   };
 
   return { onSubmit, errors, handleSubmit, register };

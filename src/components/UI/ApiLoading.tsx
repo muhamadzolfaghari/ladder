@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import SpinnerLoader from "../SpinnerLoader";
 import Image from "next/image";
 
-const GenerateLadderLoading = () => (
+const ApiLoading = () => (
   <Box
     display="flex"
     flexDirection="column"
@@ -36,4 +36,4 @@ const GenerateLadderLoading = () => (
   </Box>
 );
 
-export default GenerateLadderLoading;
+export default ApiLoading;

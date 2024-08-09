@@ -5,9 +5,10 @@ import Prompt2 from "./Prompt2";
 import { useAppSelector } from "@/hooks/reduxHooks";
 import ReviewPrompt from "./ReviewPrompt";
 import PromptFailed from "./PromptFailed";
+import PreviewLadder from "./PreviewLadder";
 
 export default function Prompts() {
-  const status = useAppSelector((state) => state.prompts.status);  
+  const status = useAppSelector((state) => state.prompts.status);
 
   switch (status) {
     case "prompt1":
@@ -16,8 +17,10 @@ export default function Prompts() {
       return <Prompt2 />;
     case "prompt3":
       return <Prompt3 />;
-    case "review":
+    case "review-prompt":
       return <ReviewPrompt />;
+    case "preview-ladder":
+      return <PreviewLadder />;
     case "error":
       return <PromptFailed />;
     default:
