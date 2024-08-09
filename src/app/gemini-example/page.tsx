@@ -10,8 +10,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import GenerateLadderRequest from "@/types/GenerateLadderRequest";
-import { useGenerateLadder } from "@/hooks/useGenerateLadder";
 import { useUpdateLadder } from "@/hooks/useUpdateLadder";
 import { useAddLearningTask } from "@/hooks/useAddLearningTask";
 
@@ -19,8 +17,8 @@ const GeminiExample = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState<string>();
   const [data, setData] = useState<string>();
-  const { mutate: generateLadder, data: generateLadderData } =
-    useGenerateLadder();
+  // const { mutate: generateLadder, data: generateLadderData } =
+  //   useGenerateLadder();
   const { mutate: createLadder } = useUpdateLadder();
   const { mutate: addLearningTask } = useAddLearningTask();
 
@@ -46,36 +44,7 @@ const GeminiExample = () => {
     );
   }, [addLearningTask]);
 
-  useEffect(() => {
-    if (generateLadderData?.result) {
-      createLadder(generateLadderData.result, {
-        onSuccess: () => {
-          console.log("success");
-        },
-      });
 
-      console.log(generateLadderData);
-    }
-  }, [createLadder, generateLadderData]);
-
-  useEffect(() => {
-    // const request: GenerateLadderRequest = {
-    //   field_of_study: "test",
-    //   goal: "Become an expert",
-    //   current_level: "Basic",
-    //   time_commitment: "3 hours a day",
-    //   preferred_learning_style: "Videos",
-    //   learning_pace: "Fast",
-    //   resources_available: "$1000",
-    //   preferred_tools_and_platforms: "Figma",
-    //   language: "English",
-    // };
-    // generateLadder(request, {
-    //   onSuccess: () => {
-    //     console.log("success");
-    //   },
-    // });
-  }, [generateLadder]);
 
   // compute, time complexity
   // const price = useMemo(() => {

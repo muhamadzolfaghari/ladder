@@ -7,12 +7,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import usePrompt2 from "./hooks/usePromt2";
+import React from "react";
+import usePrompt2 from "./hooks/usePrompt2";
 
 
 export default function PromptStepsForm() {

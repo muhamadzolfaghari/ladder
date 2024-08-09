@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import getGeminiAIContentParts from "@/lib/utils/getGeminiAIContentParts";
 import templateResponse from "./new.json";
-import GenerateLadderRequest from "@/types/GenerateLadderRequest";
 import Ladder from "@/types/Ladder";
 import convertToCamelCase from "@/lib/utils/convertToCamelCase";
 import {
@@ -12,7 +11,7 @@ import {
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
-    const requestJson = (await request.json()) as GenerateLadderRequest;
+    const requestJson = await request.json();
     const geminiAIParts = getGeminiAIContentParts(requestJson);
 
     if (!geminiAIParts) {
