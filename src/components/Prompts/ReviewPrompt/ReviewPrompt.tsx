@@ -2,83 +2,88 @@
 import { Box, Typography, List, ListItem, Button } from "@mui/material";
 import React from "react";
 import useReviewPrompt from "./hooks/useReviewPrompt";
-import Ladder from "@/types/Ladder";
+import GenerateLadderLoading from "../GenerateLadderLoading";
 
-interface ReviewPromptProps {
-  ladder: Ladder;
-}
+export default function ReviewPrompt() {
+  const {
+    field_of_study,
+    current_level,
+    goal,
+    language,
+    learning_pace,
+    preferred_learning_style,
+    preferred_tools_and_platforms,
+    resources_available,
+    time_commitment,
+    handleEditPrompt,
+    handleCreateLadder,
+    generateLadderIsPending,
+  } = useReviewPrompt();
 
-export default function ReviewPrompt({ ladder }: ReviewPromptProps) {
-
-  console.log("ladder", ladder);
+  if (generateLadderIsPending) {
+    return <GenerateLadderLoading />;
+  }
 
   return (
     <Box sx={{ mt: 4 }}>
       <Typography variant="h4">Review Your prompt</Typography>
       <Typography variant="body1">
-        Let&#10076;s have a last check on what you want in Ladder.
+        Let&#10076;s have a last check on what you want in
       </Typography>
       <Box sx={{ mt: 4, pl: 2 }}>
         <Box sx={{ display: "flex", gap: "1rem" }}>
-          <Typography variant="h4">1 .</Typography>
-          <Typography variant="h4">Field-Specific</Typography>
+          <Typography variant="h4">1 .Field-Specific</Typography>
         </Box>
 
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">{ladder.fieldOfStudy}</Typography>
+            <Typography variant="body1">{field_of_study}</Typography>
           </ListItem>
         </List>
       </Box>
 
       <Box sx={{ mt: 4, pl: 2 }}>
         <Box sx={{ display: "flex", gap: "1rem" }}>
-          <Typography variant="h4">2 .</Typography>
-          <Typography variant="h4">Goal</Typography>
+          <Typography variant="h4">2 . Goal</Typography>
         </Box>
 
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">{ladder.goal}</Typography>
+            <Typography variant="body1">{goal}</Typography>
           </ListItem>
         </List>
       </Box>
 
       <Box sx={{ mt: 4, pl: 2 }}>
         <Box sx={{ display: "flex", gap: "1rem" }}>
-          <Typography variant="h4">3 .</Typography>
-          <Typography variant="h4">Current Level:</Typography>
+          <Typography variant="h4">3 . Current Level:</Typography>
         </Box>
 
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">{ladder.currentLevel}</Typography>
+            <Typography variant="body1">{current_level}</Typography>
           </ListItem>
         </List>
       </Box>
 
       <Box sx={{ mt: 4, pl: 2 }}>
         <Box sx={{ display: "flex", gap: "1rem" }}>
-          <Typography variant="h4">4 .</Typography>
-          <Typography variant="h4">Time Commitment:</Typography>
+          <Typography variant="h4">4 . Time Commitment:</Typography>
         </Box>
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">{ladder.timeCommitment}</Typography>
+            <Typography variant="body1">{time_commitment}</Typography>
           </ListItem>
         </List>
       </Box>
 
       <Box sx={{ mt: 4, pl: 2 }}>
         <Box sx={{ display: "flex", gap: "1rem" }}>
-          <Typography variant="h4">5 .</Typography>
-          <Typography variant="h4">Preferred Learning Style:</Typography>
+          <Typography variant="h4">5 .Preferred Learning Style:</Typography>
         </Box>
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">
-              {ladder.preferredLearningStyle}
-            </Typography>
+            <Typography variant="body1">{preferred_learning_style}</Typography>
           </ListItem>
         </List>
       </Box>
@@ -90,7 +95,7 @@ export default function ReviewPrompt({ ladder }: ReviewPromptProps) {
         </Box>
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">{ladder.learningPace}</Typography>
+            <Typography variant="body1">{learning_pace}</Typography>
           </ListItem>
         </List>
       </Box>
@@ -102,9 +107,7 @@ export default function ReviewPrompt({ ladder }: ReviewPromptProps) {
         </Box>
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">
-              {ladder.resourcesAvailable}
-            </Typography>
+            <Typography variant="body1">{resources_available}</Typography>
           </ListItem>
         </List>
       </Box>
@@ -116,7 +119,7 @@ export default function ReviewPrompt({ ladder }: ReviewPromptProps) {
         </Box>
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
-            <Typography variant="body1">{ladder.language}</Typography>
+            <Typography variant="body1">{language}</Typography>
           </ListItem>
         </List>
       </Box>
@@ -129,7 +132,7 @@ export default function ReviewPrompt({ ladder }: ReviewPromptProps) {
         <List sx={{ pl: 3, listStyleType: "disc" }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
             <Typography variant="body1">
-              {ladder.preferredToolsAndPlatforms}
+              {preferred_tools_and_platforms}
             </Typography>
           </ListItem>
         </List>
@@ -137,7 +140,6 @@ export default function ReviewPrompt({ ladder }: ReviewPromptProps) {
 
       <Box sx={{ mt: 4, pl: 2, mb: 12, display: "flex", gap: "1rem" }}>
         <Button
-          href="/prompt-1"
           sx={{
             width: "30%",
             background: "white",
@@ -147,11 +149,16 @@ export default function ReviewPrompt({ ladder }: ReviewPromptProps) {
               background: "#fff",
             },
           }}
+          onClick={handleEditPrompt}
         >
           Edit
         </Button>
 
-        <Button variant="contained" sx={{ width: "100%" }} href="/result">
+        <Button
+          variant="contained"
+          sx={{ width: "100%" }}
+          onClick={handleCreateLadder}
+        >
           Create Ladder
         </Button>
       </Box>
