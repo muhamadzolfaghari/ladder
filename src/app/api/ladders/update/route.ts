@@ -7,7 +7,7 @@ import {
   createOKResponse,
   createUnauthenticatedErrorResponse,
 } from "@/lib/utils/responseHandlers";
-import CreateLadderRequest from "@/types/CreateLadderRequest";
+import Ladder from "@/types/Ladder";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(request: NextRequest): Promise<NextResponse> {
@@ -24,7 +24,7 @@ export async function PUT(request: NextRequest): Promise<NextResponse> {
       return createNotFundedErrorResponse("Ladder does not exist");
     }
 
-    const newLadder = (await request.json()) as CreateLadderRequest;
+    const newLadder = (await request.json()) as Ladder;
     await updateLaddersByUserId(user.id, newLadder);
 
     return createOKResponse();

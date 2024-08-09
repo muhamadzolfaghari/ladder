@@ -7,7 +7,6 @@ import {
   createOKResponse,
   createBadRequestErrorResponse,
 } from "@/lib/utils/responseHandlers";
-import CreateLadderRequest from "@/types/CreateLadderRequest";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -24,7 +23,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return createBadRequestErrorResponse("Ladder already exists");
     }
 
-    const newLadder = (await request.json()) as CreateLadderRequest;
+    const newLadder = (await request.json());
     await insertLaddersByUserId(user.id, newLadder);
 
     return createOKResponse();

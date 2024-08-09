@@ -1,6 +1,5 @@
 "use client";
 
-import StepBar from "@/components/StepBar";
 import {
   Box,
   Button,
@@ -10,7 +9,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import usePrompt3 from "./hooks/usePrompt3";
 
 export default function Prompt3() {
@@ -18,7 +17,6 @@ export default function Prompt3() {
 
   return (
     <Container sx={{ mt: 4, px: "1rem" }}>
-
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ mt: 4, pl: 2 }}>
           <Box sx={{ display: "flex", gap: "1rem" }}>

@@ -14,7 +14,8 @@ async function createLadder(
   });
 
   if (!response.ok) {
-    throw new Error("Network response was not ok");
+    const res = await response.json();
+    throw new Error(res.error);
   }
 
   return response.json();
