@@ -36,7 +36,7 @@ const usePrompt2 = () => {
     setValue("learning_pace", learning_pace);
     setValue("time_commitment", time_commitment);
     setValue("preferred_learning_style", preferred_learning_style);
-  }, []);
+  }, [learning_pace, preferred_learning_style, setValue, time_commitment]);
 
   const onSubmit: SubmitHandler<Prompt2Data> = (data) => {
     dispatch(prompt2Changed(data));

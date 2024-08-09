@@ -37,7 +37,7 @@ const usePrompt3 = () => {
     setValue("language", language);
     setValue("resources_available", resources_available);
     setValue("preferred_tools_and_platforms", preferred_tools_and_platforms);
-  }, []);
+  }, [language, preferred_tools_and_platforms, resources_available, setValue]);
 
   const onSubmit: SubmitHandler<Prompt3Data> = async (data) => {
     dispatch(prompt3Changed(data));

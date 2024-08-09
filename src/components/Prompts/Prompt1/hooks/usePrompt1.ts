@@ -34,7 +34,7 @@ const usePrompt1 = () => {
     setValue("goal", goal);
     setValue("current_level", current_level);
     setValue("field_of_study", field_of_study);
-  }, []);
+  }, [current_level, field_of_study, goal, setValue]);
 
   const onSubmit: SubmitHandler<Prompt1Data> = (data) => {
     dispatch(prompt1Changed(data));
