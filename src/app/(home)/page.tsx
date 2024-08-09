@@ -3,14 +3,17 @@ import { redirect } from "next/navigation";
 import VisitorStatus from "../../types/VisitorStatus";
 import getVisitorStatusByUserId from "@/lib/db/getVisitorStatusById";
 import insertVisitorStatusByUserId from "@/lib/db/insertVisitorStatusByUserId";
+import Ladder from "@/types/Ladder";
+import getLadderByUserId from "@/lib/db/getLadderByUserId";
 
 const Home = async () => {
+  let ladder: Ladder | null;
   let visitorStatus: VisitorStatus | null;
 
   try {
     const user = await getUser();
-
     visitorStatus = await getVisitorStatusByUserId(user?.id!);
+    ladder = await getLadderByUserId(user?.id!);
 
     if (!visitorStatus) {
       await insertVisitorStatusByUserId(user?.id!);
@@ -23,11 +26,11 @@ const Home = async () => {
     return redirect("/get-start");
   }
 
-  if (!visitorStatus.is_prompts_finished) {
-    return redirect("/prompt-1");
+  if (!ladder) {
+    return redirect("/prompts");
   }
 
-  return redirect("/review")
+  return <div>home</div>
 };
 
 export default Home;

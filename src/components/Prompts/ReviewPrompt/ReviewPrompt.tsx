@@ -2,7 +2,7 @@
 import { Box, Typography, List, ListItem, Button } from "@mui/material";
 import React from "react";
 import useReviewPrompt from "./hooks/useReviewPrompt";
-import GenerateLadderLoading from "../GenerateLadderLoading";
+import ApiLoading from "../../UI/ApiLoading";
 
 export default function ReviewPrompt() {
   const {
@@ -21,7 +21,7 @@ export default function ReviewPrompt() {
   } = useReviewPrompt();
 
   if (generateLadderIsPending) {
-    return <GenerateLadderLoading />;
+    return <ApiLoading />;
   }
 
   return (

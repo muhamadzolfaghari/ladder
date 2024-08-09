@@ -2,7 +2,10 @@
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { useCreateLadder } from "@/hooks/useCreateLadder";
 import { useGenerateLadder } from "@/hooks/useGenerateLadder";
-import { promptsStatusChanged } from "@/store/slices/promptsSlice";
+import {
+  ladderGenerated,
+  promptsStatusChanged,
+} from "@/store/slices/promptsSlice";
 import { useEffect } from "react";
 
 const useReviewPrompt = () => {
@@ -30,11 +33,17 @@ const useReviewPrompt = () => {
 
   useEffect(() => {
     if (generateLadderIsSuccess) {
-      dispatch(promptsStatusChanged("prompt1"));
+      dispatch(ladderGenerated(generateLadderData.result));
+      dispatch(promptsStatusChanged("preview-ladder"));
     } else if (generateLadderIsError) {
       dispatch(promptsStatusChanged("error"));
     }
-  }, [dispatch, generateLadderIsSuccess, generateLadderIsError]);
+  }, [
+    dispatch,
+    generateLadderIsSuccess,
+    generateLadderIsError,
+    generateLadderData?.result,
+  ]);
 
   function handleEditPrompt() {
     dispatch(promptsStatusChanged("prompt1"));

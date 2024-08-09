@@ -7,7 +7,7 @@ const PromptFailed = () => {
   const dispatch = useAppDispatch();
 
   function handleTryAgain(): void {
-    dispatch(promptsStatusChanged("review"));
+    dispatch(promptsStatusChanged("review-prompt"));
   }
 
   return (

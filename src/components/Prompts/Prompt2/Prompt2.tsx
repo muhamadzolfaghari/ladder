@@ -11,7 +11,7 @@ import React from "react";
 import usePrompt2 from "./hooks/usePrompt2";
 
 
-export default function PromptStepsForm() {
+export default function Prompt2() {
   const { onSubmit, errors, handleSubmit, register } = usePrompt2();
 
   return (

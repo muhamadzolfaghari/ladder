@@ -9,7 +9,11 @@ import { STEPS } from "../resources/steps";
 const useGetStartSteps = () => {
   const [currentStep, setCurrentStep] = useState<number>(0);
   const router = useRouter();
-  const { mutate: updateVisitorStatus } = useUpdateVisitorStatus();
+  const {
+    mutate: updateVisitorStatus,
+    isPending: updateVisitorStatusIsPending,
+    isSuccess: updateVisitorStatusIsSuccess,
+  } = useUpdateVisitorStatus();
 
   useEffect(() => {
     const handlePopState = () => {
@@ -23,23 +27,25 @@ const useGetStartSteps = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (updateVisitorStatusIsSuccess) {
+      router.push("/prompts");
+    }
+  }, [router, updateVisitorStatusIsSuccess]);
+
   const handleNext = () => {
     if (currentStep < STEPS.length - 1) {
       setCurrentStep(currentStep + 1);
       window.history.pushState({ currentStep }, "", window.location.href);
     } else {
-      updateVisitorStatus(undefined, {
-        onSuccess: () => {
-          router.push("/prompt-1");
-        },
-        
-      });
+      updateVisitorStatus();
     }
   };
 
   return {
     handleNext,
     currentStep,
+    updateVisitorStatusIsPending,
   };
 };
 

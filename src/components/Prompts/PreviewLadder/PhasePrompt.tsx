@@ -21,6 +21,7 @@ export default function PhasePrompt() {
       setExpanded(isExpanded ? panel : false);
     };
   const theme = useTheme();
+  
   return (
     <Box
       sx={{ display: "flex", flexDirection: "column", gap: "1.3rem" }}

@@ -7,9 +7,15 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import useGetStartSteps from "./hooks/useGetStartSteps";
 import { STEPS } from "./resources/steps";
+import ApiLoading from "../UI/ApiLoading";
 
-export default function GetStartSteps() {
-  const { currentStep, handleNext } = useGetStartSteps();
+export default function GetStart() {
+  const { currentStep, handleNext, updateVisitorStatusIsPending } =
+    useGetStartSteps();
+
+  if (updateVisitorStatusIsPending) {
+    return <ApiLoading />;
+  }
 
   return (
     <Container maxWidth="sm">

@@ -1,19 +1,24 @@
-"use client";
+import { Box, Typography, List, ListItem, Button } from "@mui/material";
+import PhasePrompt from "./PhasePrompt";
+import usePreviewLadder from "./hooks/usePreviewLadder";
+import ApiLoading from "../../UI/ApiLoading";
 
-import {
-  Box,
-  Typography,
-  List,
-  ListItem,
-  Button,
-} from "@mui/material";
-import PhasePrompt from "./Prompts/PreviewLadder/PhasePrompt";
+export default function PreviewLadder() {
+  const {
+    ladder,
+    handleBackToPrompt,
+    handleStartLadder,
+    createLadderIsPending,
+  } = usePreviewLadder();
 
-export default function ContentResult() {
+  if (createLadderIsPending) {
+    return <ApiLoading />;
+  }
+
   return (
     <Box sx={{ mt: 4 }}>
       <Typography variant="h4" sx={{ mb: 3, textAlign: "center" }}>
-        Full-Stack Web Development
+        {ladder.fieldOfStudy}
       </Typography>
       <Box sx={{ mb: 3 }}>
         <Typography variant="h5">Overview</Typography>
@@ -31,7 +36,7 @@ export default function ContentResult() {
           </ListItem>
         </List>
       </Box>
-      <PhasePrompt/>
+      <PhasePrompt />
       <Box
         sx={{
           mt: 10,
@@ -41,6 +46,7 @@ export default function ContentResult() {
         }}
       >
         <Button
+          onClick={handleBackToPrompt}
           variant="outlined"
           sx={{
             background: "white",
@@ -53,8 +59,11 @@ export default function ContentResult() {
         >
           Back to prompt
         </Button>
-
-        <Button variant="contained" href="/start-ladder" sx={{ width: "100%" }}>
+        <Button
+          variant="contained"
+          sx={{ width: "100%" }}
+          onClick={handleStartLadder}
+        >
           Start Ladder
         </Button>
       </Box>
