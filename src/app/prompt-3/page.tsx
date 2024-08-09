@@ -1,4 +1,4 @@
-import Prompt3 from "@/components/Prompt3";
+import Prompt3 from "@/components/Prompts/Prompt3";
 import StepBar from "@/components/StepBar";
 import { Container } from "@mui/material";
 import React from "react";

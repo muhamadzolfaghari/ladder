@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, {  } from "react";
 import {
   Button,
   ListItem,
@@ -11,7 +11,8 @@ import {
 } from "@mui/material";
 import usePrompt1 from "./hooks/usePrompt1";
 
-export default function PromptSteps() {
+
+export default function Prompt1() {
   const { onSubmit, errors, handleSubmit, register } = usePrompt1();
 
   return (
