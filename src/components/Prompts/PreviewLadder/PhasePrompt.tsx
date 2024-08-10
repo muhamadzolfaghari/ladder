@@ -1,138 +1,49 @@
 "use client";
-
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Box,
   Typography,
-  List,
-  ListItem,
-  useTheme,
 } from "@mui/material";
-import React, { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import React, { PropsWithChildren } from "react";
+import { usePreviewLadderPhases } from "./hooks/usePreviewLadderPhases";
+import Ladder, { LearningPath, LearningTask } from "@/types/Ladder";
+import ListSectionAccordian from "./ListSectionAccordian";
 
-export default function PhasePrompt() {
-  const [expanded, setExpanded] = useState<string | false>(false);
-  const handleChange =
-    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panel : false);
-    };
-  const theme = useTheme();
-  
+interface LadderInterface {
+  ladder: Ladder;
+}
+
+export default function PhasePrompt(props: PropsWithChildren<LadderInterface>) {
+  const { expanded, handleChange, theme } = usePreviewLadderPhases();
+  const { ladder } = props;
+
+  const detailLearningPath: LearningPath[] = ladder.learningPath;
+  const detailPath = detailLearningPath.map((item) =>
+    item.dailyRoutine.map((item) => item)
+  );
+
   return (
     <Box
       sx={{ display: "flex", flexDirection: "column", gap: "1.3rem" }}
       mb={2}
     >
-      <Accordion
-        defaultExpanded
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
-      >
-        <AccordionSummary
-          sx={{
-            backgroundColor: expanded === "panel1" ? "#22983C" : "#526350",
-          }}
-          expandIcon={
-            expanded === "panel1" ? (
-              <ArrowDropDownIcon
-                fontSize="large"
-                sx={{ color: theme.palette.primary.contrastText }}
-              />
-            ) : (
-              <ArrowRightIcon
-                fontSize="large"
-                sx={{ color: theme.palette.primary.contrastText }}
-              />
-            )
-          }
-        >
-          <Typography>Phase 1: Foundations (Months 1-3)</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Box sx={{ mt: 2, mb: 3 }}>
-            <Typography variant="h5">Weekly Schedule:</Typography>
-            <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-              <ListItem sx={{ display: "list-item", p: 0 }}>
-                Weekdays (2 hours/day):
-                <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                  <ListItem sx={{ display: "list-item", p: 0 }}>
-                    1 hour: Online course (HTML, CSS, JavaScript basics) –
-                    Codecademy or Udemy.
-                  </ListItem>
-                  <ListItem sx={{ display: "list-item", p: 0 }}>
-                    1 hour: Practice coding on freeCodeCamp or similar
-                    platforms.
-                  </ListItem>
-                </List>
-              </ListItem>
-            </List>
-            <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-              <ListItem sx={{ display: "list-item", p: 0 }}>
-                Weekends (4 hours/day):
-                <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                  <ListItem sx={{ display: "list-item", p: 0 }}>
-                    2 hours: Reading and taking notes from recommended books
-                    (e.g., &quot; HTML & CSS: Design and Build Websites &quot;
-                    by Jon Duckett).
-                  </ListItem>
-                  <ListItem sx={{ display: "list-item", p: 0 }}>
-                    2 hours: Building small projects (e.g., personal website,
-                    simple games).
-                  </ListItem>
-                </List>
-              </ListItem>
-            </List>
-          </Box>
-          <Box sx={{ mt: 2, mb: 3 }}>
-            <Typography variant="h5">Key Topics:</Typography>
-            <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-              <ListItem sx={{ display: "list-item", p: 0 }}>
-                HTML5: Elements, attributes, forms, semantic HTML.
-              </ListItem>
-              <ListItem sx={{ display: "list-item", p: 0 }}>
-                CSS3: Selectors, properties, layouts (Flexbox, Grid),
-                animations.
-              </ListItem>
-              <ListItem sx={{ display: "list-item", p: 0 }}>
-                JavaScript: Syntax, variables, functions, DOM manipulation,
-                events.
-              </ListItem>
-            </List>
-          </Box>
-          <Box sx={{ mt: 2, mb: 3 }}>
-            <Typography variant="h5">Resources:</Typography>
-            <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-              <ListItem sx={{ display: "list-item", p: 0 }}>
-                Courses: Codecademy HTML/CSS, JavaScript.
-              </ListItem>
-              <ListItem sx={{ display: "list-item", p: 0 }}>
-                CSS3: Selectors, properties, layouts (Flexbox, Grid),
-                animations.
-              </ListItem>
-              <ListItem sx={{ display: "list-item", p: 0 }}>
-                JavaScript: Syntax, variables, functions, DOM manipulation,
-                events.
-              </ListItem>
-            </List>
-          </Box>
-        </AccordionDetails>
-      </Accordion>
-
-      <div>
+      {detailLearningPath.map((item, index) => (
         <Accordion
-          expanded={expanded === "panel2"}
-          onChange={handleChange("panel2")}
+          key={index}
+          expanded={expanded === `panel${index + 1}`}
+          onChange={handleChange(`panel${index + 1}`)}
         >
           <AccordionSummary
             sx={{
-              backgroundColor: expanded === "panel2" ? "#22983C" : "#526350",
+              backgroundColor:
+                expanded === `panel${index + 1}` ? "#22983C" : "#526350",
             }}
             expandIcon={
-              expanded === "panel1" ? (
+              expanded === `panel${index + 1}` ? (
                 <ArrowDropDownIcon
                   fontSize="large"
                   sx={{ color: theme.palette.primary.contrastText }}
@@ -145,173 +56,28 @@ export default function PhasePrompt() {
               )
             }
           >
-            <Typography>Phase 1: Foundations (Months 1-3)</Typography>
+            <Typography>
+              Phase {index + 1}: {item.phase} &#40;{item.duration}&#41;
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Box sx={{ mt: 2, mb: 3 }}>
-              <Typography variant="h5">Weekly Schedule:</Typography>
-              <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  Weekdays (2 hours/day):
-                  <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                    <ListItem sx={{ display: "list-item", p: 0 }}>
-                      1 hour: Online course (HTML, CSS, JavaScript basics) –
-                      Codecademy or Udemy.
-                    </ListItem>
-                    <ListItem sx={{ display: "list-item", p: 0 }}>
-                      1 hour: Practice coding on freeCodeCamp or similar
-                      platforms.
-                    </ListItem>
-                  </List>
-                </ListItem>
-              </List>
-              <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  Weekends (4 hours/day):
-                  <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                    <ListItem sx={{ display: "list-item", p: 0 }}>
-                      2 hours: Reading and taking notes from recommended books
-                      (e.g., &quot; HTML & CSS: Design and Build Websites &quot;
-                      by Jon Duckett).
-                    </ListItem>
-                    <ListItem sx={{ display: "list-item", p: 0 }}>
-                      2 hours: Building small projects (e.g., personal website,
-                      simple games).
-                    </ListItem>
-                  </List>
-                </ListItem>
-              </List>
-            </Box>
-            <Box sx={{ mt: 2, mb: 3 }}>
-              <Typography variant="h5">Key Topics:</Typography>
-              <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  HTML5: Elements, attributes, forms, semantic HTML.
-                </ListItem>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  CSS3: Selectors, properties, layouts (Flexbox, Grid),
-                  animations.
-                </ListItem>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  JavaScript: Syntax, variables, functions, DOM manipulation,
-                  events.
-                </ListItem>
-              </List>
-            </Box>
-            <Box sx={{ mt: 2, mb: 3 }}>
-              <Typography variant="h5">Resources:</Typography>
-              <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  Courses: Codecademy HTML/CSS, JavaScript.
-                </ListItem>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  CSS3: Selectors, properties, layouts (Flexbox, Grid),
-                  animations.
-                </ListItem>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  JavaScript: Syntax, variables, functions, DOM manipulation,
-                  events.
-                </ListItem>
-              </List>
+              <ListSectionAccordian
+                title="Weekly Schedule:"
+                itemEl={item.dailyRoutine}
+              />
+              <ListSectionAccordian
+                title="Key Topics:"
+                itemEl={item.dailyRoutine}
+              />
+              <ListSectionAccordian
+                title="Resources:"
+                itemEl={item.dailyRoutine}
+              />
             </Box>
           </AccordionDetails>
         </Accordion>
-      </div>
-      <div>
-        <Accordion
-          expanded={expanded === "panel3"}
-          onChange={handleChange("panel3")}
-        >
-          <AccordionSummary
-            sx={{
-              backgroundColor: expanded === "panel3" ? "#22983C" : "#526350",
-            }}
-            expandIcon={
-              expanded === "panel3" ? (
-                <ArrowDropDownIcon
-                  fontSize="large"
-                  sx={{ color: theme.palette.primary.contrastText }}
-                />
-              ) : (
-                <ArrowRightIcon
-                  fontSize="large"
-                  sx={{ color: theme.palette.primary.contrastText }}
-                />
-              )
-            }
-          >
-            <Typography>Phase 1: Foundations (Months 1-3)</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Box sx={{ mt: 2, mb: 3 }}>
-              <Typography variant="h5">Weekly Schedule:</Typography>
-              <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  Weekdays (2 hours/day):
-                  <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                    <ListItem sx={{ display: "list-item", p: 0 }}>
-                      1 hour: Online course (HTML, CSS, JavaScript basics) –
-                      Codecademy or Udemy.
-                    </ListItem>
-                    <ListItem sx={{ display: "list-item", p: 0 }}>
-                      1 hour: Practice coding on freeCodeCamp or similar
-                      platforms.
-                    </ListItem>
-                  </List>
-                </ListItem>
-              </List>
-              <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  Weekends (4 hours/day):
-                  <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                    <ListItem sx={{ display: "list-item", p: 0 }}>
-                      2 hours: Reading and taking notes from recommended books
-                      (e.g., &quot; HTML & CSS: Design and Build Websites &quot;
-                      by Jon Duckett).
-                    </ListItem>
-                    <ListItem sx={{ display: "list-item", p: 0 }}>
-                      2 hours: Building small projects (e.g., personal website,
-                      simple games).
-                    </ListItem>
-                  </List>
-                </ListItem>
-              </List>
-            </Box>
-            <Box sx={{ mt: 2, mb: 3 }}>
-              <Typography variant="h5">Key Topics:</Typography>
-              <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  HTML5: Elements, attributes, forms, semantic HTML.
-                </ListItem>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  CSS3: Selectors, properties, layouts (Flexbox, Grid),
-                  animations.
-                </ListItem>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  JavaScript: Syntax, variables, functions, DOM manipulation,
-                  events.
-                </ListItem>
-              </List>
-            </Box>
-            <Box sx={{ mt: 2, mb: 3 }}>
-              <Typography variant="h5">Resources:</Typography>
-              <List sx={{ pl: 4, listStyleType: "disc", color: "#424940" }}>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  Courses: Codecademy HTML/CSS, JavaScript.
-                </ListItem>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  CSS3: Selectors, properties, layouts (Flexbox, Grid),
-                  animations.
-                </ListItem>
-                <ListItem sx={{ display: "list-item", p: 0 }}>
-                  JavaScript: Syntax, variables, functions, DOM manipulation,
-                  events.
-                </ListItem>
-              </List>
-            </Box>
-          </AccordionDetails>
-        </Accordion>
-      </div>
+      ))}
     </Box>
   );
 }

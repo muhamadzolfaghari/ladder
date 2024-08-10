@@ -10,6 +10,7 @@ import {
 import PhasePrompt from "./Prompts/PreviewLadder/PhasePrompt";
 
 export default function ContentResult() {
+  console.log('ggg');
   return (
     <Box sx={{ mt: 4 }}>
       <Typography variant="h4" sx={{ mb: 3, textAlign: "center" }}>
