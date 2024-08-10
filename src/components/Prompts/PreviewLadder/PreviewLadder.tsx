@@ -1,7 +1,8 @@
 import { Box, Typography, List, ListItem, Button } from "@mui/material";
-import PhasePrompt from "./PhasePrompt";
+import PhasePrompt from "../../UI/Phases";
 import usePreviewLadder from "./hooks/usePreviewLadder";
 import ApiLoading from "../../UI/ApiLoading";
+import Phases from "../../UI/Phases";
 
 export default function PreviewLadder() {
   const {
@@ -14,7 +15,6 @@ export default function PreviewLadder() {
   if (createLadderIsPending) {
     return <ApiLoading />;
   }
-  console.log(ladder);
 
   return (
     <Box sx={{ mt: 4 }}>
@@ -35,7 +35,7 @@ export default function PreviewLadder() {
           </ListItem>
         </List>
       </Box>
-      <PhasePrompt ladder={ladder} />
+      <Phases learningPath={ladder.learningPath} />
       <Box
         sx={{
           mt: 10,

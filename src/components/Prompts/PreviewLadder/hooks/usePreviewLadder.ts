@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { useCreateLadder } from "@/hooks/useCreateLadder";
 import { promptsStatusChanged } from "@/store/slices/promptsSlice";
+import Ladder from "@/types/Ladder";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -24,7 +25,7 @@ export default function usePreviewLadder() {
   }, [createLadderIsError, createLadderIsSuccess, dispatch, router]);
 
   function handleStartLadder() {
-    createLader(ladder);
+    createLader(ladder as Ladder);
   }
 
   function handleBackToPrompt() {

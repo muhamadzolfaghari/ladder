@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import SpinnerLoader from "../SpinnerLoader";
+import SpinnerLoader from "./SpinnerLoader/SpinnerLoader";
 import Image from "next/image";
 
 const ApiLoading = () => (

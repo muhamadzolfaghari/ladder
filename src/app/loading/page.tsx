@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
-import SpinnerLoader from "@/components/SpinnerLoader";
+import SpinnerLoader from "@/components/UI/SpinnerLoader/SpinnerLoader";
 
 export default function Page() {
   return (
