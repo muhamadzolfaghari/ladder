@@ -14,6 +14,7 @@ export default function PreviewLadder() {
   if (createLadderIsPending) {
     return <ApiLoading />;
   }
+  console.log(ladder);
 
   return (
     <Box sx={{ mt: 4 }}>
@@ -24,19 +25,17 @@ export default function PreviewLadder() {
         <Typography variant="h5">Overview</Typography>
         <List sx={{ listStyleType: "disc", pl: 3 }}>
           <ListItem sx={{ display: "list-item", p: 0 }}>
-            Duration: 12 months
+            Duration: {ladder.goal} months
           </ListItem>
           <ListItem sx={{ display: "list-item", p: 0 }}>
-            Time Commitment: 2 hours daily on weekdays, 4 hours on weekends
+            Time Commitment: {ladder.timeCommitment}
           </ListItem>
           <ListItem sx={{ display: "list-item", p: 0 }}>
-            Goal: Proficiency in full-stack web development, ability to build
-            and deploy fully functional web applications, and obtaining a
-            certification within 12 months
+            Goal: {ladder.goal}
           </ListItem>
         </List>
       </Box>
-      <PhasePrompt />
+      <PhasePrompt ladder={ladder} />
       <Box
         sx={{
           mt: 10,
