@@ -1,4 +1,4 @@
-import GetStart from "@/components/GetStart1/GetStart";
+import GetStart from "@/components/GetStart/GetStart";
 import getVisitorStatusByUserId from "@/lib/db/getVisitorStatusById";
 import getUser from "@/lib/utils/getUser";
 import VisitorStatus from "@/types/VisitorStatus";
