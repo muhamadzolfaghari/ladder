@@ -13,25 +13,35 @@ interface PromptsState {
   prompt3Data: Prompt3Data;
 }
 
+// field_of_study: "UIUX",
+// goal: "Become an expert",
+// current_level: "Basic",
+// time_commitment: "3 hours a day",
+// preferred_learning_style: "Videos",
+// learning_pace: "Fast",
+// resources_available: "$1000",
+// preferred_tools_and_platforms: "Figma",
+// language: "English",
+
 const initialState: PromptsState = {
   status: "prompt1",
   // prompt1Data: {} as Prompt1Data,
   // prompt2Data: {} as Prompt2Data,
   // prompt3Data: {} as Prompt3Data,
   prompt1Data: {
-    field_of_study: "fd",
-    goal: "dsf",
-    current_level: "dfs",
+    field_of_study: "UIUX",
+    goal: "Become an expert",
+    current_level: "Basic",
   },
   prompt2Data: {
-    time_commitment: "dfs",
-    preferred_learning_style: "dsf",
-    learning_pace: "dsf",
+    time_commitment: "3 hours a day",
+    preferred_learning_style: "Videos",
+    learning_pace: "Fast",
   },
   prompt3Data: {
-    language: "dsf",
-    preferred_tools_and_platforms: "dsf",
-    resources_available: "dsf",
+    resources_available: "$1000",
+    preferred_tools_and_platforms: "Figma",
+    language: "English",
   },
   ladder: {} as Ladder,
 };
@@ -54,7 +64,7 @@ const promptsSlice = createSlice({
     },
     ladderGenerated: (state, action: PayloadAction<Ladder>) => {
       state.ladder = action.payload;
-    }
+    },
   },
 });
 
@@ -63,6 +73,6 @@ export const {
   prompt1Changed,
   prompt2Changed,
   prompt3Changed,
-  ladderGenerated
+  ladderGenerated,
 } = promptsSlice.actions;
 export default promptsSlice.reducer;
