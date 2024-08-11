@@ -28,18 +28,18 @@ export default function States() {
       </Typography>
       <SliderProgressBar />
       <InfoCardTime />
-      <Typography variant="h5" mt={2}>Phase 1 performance</Typography>
-      <AllWeekLadder />
+    
       <Box
         my={2}
         sx={{
           display: "flex",
           flexDirection: "column",
           flexGrow: 1,
-          justifyContent: "flex-end",
+          justifyContent: "flex-start",
         }}
       >
-
+  <Typography variant="h5" mt={2}>Phase 1 performance</Typography>
+      <AllWeekLadder />
       </Box>
 
       <Box
