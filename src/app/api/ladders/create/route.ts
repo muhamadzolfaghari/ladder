@@ -1,5 +1,5 @@
-import getLadderByUserId from "@/lib/db/selectLadderByUserId";
-import { insertLaddersByUserId } from "@/lib/db/insertLaddersByUserId";
+import insertIntoTable from "@/lib/db/InsertIntoTable";
+import selectFirstLadders from "@/lib/db/selectFirstLadders";
 import getUser from "@/lib/utils/getUser";
 import {
   createUnauthenticatedErrorResponse,
@@ -17,14 +17,20 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return createUnauthenticatedErrorResponse();
     }
 
-    const row = await getLadderByUserId(user.id);
+    const ladder = await selectFirstLadders(user.id);
 
-    if (row) {
+    if (ladder) {
       return createBadRequestErrorResponse("Ladder already exists");
     }
 
     const newLadder = (await request.json());
-    await insertLaddersByUserId(user.id, newLadder);
+
+    
+
+    await insertIntoTable("ladders", {
+      user_id: user.id,
+      ...newLadder,
+    });
 
     return createOKResponse();
   } catch (e) {

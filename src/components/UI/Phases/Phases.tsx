@@ -7,11 +7,11 @@ import Phase from "./Phase";
 import PhaseAccordion from "../PhaseAccordion/PhaseAccordion";
 
 interface PhasesProps {
-  learningPath: LearningPath[] | undefined;
+  learningPaths: LearningPath[] | undefined;
 }
 
 export default function Phases({
-  learningPath,
+  learningPaths,
 }: PropsWithChildren<PhasesProps>) {
   const { expanded, handleExpandedChange } = usePhaseAccordion();
 
@@ -20,7 +20,7 @@ export default function Phases({
       sx={{ display: "flex", flexDirection: "column", gap: "1.3rem" }}
       mb={2}
     >
-      {learningPath?.map(({ phase, duration, dailyRoutine }, index) => (
+      {learningPaths?.map(({ phase, duration, dailyRoutines }, index) => (
         <PhaseAccordion
           key={index}
           title={`Phase ${index + 1}: ${phase} &#40;${duration}&#41;`}
@@ -28,7 +28,7 @@ export default function Phases({
           expanded={expanded}
           onExpandedChange={handleExpandedChange}
         >
-          <Phase dailyRoutine={dailyRoutine} />
+          <Phase dailyRoutines={dailyRoutines} />
         </PhaseAccordion>
       ))}
     </Box>

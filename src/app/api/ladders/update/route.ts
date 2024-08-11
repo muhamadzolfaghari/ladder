@@ -1,9 +1,6 @@
-import getLadderByUserId from "@/lib/db/selectLadderByUserId";
-import { updateLaddersByUserId } from "@/lib/db/updateLaddersByUserId";
 import getUser from "@/lib/utils/getUser";
 import {
   createInternalServerErrorResponse,
-  createNotFundedErrorResponse,
   createOKResponse,
   createUnauthenticatedErrorResponse,
 } from "@/lib/utils/responseHandlers";
@@ -18,14 +15,14 @@ export async function PUT(request: NextRequest): Promise<NextResponse> {
       return createUnauthenticatedErrorResponse();
     }
 
-    const row = await getLadderByUserId(user.id);
+    // const row = await getLadderByUserId(user.id);
 
-    if (!row) {
-      return createNotFundedErrorResponse("Ladder does not exist");
-    }
+    // if (!row) {
+      // return createNotFundedErrorResponse("Ladder does not exist");
+    // }
 
     const newLadder = (await request.json()) as Ladder;
-    await updateLaddersByUserId(user.id, newLadder);
+    // await updateLaddersByUserId(user.id, newLadder);
 
     return createOKResponse();
   } catch (e) {
