@@ -1,14 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
-  Card,
-  CardContent,
   Typography,
   Container,
-  IconButton,
-  Divider,
   Accordion,
   AccordionDetails,
   AccordionSummary,
@@ -18,13 +15,32 @@ import {
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import { Timeline, Assignment, BarChart, Margin } from "@mui/icons-material";
-import BottomNav from "@/components/BottomNav";
 import theme from "@/lib/resources/theme";
-
+import { useAppSelector } from "@/hooks/reduxHooks";
+import Ladder from "../Ladder";
+import ReviewPerformance1 from "../ReviewPerformance/ReviewPerformance1";
+import ReviewPerformance2 from "../ReviewPerformance/ReviewPerformance2";
 
 export default function WeekSheet() {
+  const currentStep = useAppSelector((state) => state.review.currentStep);
+
   const [expanded, setExpanded] = useState<string | false>(false);
+
+
+
+    const renderContent = () => {
+    switch (currentStep) {
+    case "reviewPerformance1":
+      return <ReviewPerformance1/>;
+    case "reviewPerformance2":
+      return <ReviewPerformance2/>;
+    case "error":
+      return <Ladder />;
+    default:
+      return <div>Nothing matched</div>;
+  }}
+
+ 
 
   return (
     <Container
@@ -43,12 +59,11 @@ export default function WeekSheet() {
       >
         <Typography variant="h5" color={"white"}>Phase 1, Week 4</Typography>
       </Box>
-      
+
       <Accordion>
         <AccordionSummary
           sx={{
             backgroundColor: "white !important",
-
             "& .MuiTypography-root": {
               color: "#2D322C",
             },
@@ -60,6 +75,7 @@ export default function WeekSheet() {
               <ArrowRightIcon fontSize="large" />
             )
           }
+          onClick={() => setExpanded(expanded === "panel1" ? false : "panel1")}
         >
           <Typography>
             {`Day ${1} ${5 ? "Weekdays" : "Weekends"} (${5 ? "2 hours/day" : "4 hours/day"})`}
@@ -80,7 +96,7 @@ export default function WeekSheet() {
       </Accordion>
 
       <Box
-      my={2}
+        my={2}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -88,27 +104,7 @@ export default function WeekSheet() {
           justifyContent: "flex-end",
         }}
       >
-          <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                type="submit"
-                sx={{ mb: 1 }}
-              >
-          Review Your Performance
-          </Button>
-      </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          flexDirection: "column",
-        }}
-      >
-        <BottomNav />
+        {renderContent()}
       </Box>
     </Container>
   );

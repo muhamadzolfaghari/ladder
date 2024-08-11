@@ -42,17 +42,6 @@ export default function States() {
       <AllWeekLadder />
       </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          flexDirection: "column",
-        }}
-      >
-        <BottomNav />
-      </Box>
     </Container>
   );
 }

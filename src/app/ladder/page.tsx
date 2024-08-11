@@ -1,4 +1,4 @@
-import Ladder from "@/components/Ladder/Ladders/Ladder";
+import Ladder from "@/components/Ladder/Ladder";
 import Layout from "@/components/layout/Layout";
 
 export default function Page() {
