@@ -79,25 +79,35 @@ export default function WeekSheet() {
         </AccordionDetails>
       </Accordion>
 
-    
+      <Box
+      my={2}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          justifyContent: "flex-end",
+        }}
+      >
+          <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                type="submit"
+                sx={{ mb: 1 }}
+              >
+          Review Your Performance
+          </Button>
+      </Box>
 
       <Box
         sx={{
           display: "flex",
+          bottom: 0,
+          left: 0,
+          right: 0,
           flexDirection: "column",
-          alignItems: "center",
-          mt: 3, 
         }}
       >
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          type="submit"
-          sx={{ mb: 2, borderRadius: '16px' }} 
-        >
-          Review Your Performance
-        </Button>
         <BottomNav />
       </Box>
     </Container>
