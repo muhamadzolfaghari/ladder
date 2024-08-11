@@ -1,4 +1,4 @@
-import getLadderByUserId from "@/lib/db/getLadderByUserId";
+import getLadderByUserId from "@/lib/db/selectLadderByUserId";
 import { updateLaddersByUserId } from "@/lib/db/updateLaddersByUserId";
 import getUser from "@/lib/utils/getUser";
 import {

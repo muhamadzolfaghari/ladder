@@ -1,8 +1,8 @@
 import VisitorStatus from "@/types/VisitorStatus";
-import getRowByUserIdAndTable from "./geRowByUserIdAndTable";
+import selectRowByUserIdFrom from "./selectRowByUserIdFrom";
 
 export default async function getVisitorStatusByUserId(
   userId: string
 ): Promise<VisitorStatus | null> {
-  return getRowByUserIdAndTable<VisitorStatus>(userId, "visitor_status");
+  return selectRowByUserIdFrom<VisitorStatus>(userId, "visitor_status");
 }

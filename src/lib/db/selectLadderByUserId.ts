@@ -1,5 +1,5 @@
 import Ladder from "@/types/Ladder";
-import getRowByUserIdAndTable from "./geRowByUserIdAndTable";
+import selectRowByUserIdFrom from "./selectRowByUserIdFrom";
 import convertToCamelCase from "../utils/convertToCamelCase";
 
 type RawLadder = Record<string, string | number | undefined> | null;
@@ -7,7 +7,7 @@ type RawLadder = Record<string, string | number | undefined> | null;
 export default async function getLadderByUserId(
   userId: string
 ): Promise<Ladder | null> {
-  const rawLadder = await getRowByUserIdAndTable<RawLadder>(userId, "ladders");
+  const rawLadder = await selectRowByUserIdFrom<RawLadder>(userId, "ladders");
 
   if (!rawLadder) {
     return null;

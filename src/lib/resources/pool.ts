@@ -1,17 +1,15 @@
-// import { Client } from 'pg';
-
+import { Database } from "@/types/Database";
 import { Pool } from "pg";
-
-// const client = new Client({
-//     connectionString: process.env.DATABASE_URL,
-// });
-
-// client.connect();
-
-// export default client;
+import { Kysely, PostgresDialect } from "kysely";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-export default pool;
+const db = new Kysely<Database>({
+  dialect: new PostgresDialect({
+    pool,
+  }),
+});
+
+export default db;

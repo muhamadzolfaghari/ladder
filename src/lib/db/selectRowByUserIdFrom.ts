@@ -1,15 +1,24 @@
 import { PoolClient } from "pg";
 import pool from "../resources/pool";
+import db from "../resources/pool";
+import { Database } from "@/types/Database";
+import { User } from "next-auth";
 
-export default async function getRowByUserIdAndTable<T>(
+type A = keyof Database;
+
+const tableName: A = "daily_routines";
+
+export default async function selectRowByUserIdFrom<T>(
   userId: string,
-  tableName: string
+  from: Extract<A, "daily_routines" | "visitor_status">
 ): Promise<T | null> {
-  const query = `SELECT * FROM ${tableName} WHERE user_id = $1`;
+  const query = `SELECT * FROM ${from} WHERE user_id = $1`;
   const values = [userId];
   let client: PoolClient | undefined;
-
+  
   try {
+    db.selectFrom(from).where("user_id", "=", userId).executeTakeFirst();
+
     client = await pool.connect();
     const res = await client.query(query, values);
 

@@ -1,0 +1,40 @@
+DROP TABLE IF EXISTS ladders CASCADE;
+DROP TABLE IF EXISTS daily_routines CASCADE;
+DROP TABLE IF EXISTS learning_paths CASCADE;
+DROP TABLE IF EXISTS visitor_status CASCADE;
+
+CREATE TABLE ladders (
+    id SERIAL PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
+    field_of_study VARCHAR(255) NOT NULL,
+    goal VARCHAR(255) NOT NULL,
+    current_level VARCHAR(255) NOT NULL,
+    time_commitment VARCHAR(255) NOT NULL,
+    preferred_learning_style VARCHAR(255) NOT NULL,
+    learning_pace VARCHAR(255) NOT NULL,
+    resources_available VARCHAR(255) NOT NULL,
+    preferred_tools_and_platforms VARCHAR(255) NOT NULL,
+    language VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE learning_paths (
+    id SERIAL PRIMARY KEY,
+    ladder_id INT REFERENCES ladders(id) ON DELETE CASCADE,
+    phase VARCHAR(255) NOT NULL,
+    duration VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE daily_routines (
+    id SERIAL PRIMARY KEY,
+    learning_path_id INT REFERENCES learning_paths(id) ON DELETE CASCADE,
+    task VARCHAR(255) NOT NULL,
+    resource VARCHAR(255) NOT NULL,
+    time VARCHAR(255) NOT NULL,
+    is_done BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE visitor_status (
+    id SERIAL PRIMARY KEY,         
+    user_id VARCHAR(255) NOT NULL, 
+    is_first_visit BOOLEAN NOT NULL DEFAULT FALSE   
+);

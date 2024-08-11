@@ -20,14 +20,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth(() => {
           },
         },
       }),
-      Credential({
-        credentials: {
-          email: {},
-        },
-        authorize: async (credentials) => {
-          return null;
-        },
-      }),
+      // Credential({
+      //   credentials: {
+      //     email: {},
+      //   },
+      //   authorize: async (credentials) => {
+      //     return null;
+      //   },
+      // }),
     ],
     adapter: PostgresAdapter(pool),
   };

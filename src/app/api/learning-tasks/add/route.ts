@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import getUser from "@/lib/utils/getUser";
-import getLadderByUserId from "@/lib/db/getLadderByUserId";
+import getLadderByUserId from "@/lib/db/selectLadderByUserId";
 import { AddLearningTaskRequestSchema } from "@/lib/resources/schemas/addLearningTaskRequestSchema";
 import Ladder from "@/types/Ladder";
 import { AddLearningTaskRequest } from "@/types/AddLearningTaskRequest";
