@@ -41,7 +41,7 @@ export default function WeekSheet() {
         borderRadius={2}
         sx={{ bgcolor: theme.palette.primary.main }}
       >
-        <Typography variant="h3">Phase 1, Week 4</Typography>
+        <Typography variant="h5" color={"white"}>Phase 1, Week 4</Typography>
       </Box>
       
       <Accordion>
@@ -80,6 +80,7 @@ export default function WeekSheet() {
       </Accordion>
 
       <Box
+      my={2}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -87,9 +88,15 @@ export default function WeekSheet() {
           justifyContent: "start",
         }}
       >
-        <Button variant="contained" color="success" fullWidth>
+          <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                type="submit"
+                sx={{ mb: 6 }}
+              >
           Review Your Performance
-        </Button>
+          </Button>
       </Box>
 
       <Box
