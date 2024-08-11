@@ -23,7 +23,7 @@ export default function Phases({
       {learningPaths?.map(({ phase, duration, dailyRoutines }, index) => (
         <PhaseAccordion
           key={index}
-          title={`Phase ${index + 1}: ${phase} &#40;${duration}&#41;`}
+          title={`Phase ${index + 1}: ${phase} (${duration})`}
           index={index}
           expanded={expanded}
           onExpandedChange={handleExpandedChange}

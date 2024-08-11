@@ -20,6 +20,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const result: Ladder = {
       ...templateResponse,
+      learningPaths: [
+        ...templateResponse.learningPath.map((learningPath) => ({
+          ...learningPath,
+          dailyRoutines: learningPath.dailyRoutine,
+        })),
+      ],
       ...convertToCamelCase(requestJson),
     };
 

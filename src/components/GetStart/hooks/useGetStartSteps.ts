@@ -29,7 +29,7 @@ const useGetStartSteps = () => {
 
   useEffect(() => {
     if (updateVisitorStatusIsSuccess) {
-      router.push("/prompts");
+      router.refresh();
     }
   }, [router, updateVisitorStatusIsSuccess]);
 
