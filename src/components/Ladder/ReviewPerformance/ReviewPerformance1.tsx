@@ -11,7 +11,6 @@ export default function ReviewPerformance1() {
         flexDirection: "column",
         justifyContent: "space-between", 
         height: "100vh",
-        paddingBottom: "64px", 
       }}
     >
       <Box sx={{ mt: 3 }}>
