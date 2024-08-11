@@ -34,7 +34,7 @@ export default function PreviewLadder() {
           </ListItem>
         </List>
       </Box>
-      <Phases learningPath={ladder?.learningPath} />
+      <Phases learningPaths={ladder?.learningPaths} />
       <Box
         sx={{
           mt: 10,

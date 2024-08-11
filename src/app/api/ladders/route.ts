@@ -1,4 +1,4 @@
-import getLadderByUserId from "@/lib/db/selectLadderByUserId";
+import getLadder from "@/app/(home)/utils/getLadder";
 import getUser from "@/lib/utils/getUser";
 import {
   createUnauthenticatedErrorResponse,
@@ -15,7 +15,7 @@ export async function GET() {
       return createUnauthenticatedErrorResponse();
     }
 
-    const ladder = await getLadderByUserId(user.id);
+    const ladder = await getLadder(user.id);
 
     if (!ladder) {
       return createNotFundedErrorResponse("Ladder does not exist");

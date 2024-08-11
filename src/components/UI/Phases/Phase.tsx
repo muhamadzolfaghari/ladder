@@ -2,7 +2,7 @@ import { DailyRoutine } from "@/types/Ladder";
 import DailyRoutineDetails from "./DailyRoutineDetails";
 
 interface PhaseProps {
-  dailyRoutine: DailyRoutine[] | undefined;
+  dailyRoutines: DailyRoutine[] | undefined;
 }
 
 type GroupedDailyRoutineItem = { title: string; values: string[] };
@@ -25,7 +25,7 @@ function createDailyRoutine(dailyRoutine: DailyRoutine[] | undefined) {
   );
 }
 
-export default function Phase({ dailyRoutine }: PhaseProps) {
+export default function Phase({ dailyRoutines: dailyRoutine }: PhaseProps) {
   const groupedDailyRoutine = createDailyRoutine(dailyRoutine);
 
   return (

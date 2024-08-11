@@ -16,17 +16,15 @@ const convertSnakeCaseToCamelCase = (str: string): string =>
  * @returns The normalized row, or `null` if the input row is `null`.
  */
 export default function convertToCamelCase<T>(obj: RawValue): T {
-  const newObj = JSON.parse(JSON.stringify(obj));
-
-  for (const key in newObj) {
-    if (newObj.hasOwnProperty(key)) {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
       if (key.includes("_")) {
         const newKey = convertSnakeCaseToCamelCase(key);
-        newObj[newKey] = newObj[key];
-        delete newObj[key];
+        obj[newKey] = obj[key];
+        delete obj[key];
       }
     }
   }
 
-  return newObj;
+  return obj as T;
 }

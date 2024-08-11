@@ -1,7 +1,7 @@
 import { VisitorStatusTable } from "@/types/Database";
 import db from "../resources/pool";
 
-export default async function selectFromVisitorStatusBy(
+export default async function selectFirstVisitorStatus(
   userId: string
 ): Promise<VisitorStatusTable | undefined> {
   try {
