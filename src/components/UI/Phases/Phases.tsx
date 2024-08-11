@@ -1,14 +1,12 @@
 "use client";
 import { Box } from "@mui/material";
 import React, { PropsWithChildren } from "react";
-import { LearningPath, LearningTask } from "@/types/Ladder";
+import { LearningPath } from "@/types/Ladder";
 import { usePhases } from "./hooks/usePhases";
 import Phase from "./Phase";
 
 interface PhasesProps {
-  learningPath:
-    | Partial<LearningPath & { dailyRoutine: Partial<LearningTask>[] }>[]
-    | undefined;
+  learningPath: LearningPath[] | undefined;
 }
 
 export default function Phases({
@@ -27,7 +25,7 @@ export default function Phases({
           index={index}
           title={phase}
           duration={duration}
-          data={dailyRoutine}
+          dailyRoutine={dailyRoutine}
           expanded={expanded}
           onExpandedChange={handleChange}
         />

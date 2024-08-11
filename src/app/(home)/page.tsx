@@ -7,7 +7,7 @@ import getLadderByUserId from "@/lib/db/getLadderByUserId";
 import GetStart from "@/components/GetStart/GetStart";
 import PromptsLayout from "@/components/layout/PromptsLayout";
 import Prompts from "@/components/Prompts/Prompts";
-import Dashboard from "@/components/Dashabord";
+import Dashboard from "@/components/Dashboard";
 import Layout from "@/components/layout/Layout";
 import { User } from "next-auth";
 

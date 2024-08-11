@@ -1,10 +1,9 @@
 import theme from "@/lib/resources/theme";
-import { LearningTask } from "@/types/Ladder";
+import { DailyRoutine } from "@/types/Ladder";
 import {
   Accordion,
   AccordionSummary,
   Typography,
-  duration,
   AccordionDetails,
   Box,
 } from "@mui/material";
@@ -15,7 +14,7 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 interface PhaseProps {
   duration: string | undefined;
   title: string | undefined;
-  data: Partial<LearningTask[]> | undefined;
+  dailyRoutine: DailyRoutine[] | undefined;
   index: number;
   expanded: string | boolean;
   onExpandedChange: (
@@ -23,13 +22,13 @@ interface PhaseProps {
   ) => (_event: React.SyntheticEvent, isExpanded: boolean) => void;
 }
 
-type DailyRoutineItem = { title: string; values: string[] };
-type DailyRoutine = {
-  tasks: DailyRoutineItem;
-  resources: DailyRoutineItem;
+type GroupedDailyRoutineItem = { title: string; values: string[] };
+type GroupedDailyRoutine = {
+  tasks: GroupedDailyRoutineItem;
+  resources: GroupedDailyRoutineItem;
 };
 
-function createDailyRoutine(dailyRoutine: Partial<LearningTask[]> | undefined) {
+function createDailyRoutine(dailyRoutine: DailyRoutine[] | undefined) {
   return dailyRoutine?.reduce(
     (prev, cur) => {
       prev.tasks.values.push(`${cur?.time}: ${cur?.task}`);
@@ -39,19 +38,19 @@ function createDailyRoutine(dailyRoutine: Partial<LearningTask[]> | undefined) {
     {
       tasks: { title: "Weekly Schedule", values: [] },
       resources: { title: "Key Topics", values: [] },
-    } as DailyRoutine
+    } as GroupedDailyRoutine
   );
 }
 
 export default function Phase({
-  data,
+  dailyRoutine,
   title,
   index,
   expanded,
   duration,
   onExpandedChange,
 }: PhaseProps) {
-  const groupedDailyRoutine = createDailyRoutine(data);
+  const groupedDailyRoutine = createDailyRoutine(dailyRoutine);
 
   return (
     <Accordion
