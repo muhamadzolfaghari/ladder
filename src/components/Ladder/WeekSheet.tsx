@@ -88,9 +88,15 @@ export default function WeekSheet() {
           justifyContent: "start",
         }}
       >
-        <Button variant="contained" color="success" fullWidth>
+          <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                type="submit"
+                sx={{ mb: 6 }}
+              >
           Review Your Performance
-        </Button>
+          </Button>
       </Box>
 
       <Box
