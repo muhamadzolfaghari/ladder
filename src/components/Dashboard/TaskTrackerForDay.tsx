@@ -1,21 +1,18 @@
 "use client";
 import { Typography, Box, Checkbox, FormControlLabel } from "@mui/material";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import React, { PropsWithChildren } from "react";
-
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ModalAddTask from "./ModalAddTask";
 import { usePhaseAccordion } from "../UI/PhaseAccordion/hooks/usePhaseAccordion";
 import PhaseAccordion from "../UI/PhaseAccordion/PhaseAccordion";
-import usePreviewLadder from "../Prompts/PreviewLadder/hooks/usePreviewLadder";
-import { DailyRoutine, LearningPath } from "@/types/Ladder";
+import Ladder from "@/types/Ladder";
 
 interface Props {
-  learningPath: LearningPath[] | undefined;
+  ladder: Ladder | undefined;
 }
 
-const TaskTrackerForDay = ({ learningPath }: PropsWithChildren<Props>) => {
+const TaskTrackerForDay = ({ ladder }: PropsWithChildren<Props>) => {
   const { expanded, handleExpandedChange } = usePhaseAccordion();
+  const dailyRoutines = ladder?.learningPath?.[0]?.dailyRoutine || undefined;
 
   return (
     <Box sx={{ mt: 3 }}>
@@ -29,13 +26,13 @@ const TaskTrackerForDay = ({ learningPath }: PropsWithChildren<Props>) => {
           expanded={expanded}
           onExpandedChange={handleExpandedChange}
         >
-          {learningPath?.[0]?.dailyRoutine?.map((dailyTask, index) => (
+          <Typography>Day 5 Weekdays &#40;2 hours/day&#41;</Typography>
+          {dailyRoutines?.map((dailyRoutine) => (
             <>
-              <Typography>Day 5 Weekdays &#40;2 hours/day&#41;</Typography>
-              <Typography key={index}>
+              <Typography key={dailyRoutine.task}>
                 <FormControlLabel
                   control={<Checkbox />}
-                  label={dailyTask.task}
+                  label={`${dailyRoutine.time}:${dailyRoutine.task} - ${dailyRoutine.resource}`}
                 />
               </Typography>
             </>

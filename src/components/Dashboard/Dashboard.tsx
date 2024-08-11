@@ -3,19 +3,18 @@ import QuoteDay from "./QuoteDay";
 import TaskTrackerForDay from "./TaskTrackerForDay";
 import { User } from "next-auth";
 import Header from "./Header";
-import { DailyRoutine, LearningPath } from "@/types/Ladder";
-
+import Ladder, { DailyRoutine, LearningPath } from "@/types/Ladder";
 
 interface DashboardProps {
   user: User | undefined;
-  learningPath : LearningPath[] | undefined;
+  ladder: Ladder | undefined;
 }
 
-const Dashboard = ({ user, learningPath }: DashboardProps) => (
+const Dashboard = ({ user, ladder }: DashboardProps) => (
   <>
     <Header user={user} />
-    <TaskTrackerForDay learningPath={learningPath} />
-    <LadderOverview />
+    <TaskTrackerForDay ladder ={ladder} />
+    <LadderOverview  ladder = {ladder?.fieldOfStudy} />
     <QuoteDay />
   </>
 );

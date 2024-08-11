@@ -47,7 +47,7 @@ const Home = async () => {
 
   return (
     <Layout>
-      <Dashboard user={user} />
+      <Dashboard user={user} ladder={ladder} />
     </Layout>
   );
 };

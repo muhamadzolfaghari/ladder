@@ -3,11 +3,11 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const WeekDaysLadder = () => {
   const days = [
-    { day: "01", status: "completed" },
-    { day: "02", status: "completed" },
-    { day: "03", status: "completed" },
-    { day: "04", status: "completed" },
-    { day: "05", status: "in-progress" },
+    { day: "01", status: "not-started" },
+    { day: "02", status: "not-started" },
+    { day: "03", status: "not-started" },
+    { day: "04", status: "not-started" },
+    { day: "05", status: "not-started" },
     { day: "06", status: "not-started" },
     { day: "07", status: "not-started" },
   ];
@@ -18,7 +18,7 @@ const WeekDaysLadder = () => {
         variant="h5"
         sx={{ mb: 2, fontSize: " 1.375rem", pt: "24px" }}
       >
-        Week 4
+        Week
       </Typography>
       <Box
         sx={{
@@ -58,8 +58,7 @@ const WeekDaysLadder = () => {
           See the hole Ladder <ArrowForwardIcon />{" "}
         </Button>
       </Box>
-      <Box sx={{ borderBottom: 1, borderColor: "#72796F", mb: 2 , pt:4 }}></Box>
-
+      <Box sx={{ borderBottom: 1, borderColor: "#72796F", mb: 2, pt: 4 }}></Box>
     </Box>
   );
 };
