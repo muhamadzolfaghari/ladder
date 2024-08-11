@@ -14,7 +14,7 @@ import {
 } from "@/lib/utils/responseHandlers";
 
 const findLearningPath = (ladder: Ladder, phase: string, duration: string) =>
-  ladder.learningPath.find(
+  ladder.learningPath?.find(
     (path) => path.phase === phase && path.duration === duration
   );
 
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return createNotFundedErrorResponse("Learning path does not exist");
     }
 
-    learningPath.dailyRoutine.push(learningTask);
+    learningPath.dailyRoutine?.push(learningTask);
     await updateLaddersByUserId(user.id, ladder);
 
     return createOKResponse();
