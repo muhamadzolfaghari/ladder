@@ -36,9 +36,18 @@ export interface VisitorStatusTable {
   is_first_visit: boolean;
 }
 
+export interface DailyRoutineWeekDaysTable {
+  id: Generated<number>;
+  daily_routine_id: number;
+  week_number: number;
+  week_day: number;
+  is_done: boolean;
+}
+
 export interface Database {
   ladders: LadderTable;
   learning_paths: LearningPathTable;
   daily_routines: DailyRoutineTable;
   visitor_status: VisitorStatusTable;
+  daily_routine_week_days: DailyRoutineWeekDaysTable;
 }

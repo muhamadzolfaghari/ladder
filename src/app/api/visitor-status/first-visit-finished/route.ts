@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import getUser from "@/lib/utils/getUser";
-import updateVisitorStatusById from "@/lib/db/updateVisitorStatusById";
+import insertIntoTable from "@/lib/db/InsertIntoTable";
 
 export async function POST() {
   try {
@@ -10,7 +10,10 @@ export async function POST() {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
-    await updateVisitorStatusById(user.id, false, false);
+    await insertIntoTable("visitor_status", {
+      user_id: user.id,
+      is_first_visit: false,
+    });
 
     return NextResponse.json({}, { status: 200 });
   } catch (error) {

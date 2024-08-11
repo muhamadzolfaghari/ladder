@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
- const LearningPreferencesSchema = z.object({
+ const LadderPreferencesSchema = z.object({
   goal: z.string(),
   current_level: z.string(),
   preferred_learning_style: z.string(),
@@ -12,4 +12,4 @@ import { z } from 'zod';
   preferred_tools_and_platforms: z.string(),
 });
 
-export default LearningPreferencesSchema;
+export default LadderPreferencesSchema;

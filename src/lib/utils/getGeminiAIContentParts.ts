@@ -1,11 +1,11 @@
 import { GeminiAIContentPart } from "@/types/GeminiAI";
-import LearningPreferencesSchema from "../resources/schemas/learningPreferencesSchema";
 import CreateLadderRequest from "@/types/CreateLadderRequest";
+import LadderPreferencesSchema from "@/lib/resources/schemas/ladderPreferencesSchema1";
 
 export default function getGeminiAIContentParts(
   payload: CreateLadderRequest
 ): GeminiAIContentPart[] | null {
-  if (!LearningPreferencesSchema.safeParse(payload).success) {
+  if (!LadderPreferencesSchema.safeParse(payload).success) {
     return null;
   }
 

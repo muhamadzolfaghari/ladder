@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import getUser from "@/lib/utils/getUser";
-import getLadderByUserId from "@/lib/db/selectLadderByUserId";
-import { AddLearningTaskRequestSchema } from "@/lib/resources/schemas/addLearningTaskRequestSchema";
-import Ladder from "@/types/Ladder";
+import Ladder, { LearningPath } from "@/types/Ladder";
 import { AddLearningTaskRequest } from "@/types/AddLearningTaskRequest";
-import { updateLaddersByUserId } from "@/lib/db/updateLaddersByUserId";
 import {
   createUnauthenticatedErrorResponse,
   createErrorResponse,
@@ -12,14 +9,16 @@ import {
   createBadRequestErrorResponse,
   createOKResponse,
 } from "@/lib/utils/responseHandlers";
+import { DailyRoutineSchema } from "@/lib/resources/schemas/ladderSchema";
+import getLadder from "@/app/(home)/utils/getLadder";
 
 const findLearningPath = (ladder: Ladder, phase: string, duration: string) =>
-  ladder.learningPath?.find(
+  ladder.learningPaths?.find(
     (path) => path.phase === phase && path.duration === duration
   );
 
-const validateRequest = (payload: AddLearningTaskRequest): boolean =>
-  AddLearningTaskRequestSchema.safeParse(payload).success;
+const validateRequest = (payload: LearningPath): boolean =>
+  DailyRoutineSchema.safeParse(payload).success;
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
@@ -35,7 +34,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return createBadRequestErrorResponse();
     }
 
-    const ladder = await getLadderByUserId(user.id);
+    const ladder = await getLadder(user.id);
 
     if (!ladder) {
       return createNotFundedErrorResponse("Ladder does not exist");
@@ -48,8 +47,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return createNotFundedErrorResponse("Learning path does not exist");
     }
 
-    learningPath.dailyRoutine?.push(learningTask);
-    await updateLaddersByUserId(user.id, ladder);
+    learningPath.dailyRoutines?.push(learningTask);
+    // await updateLaddersByUserId(user.id, ladder);
 
     return createOKResponse();
   } catch (e) {

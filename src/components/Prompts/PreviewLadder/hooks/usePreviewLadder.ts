@@ -17,7 +17,7 @@ export default function usePreviewLadder() {
 
   useEffect(() => {
     if (createLadderIsSuccess) {
-      router.push("/");
+      router.refresh();
     } else if (createLadderIsError) {
       dispatch(promptsStatusChanged("error"));
     }

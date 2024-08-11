@@ -7,7 +7,7 @@ export interface DailyRoutine {
 export interface LearningPath {
   phase?: string;
   duration?: string;
-  dailyRoutine?: DailyRoutine[];
+  dailyRoutines?: DailyRoutine[];
 }
 
 export default interface Ladder {
@@ -20,5 +20,5 @@ export default interface Ladder {
   resourcesAvailable?: string;
   preferredToolsAndPlatforms?: string;
   language?: string;
-  learningPath?: LearningPath[];
+  learningPaths?: LearningPath[];
 }
