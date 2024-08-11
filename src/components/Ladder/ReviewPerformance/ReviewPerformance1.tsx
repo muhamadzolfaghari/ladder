@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography, Container, Button, TextField } from "@mui/material";
 import BottomNav from "@/components/BottomNav";
 
-export default function ReviewPerformance() {
+export default function ReviewPerformance1() {
   return (
     <Container
       maxWidth="sm"
