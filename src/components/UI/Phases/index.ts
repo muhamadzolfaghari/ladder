@@ -1,1 +1,1 @@
-export {default} from "./Phases";
+export { default } from "./Phases";

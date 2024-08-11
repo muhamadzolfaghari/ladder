@@ -11,26 +11,34 @@ import {
   Checkbox,
 } from "@mui/material";
 
-import React, { useState } from "react";
+import React from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ModalAddTask from "./ModalAddTask";
+import { usePhaseAccordion } from "./UI/PhaseAccordion/hooks/usePhaseAccordion";
+import PhaseAccordion from "./UI/PhaseAccordion/PhaseAccordion";
 
 const TaskTrackerForDay = () => {
-  const [expanded, setExpanded] = useState<string | false>(false);
-  const handleChange =
-    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panel : false);
-    };
   const theme = useTheme();
+  const { expanded, handleExpandedChange } = usePhaseAccordion();
+
   return (
     <Box sx={{ mt: 3 }}>
       <Typography variant="h5">Today&#39;s tasks</Typography>
       <Box sx={{ display: "flex", flexDirection: "column", gap: "1.3rem" }}>
+        <PhaseAccordion
+          title={"Phase 1: Introduction to Web Development"}
+          index={0}
+          expanded={expanded}
+          onExpandedChange={handleExpandedChange}
+        >
+          details
+        </PhaseAccordion>
+
         <div>
           <Accordion
             expanded={expanded === "panel1"}
-            onChange={handleChange("panel1")}
+            onChange={handleExpandedChange("panel1")}
           >
             <AccordionSummary
               sx={{
@@ -76,7 +84,7 @@ const TaskTrackerForDay = () => {
       <Box
         sx={{
           borderBottom: "1px solid #72796F",
-          mt:'1.5rem'
+          mt: "1.5rem",
         }}
       ></Box>
     </Box>

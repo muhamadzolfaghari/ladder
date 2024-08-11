@@ -2,8 +2,9 @@
 import { Box } from "@mui/material";
 import React, { PropsWithChildren } from "react";
 import { LearningPath } from "@/types/Ladder";
-import { usePhases } from "./hooks/usePhases";
+import { usePhaseAccordion } from "../PhaseAccordion/hooks/usePhaseAccordion";
 import Phase from "./Phase";
+import PhaseAccordion from "../PhaseAccordion/PhaseAccordion";
 
 interface PhasesProps {
   learningPath: LearningPath[] | undefined;
@@ -12,7 +13,7 @@ interface PhasesProps {
 export default function Phases({
   learningPath,
 }: PropsWithChildren<PhasesProps>) {
-  const { expanded, handleChange, theme } = usePhases();
+  const { expanded, handleExpandedChange } = usePhaseAccordion();
 
   return (
     <Box
@@ -20,15 +21,15 @@ export default function Phases({
       mb={2}
     >
       {learningPath?.map(({ phase, duration, dailyRoutine }, index) => (
-        <Phase
+        <PhaseAccordion
           key={index}
+          title={`Phase ${index + 1}: ${phase} &#40;${duration}&#41;`}
           index={index}
-          title={phase}
-          duration={duration}
-          dailyRoutine={dailyRoutine}
           expanded={expanded}
-          onExpandedChange={handleChange}
-        />
+          onExpandedChange={handleExpandedChange}
+        >
+          <Phase dailyRoutine={dailyRoutine} />
+        </PhaseAccordion>
       ))}
     </Box>
   );
