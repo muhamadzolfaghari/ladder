@@ -9,9 +9,9 @@ export default function ReviewPerformance1() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between", // Distribute space between top content and bottom elements
+        justifyContent: "space-between", 
         height: "100vh",
-        paddingBottom: "64px", // Reserve space for BottomNav
+        paddingBottom: "64px", 
       }}
     >
       <Box sx={{ mt: 3 }}>
@@ -28,7 +28,7 @@ export default function ReviewPerformance1() {
           rows={6}
           placeholder="Completion of most of the tasks of the training course due to the high quality of the training content"
           fullWidth
-          sx={{ mb: 3 }} // Adds margin bottom between text fields
+          sx={{ mb: 3 }}
         />
         <TextField
           InputLabelProps={{ shrink: true }}
@@ -36,27 +36,39 @@ export default function ReviewPerformance1() {
           rows={6}
           placeholder="Failure to do coding exercises due to lack of self-confidence"
           fullWidth
-          sx={{ mb: 3 }} // Adds margin bottom to ensure spacing below the second field as well
+          sx={{ mb: 3 }} 
         />
+      </Box>
+
+      <Box
+      my={2}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          justifyContent: "flex-end",
+        }}
+      >
+          <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                type="submit"
+                sx={{ mb: 1 }}
+              >
+          Review Your Performance
+          </Button>
       </Box>
 
       <Box
         sx={{
           display: "flex",
+          bottom: 0,
+          left: 0,
+          right: 0,
           flexDirection: "column",
-          alignItems: "center",
-          mt: 3, 
         }}
       >
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          type="submit"
-          sx={{ mb: 2, borderRadius: '16px' }} 
-        >
-          Review Your Performance
-        </Button>
         <BottomNav />
       </Box>
     </Container>
