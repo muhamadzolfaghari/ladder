@@ -80,6 +80,7 @@ export default function Page() {
               flexItem
               sx={{ bgcolor: "white" }}
             />
+           <Link legacyBehavior href="/week-sheet" passHref>
             <Box
               sx={{
                 display: "flex",
@@ -97,11 +98,14 @@ export default function Page() {
                 Week Sheet
               </Typography>
             </Box>
+            </Link>
+
             <Divider
               orientation="vertical"
               flexItem
               sx={{ bgcolor: "white" }}
             />
+            <Link legacyBehavior href="/status" passHref>
             <Box
               sx={{
                 display: "flex",
@@ -114,6 +118,7 @@ export default function Page() {
                 Stats
               </Typography>
             </Box>
+            </Link>
           </Box>
         </CardContent>
       </Card>
