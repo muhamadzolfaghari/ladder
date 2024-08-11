@@ -7,6 +7,7 @@ import {
   Box,
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { PropsWithChildren } from "react";
 
@@ -40,7 +41,9 @@ export default function PhaseAccordion({
           expanded === `panel${index + 1}` ? (
             <ArrowDropDownIcon
               fontSize="large"
-              sx={{ color: theme.palette.primary.contrastText }}
+              sx={{
+                color: theme.palette.primary.contrastText,
+              }}
             />
           ) : (
             <ArrowRightIcon

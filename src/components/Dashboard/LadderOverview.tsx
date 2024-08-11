@@ -1,13 +1,7 @@
 import {
   Typography,
   Box,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  useTheme,
-  FormControlLabel,
-  FormGroup,
-  Checkbox,
+ 
 } from "@mui/material";
 import SliderProgressBar from "./SliderProgressBar";
 import InfoCardTime from "./InfoCardTime";

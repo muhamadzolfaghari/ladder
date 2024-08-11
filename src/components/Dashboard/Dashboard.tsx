@@ -1,6 +1,6 @@
-import LadderOverview from "@/components/LadderOverview";
-import QuoteDay from "@/components/QuoteDay";
-import TaskTrackerForDay from "@/components/TaskTrackerForDay";
+import LadderOverview from "./LadderOverview";
+import QuoteDay from "./QuoteDay";
+import TaskTrackerForDay from "./TaskTrackerForDay";
 import { User } from "next-auth";
 import Header from "./Header";
 
