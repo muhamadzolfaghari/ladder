@@ -74,53 +74,59 @@ const weeksData: Week[] = [
   },
 ];
 
-
 const AllWeekLadder = () => {
-    return (
-        <Box sx={{ pt:"16px", maxWidth: "700px",  }}>
-          {weeksData.map((week, weekIndex) => (
-            <Box key={weekIndex} sx={{ marginBottom: "12px", display: "flex", alignItems: "center" }}>
-              <Typography
-                variant="h6"
-                sx={{ fontSize: "1rem", fontWeight: "bold", textAlign: "left", mr: 1 }}
-              >
-                {week.name}
-              </Typography>
+  return (
+    <Box
+      sx={{
+        pt: "16px",
+        maxWidth: "700px",
+        justifyContent: { xs: "center", md: "space-evenly" },
+        alignItems: { md: "center" },
+      }}
+    >
+      {weeksData.map((week, weekIndex) => (
+        <Box key={weekIndex} sx={{ marginBottom: "12px", display: "flex" }}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontSize: "1rem",
+              fontWeight: "bold",
+              textAlign: "left",
+              mr: 1,
+            }}
+          >
+            {week.name}
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "0.5rem",
+            }}
+          >
+            {week.days.map((item, dayIndex) => (
               <Box
+                key={dayIndex}
                 sx={{
-
-                  display: "flex",
-                  gap: "0.5rem",
-                  justifyContent: { xs: "center", md: "space-around" }, 
-                  alignItems: { md: 'center' } ,
+                  padding: "8px 10.5px",
+                  borderRadius: "10px",
+                  background:
+                    item.status === "completed"
+                      ? "#BAF0B6"
+                      : item.status === "in-progress"
+                        ? "#C2C9BD"
+                        : "#ffff",
+                  border:
+                    item.status === "not-started" ? "1px solid #72796F" : "",
                 }}
               >
-                {week.days.map((item, dayIndex) => (
-                  <Box
-                    key={dayIndex}
-                    sx={{
-                      padding: "8px 10.5px",
-                      borderRadius: "10px",
-                      background:
-                        item.status === "completed"
-                          ? "#BAF0B6"
-                          : item.status === "in-progress"
-                          ? "#C2C9BD"
-                          : "#ffff",
-                      border:
-                        item.status === "not-started" ? "1px solid #72796F" : "",
-                    }}
-                  >
-                    <Typography>{item.day}</Typography>
-                  </Box>
-                ))}
+                <Typography>{item.day}</Typography>
               </Box>
-            </Box>
-          ))}
-    
-     
+            ))}
+          </Box>
         </Box>
-      );
-    };
+      ))}
+    </Box>
+  );
+};
 
 export default AllWeekLadder;
