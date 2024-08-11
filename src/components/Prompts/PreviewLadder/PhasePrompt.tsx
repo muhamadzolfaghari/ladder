@@ -10,7 +10,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import React, { PropsWithChildren } from "react";
 import { usePreviewLadderPhases } from "./hooks/usePreviewLadderPhases";
-import Ladder, { LearningPath, LearningTask } from "@/types/Ladder";
+import Ladder, { LearningPath, DailyRoutine } from "@/types/Ladder";
 import ListSectionAccordian from "./ListSectionAccordian";
 
 interface LadderInterface {

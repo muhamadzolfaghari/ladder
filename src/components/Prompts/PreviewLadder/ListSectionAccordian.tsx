@@ -1,11 +1,11 @@
-import { LearningPath, LearningTask } from "@/types/Ladder";
+import { LearningPath, DailyRoutine } from "@/types/Ladder";
 import { Typography, List, ListItem } from "@mui/material";
 import { title } from "process";
 import { PropsWithChildren } from "react";
 
 interface Props {
   title: string;
-  itemEl: LearningTask[];
+  itemEl: DailyRoutine[];
 }
 
 const ListSectionAccordian = (props: PropsWithChildren<Props>) => {

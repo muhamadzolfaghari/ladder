@@ -1,11 +1,8 @@
 import { Container } from "@mui/material";
-import { PropsWithChildren } from "react";
-import HeaderHomePage from "../HeaderHomePage";
 import NavigationBottom from "../NavigationBottom";
 
-const Layout = ({ children }: PropsWithChildren) => (
+const Layout = ({ children }: { children: React.ReactNode }) => (
   <Container sx={{ pt: 2 }}>
-    <HeaderHomePage />
     {children}
     <NavigationBottom />
   </Container>
