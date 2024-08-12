@@ -53,48 +53,50 @@ The source code for Ladder is available and can be provided upon request. Please
 
 
 ## Screenshots
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/LadderApp.jpg)
+
 ## Signin
-![App Screenshot](https://imageshack.com/i/pmbI4qjCj)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/signup.jpg)
 ## Getstart
-![App Screenshot](https://imageshack.com/i/pmF1gGMop)
-![App Screenshot](https://imageshack.com/i/pnt97CCmp)
-![App Screenshot](https://imageshack.com/i/pnXh9U3dp)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/What%20is%20Ladder_.png)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/How%20it%20works_.png)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/What%20is%20Ladder_-1.png)
 
 ## Create First Ladder
-![App Screenshot](https://imageshack.com/i/pnpo6PF0j)
-![App Screenshot](https://imageshack.com/i/pn6hd4w9j)
-![App Screenshot](https://imageshack.com/i/pn3GY4PQj)
-![App Screenshot](https://imageshack.com/i/poGibNBij)
-![App Screenshot](https://imageshack.com/i/pohDFwY4j)
-![App Screenshot](https://imageshack.com/i/porhR6Itj)
-![App Screenshot](https://imageshack.com/i/pmLFFtjxj)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Get%20a%20prompt%201.jpg)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Get%20a%20prompt%202.jpg)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Get%20a%20prompt%203.jpg)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Review%20the%20prompt.jpg)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Get%20the%20prompt.jpg)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Wait%20screen!.jpg)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Failed%20Prompt!.jpg)
 ## Dadhboard
 ##  
-![App Screenshot](https://imageshack.com/i/pooWQOIjj)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Failed%20Prompt!.jpg)
 ##    
-![App Screenshot](https://imageshack.com/i/pndi61Acj)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Add%20Task.jpg)
 ## Gemini
-![App Screenshot](https://imageshack.com/i/pnng8E1pj)
-![App Screenshot](https://imageshack.com/i/pnqu1Z2Cj)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Gemini.jpg)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Gemini%202.jpg)
 
 ## Ladder
-![App Screenshot](https://imageshack.com/i/poRRQqpPj)
-![App Screenshot](https://imageshack.com/i/poTp6OFfj)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Ladder.jpg)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Ladder%20Manage.jpg)
 
 Roadmap
-![App Screenshot](https://imageshack.com/i/poPhSXA8j)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Road%20Map.jpg)
 
 Weeksheet
-![App Screenshot](https://imageshack.com/i/poutRXdtj)
-![App Screenshot](https://imageshack.com/i/poKjpEAbj)
-![App Screenshot](https://imageshack.com/i/pm5nAVlFj)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Week%20Sheet.jpg)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Review%20Your%20Performance.jpg)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Review%20Your%20Performance-1.jpg)
 
 States
-![App Screenshot](https://imageshack.com/i/pmv2cWnWj)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Stats.jpg)
 
 ## Notification
-![App Screenshot](https://imageshack.com/i/posZBpMpj)
-![App Screenshot](https://imageshack.com/i/pn1jhgT2j)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Notification.jpg)
+![App Screenshot](https://github.com/muhamadzolfaghari/ladder/blob/master/public/screenshots/Add%20a%20Reminder.jpg)
 
 
 
