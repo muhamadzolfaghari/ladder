@@ -61,7 +61,6 @@ async function insertLadder(userId: string, newLadder: Required<Ladder>) {
         task: dailyRoutine.task,
         resource: dailyRoutine.resource,
         time: dailyRoutine.time,
-        is_done: false,
       });
     }
   }

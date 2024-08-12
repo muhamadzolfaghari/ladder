@@ -24,17 +24,30 @@ CREATE TABLE learning_paths (
     duration VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE visitor_status (
+    id SERIAL PRIMARY KEY,         
+    user_id VARCHAR(255) NOT NULL, 
+    is_first_visit BOOLEAN NOT NULL DEFAULT FALSE   
+);
+
+CREATE TABLE daily_routine_week_days (
+    id SERIAL PRIMARY KEY,
+    daily_routine_id INT REFERENCES daily_routines(id) ON DELETE CASCADE,
+    week_number INT NOT NULL,      
+    week_day INT NOT NULL,    
+);
+
 CREATE TABLE daily_routines (
     id SERIAL PRIMARY KEY,
     learning_path_id INT REFERENCES learning_paths(id) ON DELETE CASCADE,
     task VARCHAR(255) NOT NULL,
     resource VARCHAR(255) NOT NULL,
-    time VARCHAR(255) NOT NULL,
-    is_done BOOLEAN NOT NULL DEFAULT FALSE
+    time VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE visitor_status (
-    id SERIAL PRIMARY KEY,         
-    user_id VARCHAR(255) NOT NULL, 
-    is_first_visit BOOLEAN NOT NULL DEFAULT FALSE   
+CREATE TABLE learning_path_week_days (
+    id SERIAL PRIMARY KEY,
+    learning_path_id INT REFERENCES learning_paths(id) ON DELETE CASCADE,
+    week_number INT NOT NULL,
+    week_day INT NOT NULL
 );

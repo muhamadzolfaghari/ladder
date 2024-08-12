@@ -27,7 +27,13 @@ export interface DailyRoutineTable {
   task: string;
   resource: string;
   time: string;
-  is_done: boolean;
+}
+
+export interface DailyRoutineWeekDaysTable {
+  id: Generated<number>;
+  daily_routine_id: number;
+  week_number: number;
+  week_day: number;
 }
 
 export interface VisitorStatusTable {
@@ -36,16 +42,16 @@ export interface VisitorStatusTable {
   is_first_visit: boolean;
 }
 
-export interface DailyRoutineWeekDaysTable {
+export interface LearningPathWeekDaysTable {
   id: Generated<number>;
-  daily_routine_id: number;
+  learning_path_id: number;
   week_number: number;
   week_day: number;
-  is_done: boolean;
 }
 
 export interface Database {
   ladders: LadderTable;
+  learning_path_week_days: LearningPathWeekDaysTable;
   learning_paths: LearningPathTable;
   daily_routines: DailyRoutineTable;
   visitor_status: VisitorStatusTable;
