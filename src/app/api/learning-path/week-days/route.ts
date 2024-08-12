@@ -6,70 +6,13 @@ import {
   createResponse,
   createUnauthenticatedErrorResponse,
 } from "@/lib/utils/responseHandlers";
+import LearningPathWeekDaysResponse from "@/types/LearningPathWeekDaysResponse";
+import { NextResponse } from "next/server";
+import { getWeekDays } from "./getWeekDays";
 
-type WeekDays = {
-  days_count: number;
-  weeks_count: number;
-  id: number;
-  ladder_id: number;
-  phase: string;
-  duration: string;
-  week_day: number;
-  week_number: number;
-};
-
-export async function getWeekDays(
-  userId: string
-): Promise<WeekDays | undefined> {
-  const ladder = await db
-    .selectFrom("ladders")
-    .selectAll()
-    .where("user_id", "=", userId)
-    .executeTakeFirst();
-
-  if (!ladder) {
-    return undefined;
-  }
-
-  const result = await db
-    .selectFrom("learning_paths")
-    .select([
-      (eb) =>
-        eb
-          .selectFrom("daily_routines")
-          .whereRef("daily_routines.learning_path_id", "=", "learning_paths.id")
-          .select(db.fn.count("daily_routines.id").as("count"))
-          .as("days_count"),
-    ])
-    .selectAll()
-    .where("ladder_id", "=", ladder?.id!)
-    .execute();
-
-  const learningPaths = result.map((routine) => ({
-    ...routine,
-    days_count: Number(routine.days_count),
-    weeks_count: parseInt(routine.duration.match(/\d+/)?.[0] || "0"),
-  }));
-
-  for (const { days_count, id, weeks_count, ...rest } of learningPaths) {
-    let { week_day, week_number } = (await db
-      .selectFrom("learning_path_week_days")
-      .select(["week_day", "week_number"])
-      .where("learning_path_id", "=", id)
-      .orderBy("id desc")
-      .executeTakeFirst()) ?? { week_day: 1, week_number: 1 };
-
-    if (week_day >= days_count && week_number >= weeks_count) {
-      continue;
-    }
-
-    return { weeks_count, days_count, week_day, week_number, id, ...rest };
-  }
-
-  return undefined;
-}
-
-export async function GET() {
+export async function GET(): Promise<
+  NextResponse<LearningPathWeekDaysResponse | unknown>
+> {
   try {
     const user = await getUser();
 
@@ -83,7 +26,26 @@ export async function GET() {
       return createBadRequestErrorResponse("Learning path is finished");
     }
 
-    return createResponse({ ...learningPathWeekDays });
+    const dailyRoutines = await db
+      .selectFrom("daily_routines")
+      .selectAll()
+      .where("learning_path_id", "=", learningPathWeekDays.id)
+      .execute();
+
+    if (!dailyRoutines) {
+      return createBadRequestErrorResponse("Learning path is finished");
+    }
+
+    return createResponse({
+      phase: learningPathWeekDays.phase,
+      weekDay: learningPathWeekDays.week_day,
+      weekNumber: learningPathWeekDays.week_number,
+      dailyRoutines: dailyRoutines.map(({ resource, task, time }) => ({
+        resource,
+        task,
+        time,
+      })),
+    });
     // insertIntoTable("daily_routine_week_days",  )
 
     // type Week = {
