@@ -6,11 +6,21 @@ import {
   createResponse,
   createUnauthenticatedErrorResponse,
 } from "@/lib/utils/responseHandlers";
-import LearningPathDaysResponse from "@/types/LearningPathWeekDaysResponse";
+
+type WeekDays = {
+  days_count: number;
+  weeks_count: number;
+  id: number;
+  ladder_id: number;
+  phase: string;
+  duration: string;
+  week_day: number;
+  week_number: number;
+};
 
 export async function getWeekDays(
   userId: string
-): Promise<LearningPathDaysResponse | undefined> {
+): Promise<WeekDays | undefined> {
   const ladder = await db
     .selectFrom("ladders")
     .selectAll()
@@ -49,8 +59,6 @@ export async function getWeekDays(
       .orderBy("id desc")
       .executeTakeFirst()) ?? { week_day: 1, week_number: 1 };
 
-    console.log(id);
-
     if (week_day >= days_count && week_number >= weeks_count) {
       continue;
     }
@@ -75,9 +83,7 @@ export async function GET() {
       return createBadRequestErrorResponse("Learning path is finished");
     }
 
-    return createResponse({
-      ...learningPathWeekDays,
-    });
+    return createResponse({ ...learningPathWeekDays });
     // insertIntoTable("daily_routine_week_days",  )
 
     // type Week = {
