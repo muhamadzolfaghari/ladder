@@ -5,15 +5,25 @@ import ModalAddTask from "./ModalAddTask";
 import { usePhaseAccordion } from "../UI/PhaseAccordion/hooks/usePhaseAccordion";
 import PhaseAccordion from "../UI/PhaseAccordion/PhaseAccordion";
 import Ladder from "@/types/Ladder";
-
+import { useEffect } from "react";
+import useLearningPathWeekdays from "./hooks/useLearningPath";
 interface Props {
   ladder: Ladder | undefined;
 }
 
 const TaskTrackerForDay = ({ ladder }: PropsWithChildren<Props>) => {
   const { expanded, handleExpandedChange } = usePhaseAccordion();
-  const dailyRoutines = ladder?.learningPath?.[0]?.dailyRoutine || undefined;
+  // const dailyRoutines = ladder?.learningPath?.[0]?.dailyRoutine || undefined;
+const { mutate: learningPathWeekdays, data: learningPathWeekdaysData } =
+  useLearningPathWeekdays();
 
+useEffect(() => {
+  learningPathWeekdays();
+}, [learningPathWeekdaysData]);
+
+useEffect(() => {
+  console.log(learningPathWeekdaysData);
+}, [learningPathWeekdaysData]);
   return (
     <Box sx={{ mt: 3 }}>
       <Typography variant="h5">Today&#39;s tasks</Typography>
@@ -21,15 +31,15 @@ const TaskTrackerForDay = ({ ladder }: PropsWithChildren<Props>) => {
         sx={{ display: "flex", flexDirection: "column", gap: "1.3rem", mt: 2 }}
       >
         <PhaseAccordion
-          title={"Phase 1, Week 4 , Day 5"}
+          title={`Phase ${learningPathWeekdaysData?.phase} Week ${learningPathWeekdaysData?.weekDay}`}
           index={0}
           expanded={expanded}
           onExpandedChange={handleExpandedChange}
         >
           <Typography>Day 5 Weekdays &#40;2 hours/day&#41;</Typography>
-          {dailyRoutines?.map((dailyRoutine) => (
+          {learningPathWeekdaysData?.dailyRoutines?.map((dailyRoutine) => (
             <>
-              <Typography key={dailyRoutine.task}>
+              <Typography key={dailyRoutine.time}>
                 <FormControlLabel
                   control={<Checkbox />}
                   label={`${dailyRoutine.time}:${dailyRoutine.task} - ${dailyRoutine.resource}`}
