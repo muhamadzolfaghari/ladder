@@ -67,64 +67,7 @@ export default function Page() {
           Hey! Great to see you :)
         </Typography>
         <Box width="100%">
-          <form action={serverAction}>
-            <Box width="100%" mt={3}>
-              <Typography variant="h4" mb={2}>
-                Login to your account{" "}
-              </Typography>
-              <TextField
-                label="Email"
-                InputLabelProps={{ shrink: true }}
-                placeholder="youremail@gmail.com"
-                fullWidth
-                margin="normal"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                sx={{ marginBottom: 2 }}
-              />
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                mb={2}
-              >
-                <TextField
-                  fullWidth
-                  label="Password"
-                  type="password"
-                  placeholder="********"
-                  InputLabelProps={{ shrink: true }}
-                  margin="normal"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <Link
-                          href="/reset-password"
-                          style={{
-                            textDecoration: "none",
-                            color: "inherit",
-                          }}
-                        >
-                          forget?
-                        </Link>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Box>
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                type="submit"
-                sx={{ mb: 6 }}
-              >
-                Login
-              </Button>
-            </Box>
-          </form>
+          
 
           <Typography variant="h4" mb={1} mt={6}>
             Or Login With Google
