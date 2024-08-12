@@ -1,10 +1,11 @@
 "use client";
-import { Typography, Box, Checkbox, FormControlLabel } from "@mui/material";
+import { Typography, Box, Checkbox, FormControlLabel, Button } from "@mui/material";
 import React, { PropsWithChildren } from "react";
 import ModalAddTask from "./ModalAddTask";
 import { usePhaseAccordion } from "../UI/PhaseAccordion/hooks/usePhaseAccordion";
 import PhaseAccordion from "../UI/PhaseAccordion/PhaseAccordion";
 import Ladder from "@/types/Ladder";
+import { useStoreLearningPathWeekdays } from "./hooks/useStore";
 
 interface Props {
   ladder: Ladder | undefined;
@@ -12,7 +13,12 @@ interface Props {
 
 const TaskTrackerForDay = ({ ladder }: PropsWithChildren<Props>) => {
   const { expanded, handleExpandedChange } = usePhaseAccordion();
-  const dailyRoutines = ladder?.learningPath?.[0]?.dailyRoutine || undefined;
+  const { isPending, mutate:storelearningPathWeekdays} =useStoreLearningPathWeekdays();
+ 
+  const handleClick = () => {
+    storelearningPathWeekdays();
+  };
+
 
   return (
     <Box sx={{ mt: 3 }}>
@@ -46,6 +52,17 @@ const TaskTrackerForDay = ({ ladder }: PropsWithChildren<Props>) => {
           mt: "1.5rem",
         }}
       ></Box>
+          <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          type="submit"
+          sx={{ mb: 1 }}
+          onClick={handleClick}
+          disabled={isPending}
+        >
+          {isPending ? "is sending..." : "save data"}
+        </Button>
     </Box>
   );
 };

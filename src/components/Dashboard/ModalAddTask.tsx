@@ -2,10 +2,19 @@ import { Box, Button, Modal, Typography, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import { useDailyRoutinCreate } from "./hooks/useDailyRoutin";
+import { isPending } from "@reduxjs/toolkit";
 const ModalAddTask = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const { isPending, mutate: DailyRoutinCreate } = useDailyRoutinCreate();
+
+
+  const handleClick = () => {
+    DailyRoutinCreate();
+  };
+  
   return (
     <div>
       <Box
@@ -20,8 +29,10 @@ const ModalAddTask = () => {
           onClick={handleOpen}
           variant="contained"
           sx={{ textTransform: "none" }}
+          onClick={handleClick}
+          disabled={isPending}
         >
-          Add a Task
+        {isPending ? "is sending...":"Add a Task"}
         </Button>
       </Box>
       <Modal
@@ -30,7 +41,7 @@ const ModalAddTask = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          mx:4
+          mx: 4,
         }}
       >
         <Box
