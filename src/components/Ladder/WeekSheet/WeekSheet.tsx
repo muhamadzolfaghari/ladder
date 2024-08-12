@@ -17,16 +17,19 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import theme from "@/lib/resources/theme";
 import { useAppSelector } from "@/hooks/reduxHooks";
-import Ladder from "../Ladder";
 import ReviewPerformance1 from "../ReviewPerformance/ReviewPerformance1";
 import ReviewPerformance2 from "../ReviewPerformance/ReviewPerformance2";
+import Ladder from "@/types/Ladder";
 
-export default function WeekSheet() {
+interface Props {
+  ladder: Ladder | undefined;
+}
+
+export default function WeekSheet({ ladder }: PropsWithChildren<Props>) {
+
   const currentStep = useAppSelector((state) => state.review.currentStep);
-
   const [expanded, setExpanded] = useState<string | false>(false);
-
-
+ const dailyRoutines = ladder?.learningPath?.[0]?.dailyRoutine || undefined;
 
     const renderContent = () => {
     switch (currentStep) {
@@ -34,10 +37,8 @@ export default function WeekSheet() {
       return <ReviewPerformance1/>;
     case "reviewPerformance2":
       return <ReviewPerformance2/>;
-    case "error":
-      return <Ladder />;
-    default:
-      return <div>Nothing matched</div>;
+      default:
+        return <div>Nothing matched</div>;
   }}
 
  
@@ -82,16 +83,16 @@ export default function WeekSheet() {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <>
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="1 hour: Online course (HTML, CSS, JavaScript basics) – Codecademy or Udemy."
-            />
-            <FormControlLabel
-              control={<Checkbox />}
-              label="1 hour: Online course (HTML, CSS, JavaScript basics) – Codecademy or Udemy."
-            />
-          </>
+        {dailyRoutines?.map((dailyRoutine) => (
+            <>
+              <Typography key={dailyRoutine.task}>
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label={`${dailyRoutine.time}:${dailyRoutine.task} - ${dailyRoutine.resource}`}
+                />
+              </Typography>
+            </>
+          ))}
         </AccordionDetails>
       </Accordion>
 
@@ -104,7 +105,17 @@ export default function WeekSheet() {
           justifyContent: "flex-end",
         }}
       >
-        {renderContent()}
+             <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          type="submit"
+          sx={{ mb: 1 }}
+          onClick={() =>{renderContent()}}
+        >
+          Review Your Performance
+        </Button>
+       
       </Box>
     </Container>
   );

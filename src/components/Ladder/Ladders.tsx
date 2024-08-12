@@ -43,7 +43,6 @@ export default function Ladder() {
         return <WeekSheet />;
       case "states":
         return <States />;
-      case "ladder":
       default:
         return null; 
     }
