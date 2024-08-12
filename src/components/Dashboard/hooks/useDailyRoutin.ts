@@ -1,7 +1,7 @@
-import LearningPathWeekDaysResponse from "@/types/LearningPathWeekDaysResponse";
+import CreateDailyRoutineRequest from "@/types/CreateDailyRoutineRequest";
 import { useMutation } from "@tanstack/react-query";
 
-async function DailyRoutinCreate(): Promise<LearningPathWeekDaysResponse>{
+async function DailyRoutinCreate(): Promise<CreateDailyRoutineRequest>{
     const response = await fetch("/api/daily-routines/create",{
         method:'Post',
         headers: {
