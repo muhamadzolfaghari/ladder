@@ -1,11 +1,13 @@
 import { Container } from "@mui/material";
-import NavigationBottom from "../NavigationBottom";
 import BottomNav from "../BottomNav";
+import StoreProvider from "@/app/StoreProvider";
 
 const Layout = ({ children }: { children: React.ReactNode }) => (
-  <Container sx={{ pt: 2 }}>
-    {children}
-    <BottomNav />
+  <Container maxWidth="sm">
+    <StoreProvider>
+      {children}
+      <BottomNav />
+    </StoreProvider>
   </Container>
 );
 

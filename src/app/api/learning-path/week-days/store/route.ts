@@ -6,7 +6,7 @@ import {
   createOKResponse,
   createInternalServerErrorResponse,
 } from "@/lib/utils/responseHandlers";
-import { getWeekDays } from "../route";
+import { getWeekDays } from "../getWeekDays";
 
 export async function POST() {
   try {

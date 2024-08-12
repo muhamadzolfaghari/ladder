@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-export function usePhaseAccordion() {
-  const [expanded, setExpanded] = useState<string | false>(false);
+export function usePhaseAccordion(defaultExpanded: false | string = false) {
+  const [expanded, setExpanded] = useState<string | false>(defaultExpanded);
 
   const handleExpandedChange =
     (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {

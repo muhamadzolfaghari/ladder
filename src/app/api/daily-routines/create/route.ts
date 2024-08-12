@@ -5,11 +5,11 @@ import {
   createInternalServerErrorResponse,
   createBadRequestErrorResponse,
 } from "@/lib/utils/responseHandlers";
-import { getWeekDays } from "../../learning-path/week-days/route";
 import insertIntoTable from "@/lib/db/InsertIntoTable";
 import { NextRequest } from "next/server";
 import CreateDailyRoutineRequest from "@/types/CreateDailyRoutineRequest";
 import { DailyRoutineSchema } from "@/lib/resources/schemas/ladderSchema";
+import { getWeekDays } from "../../learning-path/week-days/getWeekDays";
 
 export async function POST(request: NextRequest) {
   try {

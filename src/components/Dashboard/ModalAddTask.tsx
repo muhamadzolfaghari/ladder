@@ -1,11 +1,45 @@
 import { Box, Button, Modal, Typography, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-const ModalAddTask = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+import { useCreateDailyRoutine } from "./hooks/useCreateDailyRoutine";
+import { on } from "events";
+
+interface ModalAddTaskProps {
+  onCreated?: () => void;
+}
+
+const ModalAddTask = ({ onCreated }: ModalAddTaskProps) => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   const handleClose = () => setOpen(false);
+
+  const {
+    isPending,
+    mutate: createDailyRoutine,
+    isSuccess,
+  } = useCreateDailyRoutine();
+
+  useEffect(() => {
+    if (isSuccess) {
+      onCreated?.();
+      setOpen(false);
+    }
+  }, [isSuccess, onCreated]);
+
+  const handleClick = () => {
+    // DailyRoutinCreate();
+    createDailyRoutine({
+      task: "test",
+      resource: "tset",
+      time: "tset",
+    });
+  };
+
   return (
     <div>
       <Box
@@ -21,7 +55,8 @@ const ModalAddTask = () => {
           variant="contained"
           sx={{ textTransform: "none" }}
         >
-          Add a Task
+          <AddIcon sx={{ mr: 1 }} />
+          {"Add a Task"}
         </Button>
       </Box>
       <Modal
@@ -30,7 +65,7 @@ const ModalAddTask = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          mx:4
+          mx: 4,
         }}
       >
         <Box
@@ -67,6 +102,20 @@ const ModalAddTask = () => {
             placeholder="Share my test code on Github"
             fullWidth
           />
+          <TextField
+            label="Describe the task"
+            InputLabelProps={{ shrink: true }}
+            multiline
+            placeholder="Share my test code on Github"
+            fullWidth
+          />
+          <TextField
+            label="Describe the task"
+            InputLabelProps={{ shrink: true }}
+            multiline
+            placeholder="Share my test code on Github"
+            fullWidth
+          />
           <Button
             sx={{
               padding: "0.5rem",
@@ -79,12 +128,14 @@ const ModalAddTask = () => {
             <AddIcon />
           </Button>
           <Button
+            onClick={handleClick}
+            disabled={isPending}
             variant="contained"
             sx={{
               width: "100%",
             }}
           >
-            Create Task
+            {isPending ? "...loading" : "Create Task"}
           </Button>
         </Box>
       </Modal>

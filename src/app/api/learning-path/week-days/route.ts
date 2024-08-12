@@ -36,7 +36,7 @@ export async function GET(): Promise<
       return createBadRequestErrorResponse("Learning path is finished");
     }
 
-    return createResponse({
+    return NextResponse.json({
       phase: learningPathWeekDays.phase,
       weekDay: learningPathWeekDays.week_day,
       weekNumber: learningPathWeekDays.week_number,
