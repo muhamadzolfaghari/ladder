@@ -1,4 +1,4 @@
-export default interface LearningPathDaysResponse {
+export default interface LearningPathWeekDaysResponse {
   days_count: number;
   weeks_count: number;
   id: number;

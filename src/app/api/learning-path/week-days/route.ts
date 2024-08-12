@@ -8,7 +8,7 @@ import {
 } from "@/lib/utils/responseHandlers";
 import LearningPathDaysResponse from "@/types/LearningPathWeekDaysResponse";
 
-async function getLearningPath(
+export async function getWeekDays(
   userId: string
 ): Promise<LearningPathDaysResponse | undefined> {
   const ladder = await db
@@ -41,30 +41,24 @@ async function getLearningPath(
     weeks_count: parseInt(routine.duration.match(/\d+/)?.[0] || "0"),
   }));
 
-  for (const learningPath of learningPaths) {
+  for (const { days_count, id, weeks_count, ...rest } of learningPaths) {
     let { week_day, week_number } = (await db
       .selectFrom("learning_path_week_days")
       .select(["week_day", "week_number"])
-      .where("learning_path_id", "=", learningPath.id)
+      .where("learning_path_id", "=", id)
       .orderBy("id desc")
-      .executeTakeFirst()) ?? { week_day: 0, week_number: 0 };
+      .executeTakeFirst()) ?? { week_day: 1, week_number: 1 };
 
-    if (
-      week_day >= learningPath.days_count ||
-      week_number >= learningPath.weeks_count
-    ) {
+    console.log(id);
+
+    if (week_day >= days_count && week_number >= weeks_count) {
       continue;
     }
 
-    return { ...learningPath, week_day, week_number };
+    return { weeks_count, days_count, week_day, week_number, id, ...rest };
   }
 
-  // if (
-  //   (dailyRoutineWeeDays?.week_day ?? 0 >= first.days_count) ||
-  //   (dailyRoutineWeeDays?.week_number ?? 0 >= first.weeks_count)
-  // ) {
-  //   console.log("learning path is finished");
-  // }
+  return undefined;
 }
 
 export async function GET() {
@@ -75,7 +69,7 @@ export async function GET() {
       return createUnauthenticatedErrorResponse();
     }
 
-    const learningPathWeekDays = await getLearningPath(user.id);
+    const learningPathWeekDays = await getWeekDays(user.id);
 
     if (!learningPathWeekDays) {
       return createBadRequestErrorResponse("Learning path is finished");
@@ -83,12 +77,6 @@ export async function GET() {
 
     return createResponse({
       ...learningPathWeekDays,
-      week_day:
-        learningPathWeekDays.week_day === 0 ? 1 : learningPathWeekDays.week_day,
-      week_number:
-        learningPathWeekDays.week_number === 0
-          ? 1
-          : learningPathWeekDays.week_number,
     });
     // insertIntoTable("daily_routine_week_days",  )
 
@@ -303,7 +291,7 @@ export async function GET() {
     //    await db.selectFrom("daily_routine_week_days").selectAll
     // }
   } catch (e) {
-    console.error("daily-routine-week-days-api", e);
+    console.error("error", e);
     return createInternalServerErrorResponse();
   }
 }
