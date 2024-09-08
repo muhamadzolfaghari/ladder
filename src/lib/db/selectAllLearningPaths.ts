@@ -1,7 +1,6 @@
-import { LadderTable, LearningPathTable } from "@/types/Database";
+import { LearningPathTable } from "@/types/Database";
 import db from "../resources/pool";
 import TableWithId from "@/types/TableWithId";
-import Ladder from "@/types/Ladder";
 
 export default function selectAllLearningPaths(
   id: number
