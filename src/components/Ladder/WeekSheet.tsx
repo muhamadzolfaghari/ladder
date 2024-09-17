@@ -16,8 +16,8 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import theme from "@/lib/resources/theme";
 import { useAppSelector } from "@/hooks/reduxHooks";
-import ReviewPerformance1 from "../ReviewPerformance/ReviewPerformance1";
-import ReviewPerformance2 from "../ReviewPerformance/ReviewPerformance2";
+import ReviewPerformance1 from "./ReviewPerformance/ReviewPerformance1/ReviewPerformance1";
+import ReviewPerformance2 from "./ReviewPerformance/ReviewPerdormance2/ReviewPerformance2";
 import Ladder from "@/types/Ladder";
 
 interface Props {
