@@ -1,39 +1,37 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type ReviewStatus = 'initial' | 'reviewPerformance1' | 'reviewPerformance2';
-
 interface ReviewState {
-  currentStep: ReviewStatus;
+  step: number;
+  strengths: string;
+  weaknesses: string;
 }
-
 const initialState: ReviewState = {
-  currentStep: 'initial',
+  step: 1,
+  strengths: "",
+  weaknesses: "",
 };
 
 const reviewSlice = createSlice({
-  name: 'review',
+  name: "review",
   initialState,
   reducers: {
-    setCurrentStep: (state, action: PayloadAction<ReviewStatus>) => {
-      state.currentStep = action.payload;
+    nextStep: (state) => {
+      state.step += 1;
     },
-    showReviewPerformance1: (state, action: PayloadAction<void>) => {
-      state.currentStep = 'reviewPerformance1';
+    previousStep: (state) => {
+      state.step -= 1;
     },
-    showReviewPerformance2: (state, action: PayloadAction<void>) => {
-      state.currentStep = 'reviewPerformance2';
+    setStrengths: (state, action) => {
+      state.strengths = action.payload;
     },
-    resetReview: (state, action: PayloadAction<void>) => {
-      state.currentStep = 'initial';
+    setWeaknesses: (state, action) => {
+      state.weaknesses = action.payload;
     },
   },
+
 });
 
 // Export actions and reducer
-export const {
-  setCurrentStep,
-  showReviewPerformance1,
-  showReviewPerformance2,
-
-} = reviewSlice.actions;
+export const { nextStep, previousStep, setStrengths, setWeaknesses } = reviewSlice.actions;
 export default reviewSlice.reducer;
+
